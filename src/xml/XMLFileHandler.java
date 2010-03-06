@@ -16,7 +16,7 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handlers;
+package xml;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -89,14 +89,17 @@ public class XMLFileHandler {
 		// close stream
 		outputStream.close();
 	}
-	
 
 	public static double getFileVersion(Document xmlDocument) {
 		// get file version number from XML document version tags
 		NodeList versionNodes = xmlDocument.getElementsByTagName("version");
-		double version = Double.parseDouble(versionNodes.item(0)
-				.getTextContent());
-		return version;
+		if (versionNodes.item(0) != null) {
+			double version = Double.parseDouble(versionNodes.item(0)
+					.getTextContent());
+			return version;
+		} else {
+			return -1;
+		}
 	}
 
 	public static String getPlotType(Document xmlDocument) {

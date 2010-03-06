@@ -2,5 +2,5 @@
 <preferences>
 <antialiasingstring>Full</antialiasingstring>
 <lookandfeel>System</lookandfeel>
-<compressfiles>true</compressfiles>
+<compressfiles>false</compressfiles>
 </preferences>

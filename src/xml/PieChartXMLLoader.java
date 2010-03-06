@@ -16,7 +16,7 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package data.piechart;
+package xml;
 
 import java.awt.Color;
 import java.util.ArrayList;

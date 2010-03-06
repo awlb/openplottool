@@ -20,9 +20,7 @@ package handlers;
 
 import gui.PreferenceDialog;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
@@ -39,6 +37,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import plot.PlotPage;
+import xml.XMLFileHandler;
 
 public class PreferenceHandler {
 	private static Preferences settings = new Preferences();
@@ -87,7 +86,7 @@ public class PreferenceHandler {
 			ParserConfigurationException {
 		// parse preferences XML file into document
 		File file = new File("settings/Preferences.xml");
-		Document doc = XMLFileHandler.openCompressedFile(file);
+		Document doc = XMLFileHandler.openPlainFile(file);
 		// get document nodes
 		NodeList preferenceNodes = doc.getElementsByTagName("preferences");
 		if (preferenceNodes.getLength() > 0) {
@@ -111,21 +110,22 @@ public class PreferenceHandler {
 	}
 
 	public static void savePreferences() throws IOException {
-		// open file
+		// create file reference
 		File file = new File("settings/Preferences.xml");
-		BufferedWriter out = new BufferedWriter(new FileWriter(file));
-		// preferences to file
-		out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		out.write("<preferences>\n");
-		out.write("<antialiasingstring>" + settings.getAntiAliasing()
-				+ "</antialiasingstring>\n");
-		out.write("<lookandfeel>" + settings.getLookAndFeel()
+		// create string buffer to hold file content
+		StringBuffer fileContentBuffer = new StringBuffer();
+		// add XML strings to buffer
+		fileContentBuffer
+				.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		fileContentBuffer.append("<preferences>\n");
+		fileContentBuffer.append("<antialiasingstring>"
+				+ settings.getAntiAliasing() + "</antialiasingstring>\n");
+		fileContentBuffer.append("<lookandfeel>" + settings.getLookAndFeel()
 				+ "</lookandfeel>\n");
-		out.write("<compressfiles>" + settings.useCompressedFiles()
-				+ "</compressfiles>\n");
-		out.write("</preferences>\n");
-		out.flush();
-		// close file
-		out.close();
+		fileContentBuffer.append("<compressfiles>"
+				+ settings.useCompressedFiles() + "</compressfiles>\n");
+		fileContentBuffer.append("</preferences>\n");
+		// write string buffer in plain format
+		XMLFileHandler.savePlainFile(fileContentBuffer, file);
 	}
 }

@@ -45,7 +45,7 @@ import plot.piechart.PieChartSettings;
 public class PageHandler {
 	// plot page list
 	private static ArrayList<PlotPage> plotPages = new ArrayList<PlotPage>();
-	
+
 	// method to add plot page
 	public static void addPlotPage(PlotPage page) {
 		// add page to list
@@ -55,8 +55,7 @@ public class PageHandler {
 				page.getPageFile().getName(), page);
 		// set index to newly created tab
 		OpenPlotTool.getMainFrame().getPlotPanel().setSelectedIndex(
-				OpenPlotTool.getMainFrame().getPlotPanel()
-						.getTabCount() - 1);
+				OpenPlotTool.getMainFrame().getPlotPanel().getTabCount() - 1);
 	}
 
 	// method to close all plots
@@ -184,7 +183,7 @@ public class PageHandler {
 		}
 		dialog.dispose();
 	}
-	
+
 	// method to print current plot page
 	public static void printSelectedPlot() {
 		// get selected plot page
@@ -205,69 +204,6 @@ public class PageHandler {
 		}
 	}
 
-	/*
-	// method to save as current selected plot
-	public static void saveAsSelectedPlot() {
-		// get selected plot page
-		PlotPage page = (PlotPage) OpenPlotTool.getMainFrame().getPlotPanel()
-				.getSelectedComponent();
-		if (page != null) {
-			// show file chooser
-			JFileChooser fc = new JFileChooser();
-			fc.showSaveDialog(OpenPlotTool.getMainFrame());
-			// get selected file
-			File selFile = fc.getSelectedFile();
-			if (selFile != null) {
-				try {
-					// set page save file
-					page.setPageFile(selFile);
-					// perform save
-					FileManager.saveFile(selFile, page);
-					// update page tab
-					int index = OpenPlotTool.getMainFrame().getPlotPanel()
-							.getSelectedIndex();
-					OpenPlotTool.getMainFrame().getPlotPanel().setTitleAt(
-							index, selFile.getName());
-					// update title
-					OpenPlotTool.getMainFrame().setTitle(
-							OpenPlotTool.programName + " - "
-									+ selFile.getAbsolutePath());
-				} catch (IOException e) {
-					ErrorBox errorDialog = new ErrorBox(OpenPlotTool
-							.getMainFrame(), "Failed to save file", e);
-					errorDialog.setVisible(true);
-				}
-			}
-		}
-	}
-	 */
-	
-	/*
-	// method to save current selected plot
-	public static void saveSelectedPlot() {
-		// get selected plot page
-		PlotPage page = (PlotPage) OpenPlotTool.getMainFrame().getPlotPanel()
-				.getSelectedComponent();
-		if (page != null) {
-			File selFile;
-			if (page.getPageFile() == null) {
-				// perform save as
-				saveAsSelectedPlot();
-			} else {
-				// get save file
-				selFile = page.getPageFile();
-				try {
-					// Perform save
-					FileManager.saveFile(selFile, page);
-				} catch (IOException e) {
-					ErrorBox errorDialog = new ErrorBox(OpenPlotTool
-							.getMainFrame(), "Failed to save file", e);
-					errorDialog.setVisible(true);
-				}
-			}
-		}
-	}
-*/
 	// method called when page changed
 	public static void updatePageChange() {
 		// clear current items from lists
