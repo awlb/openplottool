@@ -16,7 +16,7 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package data.cartesian;
+package xml;
 
 import plot.PlotPage;
 import plot.cartesian.CartesianDataSet;
