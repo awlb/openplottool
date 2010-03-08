@@ -42,6 +42,8 @@ public class PlotPage extends JPanel implements Printable {
 	private ArrayList<PlotPoint> plotPoints = new ArrayList<PlotPoint>();
 	// page settings
 	private PageSettings settings = null;
+	// tab title
+	private String tabTitle = "New";
 	// page type
 	private String type = null;
 
@@ -87,6 +89,10 @@ public class PlotPage extends JPanel implements Printable {
 		return settings;
 	}
 
+	public String getTabTitle() {
+		return tabTitle;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -119,6 +125,19 @@ public class PlotPage extends JPanel implements Printable {
 		}
 	}
 
+	@Override
+	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex)
+			throws PrinterException {
+		if (pageIndex >= 1) {
+			return Printable.NO_SUCH_PAGE;
+		}
+		Graphics2D g2 = (Graphics2D) graphics;
+		// translate image to correct place on page
+		g2.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+		paint(g2);
+		return Printable.PAGE_EXISTS;
+	}
+
 	public void removeData(PlotDataSet inData) {
 		plotData.remove(inData);
 	}
@@ -133,6 +152,7 @@ public class PlotPage extends JPanel implements Printable {
 
 	public void setPageFile(File pageFile) {
 		this.pageFile = pageFile;
+		tabTitle = pageFile.getName();
 	}
 
 	public void setSettings(PageSettings settings) {
@@ -141,18 +161,5 @@ public class PlotPage extends JPanel implements Printable {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	@Override
-	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex)
-			throws PrinterException {
-		if (pageIndex >= 1) {
-			return Printable.NO_SUCH_PAGE;
-		}
-		Graphics2D g2 = (Graphics2D) graphics;
-		// translate image to correct place on page
-		g2.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-		paint(g2);
-		return Printable.PAGE_EXISTS;
 	}
 }

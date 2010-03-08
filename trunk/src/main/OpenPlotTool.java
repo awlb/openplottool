@@ -49,8 +49,7 @@ import data.DataManager;
 
 public class OpenPlotTool {
 
-	public static String programName = "OpenPlot Tool";
-	public static String fullProgramName = "OpenPlot Tool 0.2-31";
+	public static String programName = "OpenPlot Tool 0.2";
 
 	// about menu listener inner class
 	private class AboutMenuListener implements ActionListener {

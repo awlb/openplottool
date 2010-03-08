@@ -50,9 +50,15 @@ public class PageHandler {
 	public static void addPlotPage(PlotPage page) {
 		// add page to list
 		plotPages.add(page);
+		String toolTip;
+		if (page.getPageFile() != null) {
+			toolTip = page.getPageFile().getAbsolutePath();
+		} else {
+			toolTip = page.getTabTitle();
+		}
 		// add tab for page
-		OpenPlotTool.getMainFrame().getPlotPanel().addTab(
-				page.getPageFile().getName(), page);
+		OpenPlotTool.getMainFrame().getPlotPanel().addTab(page.getTabTitle(),
+				null, page, toolTip);
 		// set index to newly created tab
 		OpenPlotTool.getMainFrame().getPlotPanel().setSelectedIndex(
 				OpenPlotTool.getMainFrame().getPlotPanel().getTabCount() - 1);
@@ -159,26 +165,21 @@ public class PageHandler {
 		dialog.setVisible(true);
 		if (dialog.getPressed() == NewPlotDialog.OK_PRESSED) {
 			String ID = dialog.getSelected().getEntryPlotID();
+			PlotPage newPage = null;
 			if (ID.equals("cartesianxyplot")) {
 				// create new Cartesian plot page and add to list
 				CartesianAxis axis = new CartesianAxis(new CartesianSettings());
-				PlotPage newPage = new PlotPage(axis);
+				newPage = new PlotPage(axis);
 				newPage.setType("cartesianxyplot");
-				plotPages.add(newPage);
-				OpenPlotTool.getMainFrame().getPlotPanel().addTab(
-						newPage.getSettings().getTitle(), newPage);
 
 			} else if (ID.equals("piechart")) {
 				// create new pie chart page and add to list
 				PieChartAxis axis = new PieChartAxis(new PieChartSettings());
-				PlotPage newPage = new PlotPage(axis);
+				newPage = new PlotPage(axis);
 				newPage.setType("piechart");
-				plotPages.add(newPage);
-				OpenPlotTool.getMainFrame().getPlotPanel().addTab(
-						newPage.getSettings().getTitle(), newPage);
-				OpenPlotTool.getMainFrame().getPlotPanel().setSelectedIndex(
-						OpenPlotTool.getMainFrame().getPlotPanel()
-								.getTabCount() - 1);
+			}
+			if (newPage != null) {
+				addPlotPage(newPage);
 			}
 		}
 		dialog.dispose();
