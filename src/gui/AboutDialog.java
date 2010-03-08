@@ -42,7 +42,7 @@ public class AboutDialog extends JDialog {
 		// create main panel
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setBorder(BorderFactory
-				.createTitledBorder(OpenPlotTool.fullProgramName + ":"));
+				.createTitledBorder(OpenPlotTool.programName + ":"));
 		setContentPane(mainPanel);
 
 		// create license text area

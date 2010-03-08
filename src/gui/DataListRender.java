@@ -18,7 +18,6 @@
 
 package gui;
 
-import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JLabel;
@@ -33,7 +32,6 @@ import plot.PlotData;
 
 @SuppressWarnings("serial")
 public class DataListRender extends JLabel implements ListCellRenderer {
-	private static final Color HIGHLIGHT_COLOR = new Color(180, 180, 255);
 
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,
@@ -43,11 +41,10 @@ public class DataListRender extends JLabel implements ListCellRenderer {
 		setText(entry.toString());
 		setForeground(entry.getDrawColor());
 		if (isSelected) {
-			setBackground(HIGHLIGHT_COLOR);
+			setBackground(list.getSelectionBackground());
 		} else {
-			setBackground(Color.WHITE);
+			setBackground(list.getBackground());
 		}
-
 		return this;
 	}
 }
