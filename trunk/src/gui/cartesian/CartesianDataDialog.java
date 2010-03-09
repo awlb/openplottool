@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -59,6 +60,7 @@ public class CartesianDataDialog extends JDialog implements ChangeListener,
 	private int pressed = 0;
 	private JSpinner setSizeField;
 	private JButton addButton, cancelButton;
+	private JCheckBox linkPointsCheck;
 
 	public CartesianDataDialog(CartesianDataSet currentDataSet) {
 		super(OpenPlotTool.getMainFrame(), "Add Data Set", true);
@@ -74,7 +76,7 @@ public class CartesianDataDialog extends JDialog implements ChangeListener,
 				.createTitledBorder("Set Settings: "));
 		mainPanel.add(settingsPanel, BorderLayout.PAGE_START);
 		// create layout
-		double[][] settingsSize = { { 0.25, 0.75 }, { 25, 25, 25 } };
+		double[][] settingsSize = { { 0.34, 0.65 }, { 25, 25, 25, 25 } };
 		settingsPanel.setLayout(new TableLayout(settingsSize));
 		// create name field
 		nameField = new JTextField();
@@ -90,6 +92,10 @@ public class CartesianDataDialog extends JDialog implements ChangeListener,
 		settingsPanel.add(new JLabel("Color: "), "0, 2");
 		colorSelector = new ColorSelector(Color.RED);
 		settingsPanel.add(colorSelector, "1, 2");
+		// create link point check box
+		settingsPanel.add(new JLabel("Link Points: "), "0, 3");
+		linkPointsCheck = new JCheckBox();
+		settingsPanel.add(linkPointsCheck, "1, 3");
 
 		// create data table
 		dataModel = new DefaultTableModel();
@@ -120,6 +126,7 @@ public class CartesianDataDialog extends JDialog implements ChangeListener,
 			nameField.setText(currentDataSet.getDataTitle());
 			sizeModel.setValue(new Integer(currentDataSet.getData().length));
 			colorSelector.setColor(currentDataSet.getDrawColor());
+			linkPointsCheck.setSelected(currentDataSet.isLinkPoints());
 			dataModel.setRowCount(currentDataSet.getData().length);
 			// add current data to table
 			double[][] rawData = currentDataSet.getData();
@@ -174,6 +181,7 @@ public class CartesianDataDialog extends JDialog implements ChangeListener,
 		dataSet.setDataTitle(nameField.getText());
 		dataSet.setData(rawData);
 		dataSet.setDrawColor(colorSelector.getColor());
+		dataSet.setLinkPoints(linkPointsCheck.isSelected());
 		return dataSet;
 	}
 

@@ -74,6 +74,7 @@ public class CartesianXMLBuilder {
 					+ "</title>\n");
 			xmlStringBuffer.append("<drawcolor>"
 					+ dataSet.getDrawColor().getRGB() + "</drawcolor>\n");
+			xmlStringBuffer.append("<linkpoints>"+dataSet.isLinkPoints()+"</linkpoints>\n");
 			xmlStringBuffer.append("<data>\n");
 			double[][] rawData = dataSet.getData();
 			for (int j = 0; j < rawData.length; j++) {
@@ -159,7 +160,7 @@ public class CartesianXMLBuilder {
 		xmlStringBuffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		xmlStringBuffer.append("<page>\n");
 		xmlStringBuffer.append("<type>cartesianxyplot</type>\n");
-		xmlStringBuffer.append("<version>0.1</version>\n");
+		xmlStringBuffer.append("<version>0.2</version>\n");
 		buildXMLSettings(page, xmlStringBuffer);
 		buildXMLAxisSettings(page, xmlStringBuffer);
 		buildXMLDataSets(page, xmlStringBuffer);

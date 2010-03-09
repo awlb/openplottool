@@ -25,6 +25,7 @@ import plot.PlotDataSet;
 
 public class CartesianDataSet extends PlotDataSet {
 	private double data[][] = null;
+	private boolean linkPoints = true;
 
 	@Override
 	public void draw(Graphics g, Axis axis) {
@@ -34,8 +35,10 @@ public class CartesianDataSet extends PlotDataSet {
 		CartesianSettings settings = (CartesianSettings) axis.getPlotSettings();
 		// set draw color
 		g.setColor(this.getDrawColor());
-		int i = 0;
-		while (i < data.length) {
+		// last draw points -- used for drawing linked points
+		int lastXPoint = -1;
+		int lastYPoint = -1;
+		for(int i =0; i < data.length;i++) {
 			// get x and y values
 			double x = data[i][0];
 			double y = data[i][1];
@@ -53,10 +56,15 @@ public class CartesianDataSet extends PlotDataSet {
 					+ ((settings.getyMax() - caxis.getyOver() - y) / settings
 							.getySplitSize()) * caxis.getySectionSize();
 			int iDrawYPoint = (int) Math.round(drawYPoint);
-
+			
+			if(linkPoints && lastXPoint > -1 && lastYPoint > -1) {
+				g.drawLine(lastXPoint, lastYPoint, iDrawXPoint, iDrawYPoint);
+			}			
 			// draw point
 			g.fillRect(iDrawXPoint - 2, iDrawYPoint - 2, 5, 5);
-			i++;
+			// update last draw point
+			lastXPoint = iDrawXPoint;
+			lastYPoint = iDrawYPoint;
 		}
 	}
 
@@ -64,7 +72,15 @@ public class CartesianDataSet extends PlotDataSet {
 		return data;
 	}
 
+	public boolean isLinkPoints() {
+		return linkPoints;
+	}
+
 	public void setData(double data[][]) {
 		this.data = data;
 	}
+
+	public void setLinkPoints(boolean linkPoints) {
+		this.linkPoints = linkPoints;
+	}	
 }

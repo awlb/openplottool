@@ -114,7 +114,7 @@ public class PageFileHandler {
 									+ "XML document is not in correct format.",
 							"Failed to open file", JOptionPane.ERROR_MESSAGE);
 					return;
-				} else if (XMLFileHandler.getFileVersion(xmlDocument) != 0.1) {
+				} else if (XMLFileHandler.getFileVersion(xmlDocument) != 0.2) {
 					// file version is old ask if they want to load anyway
 					int chosen = JOptionPane
 							.showConfirmDialog(
