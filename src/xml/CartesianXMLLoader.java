@@ -131,6 +131,7 @@ public class CartesianXMLLoader {
 			ArrayList<double[]> plotData = null;
 			Color drawColor = Color.RED;
 			String title = "new";
+			boolean linkPoints = false;
 			for (int j = 0; j < dataSetData.getLength(); j++) {
 				// loop through nodes for each data set
 				Node curNode = dataSetData.item(j);
@@ -139,6 +140,8 @@ public class CartesianXMLLoader {
 					drawColor = Color.decode(colorStr);
 				} else if (curNode.getNodeName().equals("title")) {
 					title = curNode.getTextContent();
+				} else if (curNode.getNodeName().equals("linkpoints")) {
+					linkPoints = Boolean.parseBoolean(curNode.getTextContent());
 				} else if (curNode.getNodeName().equals("data")) {
 					// call function to get array list of data
 					plotData = parseDataRow(curNode);
@@ -153,9 +156,10 @@ public class CartesianXMLLoader {
 					data[j][0] = plotData.get(j)[0];
 					data[j][1] = plotData.get(j)[1];
 				}
-				loadedDataSet.setData(data);
 				loadedDataSet.setDataTitle(title);
 				loadedDataSet.setDrawColor(drawColor);
+				loadedDataSet.setLinkPoints(linkPoints);
+				loadedDataSet.setData(data);
 				// add data set to page
 				newPage.addData(loadedDataSet);
 			}

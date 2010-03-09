@@ -97,7 +97,7 @@ public class PieChartXMLBuilder {
 		xmlStringBuffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		xmlStringBuffer.append("<page>\n");
 		xmlStringBuffer.append("<type>piechartplot</type>\n");
-		xmlStringBuffer.append("<version>0.1</version>\n");
+		xmlStringBuffer.append("<version>0.2</version>\n");
 		buildXMLSettings(page, xmlStringBuffer);
 		buildXMLAxisSettings(page, xmlStringBuffer);
 		buildXMLDataSets(page, xmlStringBuffer);
