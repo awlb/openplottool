@@ -39,6 +39,7 @@ import javax.swing.JTextField;
 
 import main.OpenPlotTool;
 import plot.PageSettings;
+import plot.StrokeType;
 
 @SuppressWarnings("serial")
 public class PageSettingsDialog extends JDialog implements ActionListener {
@@ -143,7 +144,7 @@ public class PageSettingsDialog extends JDialog implements ActionListener {
 		settings.setBackgroundColor(backgroundSelector.getColor());
 		settings.setDrawBorder(drawBorderCheck.isSelected());
 		settings.setBorderColor(borderSelector.getColor());
-		settings.setBorderDrawType((String) borderDrawCombo.getSelectedItem());
+		settings.setBorderDrawType(((StrokeType) borderDrawCombo.getSelectedItem()).getName());
 		return settings;
 	}
 
