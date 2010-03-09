@@ -220,10 +220,11 @@ public class PageFileHandler {
 				}
 				// set page file
 				page.setPageFile(saveFile);
-				// update tab title and tool tip 
+				// update tab title and tool tip
 				OpenPlotTool.getMainFrame().getPlotPanel().setTitleAt(index,
 						saveFile.getName());
-				OpenPlotTool.getMainFrame().getPlotPanel().setToolTipTextAt(index, saveFile.getAbsolutePath());
+				OpenPlotTool.getMainFrame().getPlotPanel().setToolTipTextAt(
+						index, saveFile.getAbsolutePath());
 				PageHandler.updatePageChange();
 			}
 		}

@@ -19,6 +19,7 @@
 package gui.cartesian;
 
 import gui.ColorSelector;
+import handlers.StrokeTypeHandler;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.BorderLayout;
@@ -39,6 +40,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import main.OpenPlotTool;
+import plot.StrokeType;
 import plot.cartesian.CartesianAxis;
 import plot.cartesian.CartesianSettings;
 
@@ -164,20 +166,19 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 		// create layout
 		double[][] drawSize = { { 0.35, 0.65 }, { 25, 25, 25 } };
 		drawMethodPanel.setLayout(new TableLayout(drawSize));
-		String[] drawTypes = { "Line", "Dash", "Dot" };
 		// create axis color field
 		drawMethodPanel.add(new JLabel("Axis: "), "0, 0");
-		axisDrawSelector = new JComboBox(drawTypes);
+		axisDrawSelector = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
 		drawMethodPanel.add(axisDrawSelector, "1, 0");
 		axisDrawSelector.setSelectedItem(settings.getAxisDrawType());
 		// create grid color field
 		drawMethodPanel.add(new JLabel("Grid: "), "0, 1");
-		gridDrawSelector = new JComboBox(drawTypes);
+		gridDrawSelector = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
 		drawMethodPanel.add(gridDrawSelector, "1, 1");
 		gridDrawSelector.setSelectedItem(settings.getMainGridDrawType());
 		// create sub grid color field
 		drawMethodPanel.add(new JLabel("Sub Grid: "), "0, 2");
-		subDrawGridSelector = new JComboBox(drawTypes);
+		subDrawGridSelector = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
 		drawMethodPanel.add(subDrawGridSelector, "1, 2");
 		subDrawGridSelector.setSelectedItem(settings.getSubGridType());
 
@@ -228,9 +229,9 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 		Color axisColor = axisColorSelector.getColor();
 		Color gridColor = gridColorSelector.getColor();
 		Color subGridColor = subColorGridSelector.getColor();
-		String axisDrawType = (String) axisDrawSelector.getSelectedItem();
-		String mainGridDrawType = (String) gridDrawSelector.getSelectedItem();
-		String subDrawType = (String) subDrawGridSelector.getSelectedItem();
+		String axisDrawType = ((StrokeType) axisDrawSelector.getSelectedItem()).getName();
+		String mainGridDrawType = ((StrokeType) gridDrawSelector.getSelectedItem()).getName();
+		String subDrawType = ((StrokeType) subDrawGridSelector.getSelectedItem()).getName();
 		CartesianSettings settings = new CartesianSettings();
 		settings.setxMax(newXMax);
 		settings.setxMin(newXMin);

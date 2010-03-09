@@ -38,7 +38,7 @@ public class CartesianDataSet extends PlotDataSet {
 		// last draw points -- used for drawing linked points
 		int lastXPoint = -1;
 		int lastYPoint = -1;
-		for(int i =0; i < data.length;i++) {
+		for (int i = 0; i < data.length; i++) {
 			// get x and y values
 			double x = data[i][0];
 			double y = data[i][1];
@@ -56,10 +56,10 @@ public class CartesianDataSet extends PlotDataSet {
 					+ ((settings.getyMax() - caxis.getyOver() - y) / settings
 							.getySplitSize()) * caxis.getySectionSize();
 			int iDrawYPoint = (int) Math.round(drawYPoint);
-			
-			if(linkPoints && lastXPoint > -1 && lastYPoint > -1) {
+
+			if (linkPoints && lastXPoint > -1 && lastYPoint > -1) {
 				g.drawLine(lastXPoint, lastYPoint, iDrawXPoint, iDrawYPoint);
-			}			
+			}
 			// draw point
 			g.fillRect(iDrawXPoint - 2, iDrawYPoint - 2, 5, 5);
 			// update last draw point
@@ -82,5 +82,5 @@ public class CartesianDataSet extends PlotDataSet {
 
 	public void setLinkPoints(boolean linkPoints) {
 		this.linkPoints = linkPoints;
-	}	
+	}
 }

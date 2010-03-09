@@ -18,6 +18,7 @@
 
 package gui;
 
+import handlers.StrokeTypeHandler;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.BorderLayout;
@@ -100,9 +101,8 @@ public class PageSettingsDialog extends JDialog implements ActionListener {
 		borderSelector = new ColorSelector(settings.getBorderColor());
 		borderSettingPanel.add(borderSelector, "1, 1");
 		// create border draw type field
-		String[] drawTypes = { "Line", "Dash", "Dot" };
 		borderSettingPanel.add(new JLabel("Border Draw Type: "), "0, 2");
-		borderDrawCombo = new JComboBox(drawTypes);
+		borderDrawCombo = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
 		borderDrawCombo.setSelectedItem(settings.getBorderDrawType());
 		borderSettingPanel.add(borderDrawCombo, "1, 2");
 

@@ -74,7 +74,8 @@ public class CartesianXMLBuilder {
 					+ "</title>\n");
 			xmlStringBuffer.append("<drawcolor>"
 					+ dataSet.getDrawColor().getRGB() + "</drawcolor>\n");
-			xmlStringBuffer.append("<linkpoints>"+dataSet.isLinkPoints()+"</linkpoints>\n");
+			xmlStringBuffer.append("<linkpoints>" + dataSet.isLinkPoints()
+					+ "</linkpoints>\n");
 			xmlStringBuffer.append("<data>\n");
 			double[][] rawData = dataSet.getData();
 			for (int j = 0; j < rawData.length; j++) {
