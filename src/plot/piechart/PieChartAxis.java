@@ -19,13 +19,13 @@
 package plot.piechart;
 
 import handlers.PreferenceHandler;
+import handlers.StrokeTypeHandler;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import plot.Axis;
-import plot.DrawTypes;
 import plot.PlotSettings;
 
 public class PieChartAxis extends Axis {
@@ -40,8 +40,11 @@ public class PieChartAxis extends Axis {
 	public void draw(Graphics g, int width, int height) {
 		PieChartSettings settings = (PieChartSettings) this.getPlotSettings();
 		Graphics2D gc = (Graphics2D) g;
+		// set antialiasing mode
 		gc.setRenderingHint(RenderingHints.KEY_ANTIALIASING, PreferenceHandler
 				.getSettings().getAntiAliasingMode());
+		gc.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
 		// Calculate indent
 		xIndent = gc.getFontMetrics().getHeight();
@@ -52,15 +55,15 @@ public class PieChartAxis extends Axis {
 				- (2 * yIndent));
 		if (this.getParentPage().getSettings().getDrawBorder()) {
 			// draw border if required
-			gc.setStroke(DrawTypes.getDrawType(this.getParentPage()
-					.getSettings().getBorderDrawType()));
+			gc.setStroke((StrokeTypeHandler.getStrokeType(this.getParentPage()
+					.getSettings().getBorderDrawType())).getStroke());
 			gc.setColor(this.getParentPage().getSettings().getBorderColor());
 			gc.drawRect(xIndent, yIndent, width - (2 * xIndent), height
 					- (2 * yIndent));
 		}
 		// draw pie outline
 		gc.setColor(settings.getOutlineDrawColor());
-		gc.setStroke(DrawTypes.getDrawType("Line"));
+		gc.setStroke(StrokeTypeHandler.getStrokeType("Line").getStroke());
 		pieSize = height - (4 * yIndent);
 		yPiePos = (yIndent * 2);
 		xPiePos = xIndent + ((width - (2 * xIndent)) / 2) - pieSize / 2;

@@ -25,6 +25,7 @@ import handlers.HelpHandler;
 import handlers.PageFileHandler;
 import handlers.PageHandler;
 import handlers.PreferenceHandler;
+import handlers.StrokeTypeHandler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -172,6 +173,7 @@ public class OpenPlotTool {
 	public OpenPlotTool() {
 		// load preferences on main thread
 		loadPreferences();
+		loadStrokes();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				// create gui and add action listeners on the EDT
@@ -224,6 +226,10 @@ public class OpenPlotTool {
 		try {
 			// save preferences before exit
 			PreferenceHandler.savePreferences();
+			// save strokes before exit if they have been edited
+			if(StrokeTypeHandler.hasChanged()) {
+				StrokeTypeHandler.saveStrokeTypes();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -282,6 +288,24 @@ public class OpenPlotTool {
 		} catch (IllegalAccessException e) {
 			ErrorBox errorDialog = new ErrorBox(OpenPlotTool.getMainFrame(),
 					"Failed to set look and feel", e);
+			errorDialog.setVisible(true);
+		}
+	}
+	
+	private void loadStrokes() {
+		try {
+			StrokeTypeHandler.loadStrokeTypes();
+		} catch (SAXException e) {
+			ErrorBox errorDialog = new ErrorBox(OpenPlotTool.getMainFrame(),
+					"Failed to load strokes", e);
+			errorDialog.setVisible(true);
+		} catch (IOException e) {
+			ErrorBox errorDialog = new ErrorBox(OpenPlotTool.getMainFrame(),
+					"Failed to load strokes", e);
+			errorDialog.setVisible(true);
+		} catch (ParserConfigurationException e) {
+			ErrorBox errorDialog = new ErrorBox(OpenPlotTool.getMainFrame(),
+					"Failed to load strokes", e);
 			errorDialog.setVisible(true);
 		}
 	}

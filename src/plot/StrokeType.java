@@ -20,28 +20,35 @@ package plot;
 
 import java.awt.BasicStroke;
 
-/*
- * Class that defines a few basic draw types
- */
-
-public class DrawTypes {
-	private static float dashA[] = { 2.0f, 2.0f };
-	private static BasicStroke dash = new BasicStroke(1.0f,
-			BasicStroke.CAP_SQUARE, BasicStroke.JOIN_BEVEL, 10.0f, dashA, 0.0f);
-
-	private static float dotA[] = { 1.0f, 2.0f };
-	private static BasicStroke dot = new BasicStroke(1.0f,
-			BasicStroke.CAP_SQUARE, BasicStroke.JOIN_BEVEL, 10.0f, dotA, 0.0f);
-
-	private static BasicStroke line = new BasicStroke(1);
-
-	public static BasicStroke getDrawType(String typeName) {
-		if (typeName.equals("Dash")) {
-			return dash;
-		} else if (typeName.equals("Dot")) {
-			return dot;
-		} else {
-			return line;
-		}
+public class StrokeType {
+	// name of the stroke
+	String name;
+	// Basic stroke object for this stroke
+	BasicStroke stroke;
+	
+	public StrokeType(String name, BasicStroke stroke) {
+		this.name = name;
+		this.stroke = stroke;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public BasicStroke getStroke() {
+		return stroke;
+	}
+
+	public void setStroke(BasicStroke stroke) {
+		this.stroke = stroke;
+	}
+
+	@Override
+	public String toString() {
+		return name;
+	}	
 }
