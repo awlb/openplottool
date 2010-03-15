@@ -41,6 +41,7 @@ import xml.XMLFileHandler;
 
 public class PreferenceHandler {
 	private static Preferences settings = new Preferences();
+	private static boolean changed = false;
 
 	public static void editPreferences() {
 		// show preference dialog
@@ -49,6 +50,7 @@ public class PreferenceHandler {
 		if (dialog.getPressed() == PreferenceDialog.APPLY_PRESSED) {
 			// get new settings
 			settings = dialog.getNewSettings();
+			changed = true;
 			PlotPage page = (PlotPage) OpenPlotTool.getMainFrame()
 					.getPlotPanel().getSelectedComponent();
 
@@ -127,5 +129,9 @@ public class PreferenceHandler {
 		fileContentBuffer.append("</preferences>\n");
 		// write string buffer in plain format
 		XMLFileHandler.savePlainFile(fileContentBuffer, file);
+	}
+	
+	public static boolean hasChanged() {
+		return changed;
 	}
 }

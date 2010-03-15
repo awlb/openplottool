@@ -224,8 +224,10 @@ public class OpenPlotTool {
 
 	private void closeProgram() {
 		try {
-			// save preferences before exit
-			PreferenceHandler.savePreferences();
+			// save preferences before exit if they have been changed
+			if(PreferenceHandler.hasChanged()) {
+				PreferenceHandler.savePreferences();
+			}
 			// save strokes before exit if they have been edited
 			if(StrokeTypeHandler.hasChanged()) {
 				StrokeTypeHandler.saveStrokeTypes();

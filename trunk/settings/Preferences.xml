@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <preferences>
 <antialiasingstring>Full</antialiasingstring>
-<lookandfeel>Cross Platform</lookandfeel>
+<lookandfeel>System</lookandfeel>
 <compressfiles>true</compressfiles>
 </preferences>

@@ -31,9 +31,11 @@ public class PieChartDataManager {
 		PlotPage page = (PlotPage) OpenPlotTool.getMainFrame().getPlotPanel()
 				.getSelectedComponent();
 		if (page != null) {
+			// create and display a PieChartDataDialog
 			PieChartDataDialog dialog = new PieChartDataDialog(null);
 			dialog.setVisible(true);
 			if (dialog.getPressed() == PieChartDataDialog.ADD_PRESSED) {
+				// get and add new data set
 				PlotDataSet data = dialog.getDataItems();
 				page.addData(data);
 				page.repaint();
@@ -50,7 +52,7 @@ public class PieChartDataManager {
 		PieChartDataSet currentDataSet = (PieChartDataSet) OpenPlotTool
 				.getMainFrame().getDataSetList().getSelectedValue();
 		if (currentDataSet != null) {
-			// create and display a EditPieChartDataDialog
+			// create and display a PieChartDataDialog
 			PieChartDataDialog dialog = new PieChartDataDialog(currentDataSet);
 			dialog.setVisible(true);
 			if (dialog.getPressed() == PieChartDataDialog.ADD_PRESSED) {
