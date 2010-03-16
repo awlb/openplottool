@@ -76,7 +76,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 		buttonPanel.add(cancelBtn);
 		// make dialog none Resizable
 		setResizable(false);
-		// pack dialog
+		// set dialog size
 		setSize(300, 300);
 		// set dialog location
 		Point winLocation = new Point(

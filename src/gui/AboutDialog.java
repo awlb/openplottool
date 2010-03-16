@@ -20,40 +20,55 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
 import main.OpenPlotTool;
 
 @SuppressWarnings("serial")
-public class AboutDialog extends JDialog {
-	private JTextArea licenseText;
+public class AboutDialog extends JDialog implements ActionListener {
+
+	private JButton licenseBtn;
+	private JButton closeBtn;
 
 	public AboutDialog() {
-		super(OpenPlotTool.getMainFrame(), "About OpenPlot Tool");
+		super(OpenPlotTool.getMainFrame(), "About", true);
 		// create main panel
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory
-				.createTitledBorder(OpenPlotTool.programName + ":"));
 		setContentPane(mainPanel);
 
-		// create license text area
-		licenseText = new JTextArea(16, 40);
-		licenseText.setEditable(false);
-		licenseText.setLineWrap(true);
-		licenseText.setWrapStyleWord(true);
-		JScrollPane scroll = new JScrollPane(licenseText);
-		mainPanel.add(scroll, BorderLayout.CENTER);
+		JLabel iconLabel = new JLabel("<html><b>" + OpenPlotTool.programName
+				+ "</b></html>", new ImageIcon("icon/plot.png"), JLabel.CENTER);
+		iconLabel.setVerticalTextPosition(JLabel.BOTTOM);
+		iconLabel.setHorizontalTextPosition(JLabel.CENTER);
+		mainPanel.add(iconLabel, BorderLayout.PAGE_START);
+		JLabel webLabel = new JLabel("http://openplottool.sourceforge.net/", JLabel.CENTER);
+		mainPanel.add(webLabel, BorderLayout.CENTER);
+		JLabel copyLabel = new JLabel("© 2009 - 2010 Alex Barfoot", JLabel.CENTER);
+		mainPanel.add(copyLabel, BorderLayout.PAGE_END);
+		
+		// create ok and cancel buttons
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+		mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
+		licenseBtn = new JButton("License");
+		licenseBtn.addActionListener(this);
+		buttonPanel.add(licenseBtn);
+		closeBtn = new JButton("Close");
+		closeBtn.addActionListener(this);
+		buttonPanel.add(closeBtn);
+
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setResizable(false);
 		// pack dialog
 		pack();
 		// set dialog location
@@ -61,24 +76,15 @@ public class AboutDialog extends JDialog {
 				OpenPlotTool.getMainFrame().getLocation().x + 20, OpenPlotTool
 						.getMainFrame().getLocation().y + 20);
 		setLocation(winLocation);
-		showLicense();
 	}
 
-	// show license text
-	public void showLicense() {
-		String text = "";
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(
-					"license/license.txt"));
-			String str;
-			while ((str = in.readLine()) != null) {
-				// read each line of file into string
-				text = text + str + "\n";
-			}
-			in.close();
-		} catch (IOException e) {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == closeBtn) {
+			setVisible(false);
+		} else if (e.getSource() == licenseBtn) {
+			LicenseDialog licenseDialog = new LicenseDialog();
+			licenseDialog.setVisible(true);
 		}
-		licenseText.setText(text);
-		licenseText.setCaretPosition(0);
 	}
 }
