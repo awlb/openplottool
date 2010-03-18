@@ -225,11 +225,11 @@ public class OpenPlotTool {
 	private void closeProgram() {
 		try {
 			// save preferences before exit if they have been changed
-			if(PreferenceHandler.hasChanged()) {
+			if (PreferenceHandler.hasChanged()) {
 				PreferenceHandler.savePreferences();
 			}
 			// save strokes before exit if they have been edited
-			if(StrokeTypeHandler.hasChanged()) {
+			if (StrokeTypeHandler.hasChanged()) {
 				StrokeTypeHandler.saveStrokeTypes();
 			}
 		} catch (IOException e) {
@@ -293,7 +293,7 @@ public class OpenPlotTool {
 			errorDialog.setVisible(true);
 		}
 	}
-	
+
 	private void loadStrokes() {
 		try {
 			StrokeTypeHandler.loadStrokeTypes();
