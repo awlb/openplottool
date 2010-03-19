@@ -27,6 +27,7 @@ import java.awt.Toolkit;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenu;
@@ -37,6 +38,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 
@@ -51,16 +53,17 @@ public class MainFrame extends JFrame {
 			editSelectedItem, removeSelectedItem;
 	// tab panels
 	private JTabbedPane consoleTabPane, plotPanel;
-	private JMenuItem exportMenuItem, quitMenuItem;
 	// function, points and data set lists models
 	private JList functionList, pointList, dataSetList;
 	// function, points and data set lists models
 	private DefaultListModel functionListModel, pointListModel,
 			dataSetListModel;
 	// file menu items
-	private JMenuItem newMenuItem, openMenuItem, saveMenuItem, saveAsMenuItem;
-	private JMenuItem saveAllMenuItem, closeMenuItem, closeAllMenuItem,
-			printMenuItem;
+	private JMenuItem newMenuItem, openMenuItem, saveMenuItem, saveAsMenuItem,
+			saveAllMenuItem, closeMenuItem, closeAllMenuItem, printMenuItem,
+			exportMenuItem, quitMenuItem;
+	// tool bar buttons
+	private JButton newToolBtn, openToolBtn, saveToolBtn, printToolBtn;
 	// page menu items
 	private JMenuItem pageInformationItem, pageSettingsItem, axisSettingsItem;
 	// edit menu items
@@ -144,6 +147,25 @@ public class MainFrame extends JFrame {
 		menuBar.add(helpMenu);
 		aboutMenuItem = new JMenuItem("About");
 		helpMenu.add(aboutMenuItem);
+
+		// create toolbar
+		JToolBar toolBar = new JToolBar("Tool Bar");
+		toolBar.setFloatable(false);
+		mainPanel.add(toolBar, BorderLayout.PAGE_START);
+
+		// create toolbar buttons
+		newToolBtn = new JButton("New", new ImageIcon("icon/document-new.png"));
+		toolBar.add(newToolBtn);
+		openToolBtn = new JButton("Open", new ImageIcon(
+				"icon/document-open.png"));
+		toolBar.add(openToolBtn);
+		saveToolBtn = new JButton("Save", new ImageIcon(
+				"icon/document-save.png"));
+		toolBar.add(saveToolBtn);
+		toolBar.addSeparator();
+		printToolBtn = new JButton("Print", new ImageIcon(
+				"icon/document-print.png"));
+		toolBar.add(printToolBtn);
 
 		// create work area panel
 		JPanel workAreaPanel = new JPanel();
@@ -230,92 +252,68 @@ public class MainFrame extends JFrame {
 		return addDataItem;
 	}
 
-	public JMenuItem getAddPointItem() {
-		return addPointItem;
-	}
-
 	public JMenuItem getAddFunctionItem() {
 		return addFunctionItem;
 	}
 
-	public JMenuItem getEditSelectedItem() {
-		return editSelectedItem;
+	public JMenuItem getAddPointItem() {
+		return addPointItem;
 	}
 
-	public JMenuItem getRemoveSelectedItem() {
-		return removeSelectedItem;
-	}
-
-	public JTabbedPane getConsoleTabPane() {
-		return consoleTabPane;
-	}
-
-	public JTabbedPane getPlotPanel() {
-		return plotPanel;
-	}
-
-	public JMenuItem getExportMenuItem() {
-		return exportMenuItem;
-	}
-
-	public JMenuItem getQuitMenuItem() {
-		return quitMenuItem;
-	}
-
-	public JList getFunctionList() {
-		return functionList;
-	}
-
-	public JList getPointList() {
-		return pointList;
-	}
-
-	public JList getDataSetList() {
-		return dataSetList;
-	}
-
-	public DefaultListModel getFunctionListModel() {
-		return functionListModel;
-	}
-
-	public DefaultListModel getPointListModel() {
-		return pointListModel;
-	}
-
-	public DefaultListModel getDataSetListModel() {
-		return dataSetListModel;
-	}
-
-	public JMenuItem getNewMenuItem() {
-		return newMenuItem;
-	}
-
-	public JMenuItem getOpenMenuItem() {
-		return openMenuItem;
-	}
-
-	public JMenuItem getSaveMenuItem() {
-		return saveMenuItem;
-	}
-
-	public JMenuItem getSaveAsMenuItem() {
-		return saveAsMenuItem;
-	}
-
-	public JMenuItem getSaveAllMenuItem() {
-		return saveAllMenuItem;
-	}
-
-	public JMenuItem getCloseMenuItem() {
-		return closeMenuItem;
+	public JMenuItem getAxisSettingsItem() {
+		return axisSettingsItem;
 	}
 
 	public JMenuItem getCloseAllMenuItem() {
 		return closeAllMenuItem;
 	}
 
-	public JMenuItem getPrintMenuItem() {
-		return printMenuItem;
+	public JMenuItem getCloseMenuItem() {
+		return closeMenuItem;
+	}
+
+	public JTabbedPane getConsoleTabPane() {
+		return consoleTabPane;
+	}
+
+	public JList getDataSetList() {
+		return dataSetList;
+	}
+
+	public DefaultListModel getDataSetListModel() {
+		return dataSetListModel;
+	}
+
+	public JMenuItem getEditSelectedItem() {
+		return editSelectedItem;
+	}
+
+	public JMenuItem getExportMenuItem() {
+		return exportMenuItem;
+	}
+
+	public JList getFunctionList() {
+		return functionList;
+	}
+
+	public DefaultListModel getFunctionListModel() {
+		return functionListModel;
+	}
+
+	public JMenuItem getNewMenuItem() {
+		return newMenuItem;
+	}
+
+	public JButton getNewToolBtn() {
+		return newToolBtn;
+	}
+
+	public JMenuItem getOpenMenuItem() {
+		return openMenuItem;
+	}
+
+	public JButton getOpenToolBtn() {
+		return openToolBtn;
 	}
 
 	public JMenuItem getPageInformationItem() {
@@ -326,15 +324,55 @@ public class MainFrame extends JFrame {
 		return pageSettingsItem;
 	}
 
-	public JMenuItem getAxisSettingsItem() {
-		return axisSettingsItem;
+	public JTabbedPane getPlotPanel() {
+		return plotPanel;
+	}
+
+	public JList getPointList() {
+		return pointList;
+	}
+
+	public DefaultListModel getPointListModel() {
+		return pointListModel;
 	}
 
 	public JMenuItem getPrefMenuItem() {
 		return prefMenuItem;
 	}
 
+	public JMenuItem getPrintMenuItem() {
+		return printMenuItem;
+	}
+
+	public JButton getPrintToolBtn() {
+		return printToolBtn;
+	}
+
 	public JProgressBar getProgressBar() {
 		return progressBar;
+	}
+
+	public JMenuItem getQuitMenuItem() {
+		return quitMenuItem;
+	}
+
+	public JMenuItem getRemoveSelectedItem() {
+		return removeSelectedItem;
+	}
+
+	public JMenuItem getSaveAllMenuItem() {
+		return saveAllMenuItem;
+	}
+
+	public JMenuItem getSaveAsMenuItem() {
+		return saveAsMenuItem;
+	}
+
+	public JMenuItem getSaveMenuItem() {
+		return saveMenuItem;
+	}
+
+	public JButton getSaveToolBtn() {
+		return saveToolBtn;
 	}
 }

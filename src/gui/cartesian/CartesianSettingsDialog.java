@@ -178,7 +178,8 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 		gridDrawSelector.setSelectedItem(settings.getMainGridDrawType());
 		// create sub grid color field
 		drawMethodPanel.add(new JLabel("Sub Grid: "), "0, 2");
-		subDrawGridSelector = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
+		subDrawGridSelector = new JComboBox(StrokeTypeHandler
+				.getStrokeTypeArray());
 		drawMethodPanel.add(subDrawGridSelector, "1, 2");
 		subDrawGridSelector.setSelectedItem(settings.getSubGridType());
 
@@ -229,9 +230,12 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 		Color axisColor = axisColorSelector.getColor();
 		Color gridColor = gridColorSelector.getColor();
 		Color subGridColor = subColorGridSelector.getColor();
-		String axisDrawType = ((StrokeType) axisDrawSelector.getSelectedItem()).getName();
-		String mainGridDrawType = ((StrokeType) gridDrawSelector.getSelectedItem()).getName();
-		String subDrawType = ((StrokeType) subDrawGridSelector.getSelectedItem()).getName();
+		String axisDrawType = ((StrokeType) axisDrawSelector.getSelectedItem())
+				.getName();
+		String mainGridDrawType = ((StrokeType) gridDrawSelector
+				.getSelectedItem()).getName();
+		String subDrawType = ((StrokeType) subDrawGridSelector
+				.getSelectedItem()).getName();
 		CartesianSettings settings = new CartesianSettings();
 		settings.setxMax(newXMax);
 		settings.setxMin(newXMin);

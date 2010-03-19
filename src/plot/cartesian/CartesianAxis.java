@@ -158,7 +158,8 @@ public class CartesianAxis extends Axis {
 
 		// set settings for sub grid
 		gc.setColor(settings.getSubGridColor());
-		gc.setStroke(StrokeTypeHandler.getStrokeType(settings.getSubGridType()).getStroke());
+		gc.setStroke(StrokeTypeHandler.getStrokeType(settings.getSubGridType())
+				.getStroke());
 
 		// draw x sub grid lines
 		for (int i = 0; i <= xWholeSectionNum; i++) {
@@ -206,8 +207,8 @@ public class CartesianAxis extends Axis {
 					int xPos = xIndent + xLowerSectionPad + (i * xSectionSize);
 					// set settings for grid
 					gc.setColor(settings.getMainGridColor());
-					gc.setStroke(StrokeTypeHandler.getStrokeType(settings
-							.getMainGridDrawType()).getStroke());
+					gc.setStroke(StrokeTypeHandler.getStrokeType(
+							settings.getMainGridDrawType()).getStroke());
 					// draw grid line
 					gc.drawLine(xPos, yIndent, xPos, (height - yPadding)
 							+ yIndent);
@@ -248,8 +249,8 @@ public class CartesianAxis extends Axis {
 							+ (i * ySectionSize);
 					// set settings for grid
 					gc.setColor(settings.getMainGridColor());
-					gc.setStroke(StrokeTypeHandler.getStrokeType(settings
-							.getMainGridDrawType()).getStroke());
+					gc.setStroke(StrokeTypeHandler.getStrokeType(
+							settings.getMainGridDrawType()).getStroke());
 					// draw grid line
 					gc.drawLine(xIndent, yPoint, (width - xPadding) + xIndent,
 							yPoint);
@@ -276,7 +277,8 @@ public class CartesianAxis extends Axis {
 
 		// draw axis
 		gc.setColor(settings.getAxisColor());
-		gc.setStroke(StrokeTypeHandler.getStrokeType(settings.getAxisDrawType()).getStroke());
+		gc.setStroke(StrokeTypeHandler
+				.getStrokeType(settings.getAxisDrawType()).getStroke());
 		int xAxisPoint = xIndent + xLowerSectionPad
 				+ (xLowerSectionNum * xSectionSize);
 		gc.drawLine(xAxisPoint, yIndent, xAxisPoint, (height - yPadding)
@@ -289,8 +291,9 @@ public class CartesianAxis extends Axis {
 		// draw border if required
 		if (this.getParentPage().getSettings().getDrawBorder()) {
 			gc.setColor(this.getParentPage().getSettings().getBorderColor());
-			gc.setStroke(StrokeTypeHandler.getStrokeType(this.getParentPage()
-					.getSettings().getBorderDrawType()).getStroke());
+			gc.setStroke(StrokeTypeHandler.getStrokeType(
+					this.getParentPage().getSettings().getBorderDrawType())
+					.getStroke());
 			gc.drawRect(xIndent, yIndent, width - xPadding, height - yPadding);
 		}
 

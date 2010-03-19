@@ -144,7 +144,8 @@ public class PageSettingsDialog extends JDialog implements ActionListener {
 		settings.setBackgroundColor(backgroundSelector.getColor());
 		settings.setDrawBorder(drawBorderCheck.isSelected());
 		settings.setBorderColor(borderSelector.getColor());
-		settings.setBorderDrawType(((StrokeType) borderDrawCombo.getSelectedItem()).getName());
+		settings.setBorderDrawType(((StrokeType) borderDrawCombo
+				.getSelectedItem()).getName());
 		return settings;
 	}
 
