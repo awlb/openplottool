@@ -159,6 +159,22 @@ public class OpenPlotTool {
 			}
 		}
 	}
+	
+	// tool bar listener inner class
+	private class ToolBarListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == mainFrame.getNewToolBtn()) {
+				PageHandler.newPlotPage();
+			} else if (e.getSource() == mainFrame.getOpenToolBtn()) {
+				PageFileHandler.openPageFile();
+			} else if (e.getSource() == mainFrame.getSaveToolBtn()) {
+				PageFileHandler.savePageFile();
+			} else if (e.getSource() == mainFrame.getPrintToolBtn()) {
+				PageHandler.printSelectedPlot();
+			}
+		}		
+	}
 
 	private static MainFrame mainFrame;
 
@@ -220,6 +236,11 @@ public class OpenPlotTool {
 		mainFrame.getDataSetList().addMouseListener(new ListClickListener());
 		mainFrame.getFunctionList().addMouseListener(new ListClickListener());
 		mainFrame.getPointList().addMouseListener(new ListClickListener());
+		// add tool bar listeners
+		mainFrame.getNewToolBtn().addActionListener(new ToolBarListener());
+		mainFrame.getOpenToolBtn().addActionListener(new ToolBarListener());
+		mainFrame.getSaveToolBtn().addActionListener(new ToolBarListener());
+		mainFrame.getPrintToolBtn().addActionListener(new ToolBarListener());
 	}
 
 	private void closeProgram() {
