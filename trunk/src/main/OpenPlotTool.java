@@ -50,7 +50,7 @@ import data.DataManager;
 
 public class OpenPlotTool {
 
-	public static String programName = "OpenPlot Tool 0.2";
+	public static String programName = "OpenPlot Tool 0.3";
 
 	// about menu listener inner class
 	private class AboutMenuListener implements ActionListener {
@@ -159,6 +159,22 @@ public class OpenPlotTool {
 			}
 		}
 	}
+	
+	// tool bar listener inner class
+	private class ToolBarListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == mainFrame.getNewToolBtn()) {
+				PageHandler.newPlotPage();
+			} else if (e.getSource() == mainFrame.getOpenToolBtn()) {
+				PageFileHandler.openPageFile();
+			} else if (e.getSource() == mainFrame.getSaveToolBtn()) {
+				PageFileHandler.savePageFile();
+			} else if (e.getSource() == mainFrame.getPrintToolBtn()) {
+				PageHandler.printSelectedPlot();
+			}
+		}		
+	}
 
 	private static MainFrame mainFrame;
 
@@ -220,16 +236,21 @@ public class OpenPlotTool {
 		mainFrame.getDataSetList().addMouseListener(new ListClickListener());
 		mainFrame.getFunctionList().addMouseListener(new ListClickListener());
 		mainFrame.getPointList().addMouseListener(new ListClickListener());
+		// add tool bar listeners
+		mainFrame.getNewToolBtn().addActionListener(new ToolBarListener());
+		mainFrame.getOpenToolBtn().addActionListener(new ToolBarListener());
+		mainFrame.getSaveToolBtn().addActionListener(new ToolBarListener());
+		mainFrame.getPrintToolBtn().addActionListener(new ToolBarListener());
 	}
 
 	private void closeProgram() {
 		try {
 			// save preferences before exit if they have been changed
-			if(PreferenceHandler.hasChanged()) {
+			if (PreferenceHandler.hasChanged()) {
 				PreferenceHandler.savePreferences();
 			}
 			// save strokes before exit if they have been edited
-			if(StrokeTypeHandler.hasChanged()) {
+			if (StrokeTypeHandler.hasChanged()) {
 				StrokeTypeHandler.saveStrokeTypes();
 			}
 		} catch (IOException e) {
@@ -293,7 +314,7 @@ public class OpenPlotTool {
 			errorDialog.setVisible(true);
 		}
 	}
-	
+
 	private void loadStrokes() {
 		try {
 			StrokeTypeHandler.loadStrokeTypes();

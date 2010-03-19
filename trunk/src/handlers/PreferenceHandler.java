@@ -130,7 +130,7 @@ public class PreferenceHandler {
 		// write string buffer in plain format
 		XMLFileHandler.savePlainFile(fileContentBuffer, file);
 	}
-	
+
 	public static boolean hasChanged() {
 		return changed;
 	}
