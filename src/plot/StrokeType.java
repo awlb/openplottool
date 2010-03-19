@@ -25,7 +25,7 @@ public class StrokeType {
 	String name;
 	// Basic stroke object for this stroke
 	BasicStroke stroke;
-
+	
 	public StrokeType(String name, BasicStroke stroke) {
 		this.name = name;
 		this.stroke = stroke;
@@ -50,5 +50,5 @@ public class StrokeType {
 	@Override
 	public String toString() {
 		return name;
-	}
+	}	
 }

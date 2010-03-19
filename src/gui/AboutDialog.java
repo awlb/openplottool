@@ -50,13 +50,11 @@ public class AboutDialog extends JDialog implements ActionListener {
 		iconLabel.setVerticalTextPosition(JLabel.BOTTOM);
 		iconLabel.setHorizontalTextPosition(JLabel.CENTER);
 		mainPanel.add(iconLabel, BorderLayout.PAGE_START);
-		JLabel webLabel = new JLabel("http://openplottool.sourceforge.net/",
-				JLabel.CENTER);
+		JLabel webLabel = new JLabel("http://openplottool.sourceforge.net/", JLabel.CENTER);
 		mainPanel.add(webLabel, BorderLayout.CENTER);
-		JLabel copyLabel = new JLabel("© 2009 - 2010 Alex Barfoot",
-				JLabel.CENTER);
+		JLabel copyLabel = new JLabel("© 2009 - 2010 Alex Barfoot", JLabel.CENTER);
 		mainPanel.add(copyLabel, BorderLayout.PAGE_END);
-
+		
 		// create ok and cancel buttons
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
@@ -67,6 +65,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 		closeBtn = new JButton("Close");
 		closeBtn.addActionListener(this);
 		buttonPanel.add(closeBtn);
+
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setResizable(false);
@@ -81,7 +80,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == closeBtn) {
+		if(e.getSource() == closeBtn) {
 			setVisible(false);
 		} else if (e.getSource() == licenseBtn) {
 			LicenseDialog licenseDialog = new LicenseDialog();

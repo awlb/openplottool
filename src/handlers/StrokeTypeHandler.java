@@ -47,11 +47,11 @@ public class StrokeTypeHandler {
 		strokeTypeList.remove(strokeType);
 		changed = true;
 	}
-
+	
 	public static StrokeType getStrokeType(String name) {
 		StrokeType strokeType = null;
-		for (StrokeType curStroke : strokeTypeList) {
-			if (curStroke.getName().equals(name)) {
+		for(StrokeType curStroke : strokeTypeList) {
+			if(curStroke.getName().equals(name)) {
 				strokeType = curStroke;
 				break;
 			}
@@ -168,7 +168,7 @@ public class StrokeTypeHandler {
 		// write string buffer in plain format
 		XMLFileHandler.savePlainFile(fileContentBuffer, file);
 	}
-
+	
 	public static boolean hasChanged() {
 		return changed;
 	}
