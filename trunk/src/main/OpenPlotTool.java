@@ -159,7 +159,7 @@ public class OpenPlotTool {
 			}
 		}
 	}
-	
+
 	// tool bar listener inner class
 	private class ToolBarListener implements ActionListener {
 		@Override
@@ -173,7 +173,7 @@ public class OpenPlotTool {
 			} else if (e.getSource() == mainFrame.getPrintToolBtn()) {
 				PageHandler.printSelectedPlot();
 			}
-		}		
+		}
 	}
 
 	private static MainFrame mainFrame;

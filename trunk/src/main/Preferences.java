@@ -21,21 +21,35 @@ package main;
 import java.awt.RenderingHints;
 
 public class Preferences {
-	private Object antiAliasingMode = RenderingHints.VALUE_ANTIALIAS_ON;
+	private boolean addFileExtensions = true;
 	private String antiAliasing = "Full";
-	private String lookAndFeel = "System";
+	private Object antiAliasingMode = RenderingHints.VALUE_ANTIALIAS_ON;
+	private boolean checkFileExtensions = true;
 	private boolean compressFiles = true;
-
-	public Object getAntiAliasingMode() {
-		return antiAliasingMode;
-	}
+	private String lookAndFeel = "System";
 
 	public String getAntiAliasing() {
 		return antiAliasing;
 	}
 
+	public Object getAntiAliasingMode() {
+		return antiAliasingMode;
+	}
+
 	public String getLookAndFeel() {
 		return lookAndFeel;
+	}
+
+	public boolean isAddFileExtensions() {
+		return addFileExtensions;
+	}
+
+	public boolean isCheckFileExtensions() {
+		return checkFileExtensions;
+	}
+
+	public void setAddFileExtensions(boolean addFileExtensions) {
+		this.addFileExtensions = addFileExtensions;
 	}
 
 	public void setAntiAliasing(String mode) {
@@ -49,15 +63,19 @@ public class Preferences {
 		}
 	}
 
+	public void setCheckFileExtensions(boolean checkFileExtensions) {
+		this.checkFileExtensions = checkFileExtensions;
+	}
+
+	public void setCompressFiles(boolean compressFiles) {
+		this.compressFiles = compressFiles;
+	}
+
 	public void setLookAndFeel(String lookAndFeel) {
 		this.lookAndFeel = lookAndFeel;
 	}
 
 	public boolean useCompressedFiles() {
 		return compressFiles;
-	}
-
-	public void setCompressFiles(boolean compressFiles) {
-		this.compressFiles = compressFiles;
 	}
 }

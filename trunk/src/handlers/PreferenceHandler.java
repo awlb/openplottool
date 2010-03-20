@@ -105,6 +105,16 @@ public class PreferenceHandler {
 						String booleanStr = curNode.getTextContent();
 						settings.setCompressFiles(Boolean
 								.parseBoolean(booleanStr));
+					} else if (curNode.getNodeName().equals(
+							"checkfileextensions")) {
+						String booleanStr = curNode.getTextContent();
+						settings.setCheckFileExtensions(Boolean
+								.parseBoolean(booleanStr));
+					} else if (curNode.getNodeName()
+							.equals("addfileextensions")) {
+						String booleanStr = curNode.getTextContent();
+						settings.setAddFileExtensions(Boolean
+								.parseBoolean(booleanStr));
 					}
 				}
 			}
@@ -126,6 +136,14 @@ public class PreferenceHandler {
 				+ "</lookandfeel>\n");
 		fileContentBuffer.append("<compressfiles>"
 				+ settings.useCompressedFiles() + "</compressfiles>\n");
+		fileContentBuffer.append("<compressfiles>"
+				+ settings.useCompressedFiles() + "</compressfiles>\n");
+		fileContentBuffer
+				.append("<checkfileextensions>"
+						+ settings.isCheckFileExtensions()
+						+ "</checkfileextensions>\n");
+		fileContentBuffer.append("<addfileextensions>"
+				+ settings.isAddFileExtensions() + "</addfileextensions>\n");
 		fileContentBuffer.append("</preferences>\n");
 		// write string buffer in plain format
 		XMLFileHandler.savePlainFile(fileContentBuffer, file);
