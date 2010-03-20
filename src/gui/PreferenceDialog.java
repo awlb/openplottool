@@ -22,7 +22,7 @@ import handlers.PreferenceHandler;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.CardLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,35 +34,55 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import main.OpenPlotTool;
 import main.Preferences;
 
 @SuppressWarnings("serial")
-public class PreferenceDialog extends JDialog implements ActionListener {
+public class PreferenceDialog extends JDialog implements ActionListener,
+		ListSelectionListener {
 	public static int APPLY_PRESSED = 1;
-	private JCheckBox compressFilesCheck;
+	private JCheckBox compressFilesCheck, addExtensionCheck,
+			checkExtensionCheck;
 	private JComboBox aaTypeField, lookTypeField;
 	private JButton applyButton, cancelButton;
 	private int pressed = 0;
+	private CardLayout cardLayout;
+	private JList sectionList;
+	private JPanel settingsPanel;
 
 	public PreferenceDialog(Preferences settings) {
 		super(OpenPlotTool.getMainFrame(), "Preferences", true);
 		// create main panel
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPanel);
 
 		// create settings panel
-		JPanel settingsPanel = new JPanel(new GridLayout(3, 1));
+		cardLayout = new CardLayout();
+		settingsPanel = new JPanel(cardLayout);
 		mainPanel.add(settingsPanel, BorderLayout.CENTER);
+
+		// create section list
+		String[] sections = { "Draw", "Files", "User Interface" };
+		sectionList = new JList(sections);
+		sectionList.addListSelectionListener(this);
+		sectionList.setSelectedIndex(0);
+		JScrollPane stopsTableScroll = new JScrollPane(sectionList,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		mainPanel.add(stopsTableScroll, BorderLayout.LINE_START);
 
 		// create draw settings panel
 		JPanel drawSettingPanel = new JPanel();
 		drawSettingPanel.setBorder(BorderFactory
 				.createTitledBorder("Draw Settings: "));
-		settingsPanel.add(drawSettingPanel);
+		settingsPanel.add(drawSettingPanel, "Draw");
 		double[][] drawSettingLayoutSize = { { 0.4, 0.6 }, { 25 } };
 		drawSettingPanel.setLayout(new TableLayout(drawSettingLayoutSize));
 
@@ -78,7 +98,7 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		JPanel guiSettingPanel = new JPanel();
 		guiSettingPanel.setBorder(BorderFactory
 				.createTitledBorder("User Interface Settings: "));
-		settingsPanel.add(guiSettingPanel);
+		settingsPanel.add(guiSettingPanel, "User Interface");
 		double[][] guiSettingLayoutSize = { { 0.4, 0.6 }, { 25 } };
 		guiSettingPanel.setLayout(new TableLayout(guiSettingLayoutSize));
 
@@ -93,15 +113,27 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		JPanel fileSettingsPanel = new JPanel();
 		fileSettingsPanel.setBorder(BorderFactory
 				.createTitledBorder("File Settings: "));
-		settingsPanel.add(fileSettingsPanel);
-		double[][] fileSettingsLayoutSize = { { 0.4, 0.6 }, { 25 } };
+		settingsPanel.add(fileSettingsPanel, "Files");
+		double[][] fileSettingsLayoutSize = { { 0.8, 0.2 }, { 25, 25, 25 } };
 		fileSettingsPanel.setLayout(new TableLayout(fileSettingsLayoutSize));
 
+		// create add extension check box
+		fileSettingsPanel.add(new JLabel("Add file extensions: "), "0, 0");
+		addExtensionCheck = new JCheckBox();
+		addExtensionCheck.setSelected(settings.isAddFileExtensions());
+		fileSettingsPanel.add(addExtensionCheck, "1, 0");
+
+		// create check file extensions check box
+		fileSettingsPanel.add(new JLabel("Check file extensions: "), "0, 1");
+		checkExtensionCheck = new JCheckBox();
+		checkExtensionCheck.setSelected(settings.isCheckFileExtensions());
+		fileSettingsPanel.add(checkExtensionCheck, "1, 1");
+
 		// create compress files check box
-		fileSettingsPanel.add(new JLabel("Compress Files: "), "0, 0");
+		fileSettingsPanel.add(new JLabel("Compress Files: "), "0, 2");
 		compressFilesCheck = new JCheckBox();
 		compressFilesCheck.setSelected(settings.useCompressedFiles());
-		fileSettingsPanel.add(compressFilesCheck, "1, 0");
+		fileSettingsPanel.add(compressFilesCheck, "1, 2");
 
 		// create button panel
 		JPanel buttonPanel = new JPanel();
@@ -139,10 +171,18 @@ public class PreferenceDialog extends JDialog implements ActionListener {
 		newSettings.setAntiAliasing((String) aaTypeField.getSelectedItem());
 		newSettings.setLookAndFeel((String) lookTypeField.getSelectedItem());
 		newSettings.setCompressFiles(compressFilesCheck.isSelected());
+		newSettings.setAddFileExtensions(addExtensionCheck.isSelected());
+		newSettings.setCheckFileExtensions(checkExtensionCheck.isSelected());
 		return newSettings;
 	}
 
 	public int getPressed() {
 		return pressed;
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		String selection = (String) sectionList.getSelectedValue();
+		cardLayout.show(settingsPanel, selection);
 	}
 }

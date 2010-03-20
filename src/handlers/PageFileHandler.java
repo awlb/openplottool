@@ -198,13 +198,15 @@ public class PageFileHandler {
 				// get required extension
 				String fileExtension = PreferenceHandler.getSettings()
 						.useCompressedFiles() ? "opc" : "opp";
-				if (getFileExtension(saveFile).equals(fileExtension)) {
-					performSave(page, saveFile);
-				} else if (getFileExtension(saveFile).equals("")) {
+				if (fileExtension.equals(getFileExtension(saveFile))) {
+					// file extension is ok
+				} else if (getFileExtension(saveFile).equals("")
+						&& PreferenceHandler.getSettings()
+								.isAddFileExtensions()) {
 					saveFile = new File(saveFile.getAbsoluteFile() + "."
 							+ fileExtension);
-					performSave(page, saveFile);
-				} else {
+				} else if (PreferenceHandler.getSettings()
+						.isCheckFileExtensions()) {
 					int chosen = JOptionPane
 							.showConfirmDialog(
 									OpenPlotTool.getMainFrame(),
@@ -212,12 +214,12 @@ public class PageFileHandler {
 											+ "Do you want to save with that extension anyway?",
 									"Wrong File Extension",
 									JOptionPane.YES_NO_OPTION);
-					if (chosen == JOptionPane.YES_OPTION) {
-						performSave(page, saveFile);
-					} else {
+					if (chosen == JOptionPane.NO_OPTION) {
 						return;
 					}
 				}
+				// perform save
+				performSave(page, saveFile);
 				// set page file
 				page.setPageFile(saveFile);
 				// update tab title and tool tip

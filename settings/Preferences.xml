@@ -3,5 +3,7 @@
 <antialiasingstring>Full</antialiasingstring>
 <lookandfeel>System</lookandfeel>
 <compressfiles>true</compressfiles>
-<showtoolbar>true</showtoolbar>
+<compressfiles>true</compressfiles>
+<checkfileextensions>true</checkfileextensions>
+<addfileextensions>true</addfileextensions>
 </preferences>
