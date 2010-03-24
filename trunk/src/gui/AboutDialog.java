@@ -23,6 +23,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,18 +45,23 @@ public class AboutDialog extends JDialog implements ActionListener {
 		// create main panel
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		setContentPane(mainPanel);
-
+		
+		// create information panel
+		JPanel informationPanel = new JPanel(new BorderLayout());
+		informationPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		mainPanel.add(informationPanel, BorderLayout.CENTER);
+		// create icon label
 		JLabel iconLabel = new JLabel("<html><b>" + OpenPlotTool.programName
 				+ "</b></html>", new ImageIcon("icon/plot.png"), JLabel.CENTER);
 		iconLabel.setVerticalTextPosition(JLabel.BOTTOM);
 		iconLabel.setHorizontalTextPosition(JLabel.CENTER);
-		mainPanel.add(iconLabel, BorderLayout.PAGE_START);
+		informationPanel.add(iconLabel, BorderLayout.PAGE_START);
 		JLabel webLabel = new JLabel("http://openplottool.sourceforge.net/",
 				JLabel.CENTER);
-		mainPanel.add(webLabel, BorderLayout.CENTER);
+		informationPanel.add(webLabel, BorderLayout.CENTER);
 		JLabel copyLabel = new JLabel("© 2009 - 2010 Alex Barfoot",
 				JLabel.CENTER);
-		mainPanel.add(copyLabel, BorderLayout.PAGE_END);
+		informationPanel.add(copyLabel, BorderLayout.PAGE_END);
 
 		// create ok and cancel buttons
 		JPanel buttonPanel = new JPanel();
