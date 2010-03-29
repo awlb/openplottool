@@ -21,7 +21,6 @@ package handlers;
 import gui.ErrorBox;
 import gui.ExportDialog;
 import gui.NewPlotDialog;
-import gui.PageInformationDialog;
 import gui.PageSettingsDialog;
 
 import java.awt.Graphics2D;
@@ -81,17 +80,6 @@ public class PageHandler {
 			plotPages.remove(page);
 			OpenPlotTool.getMainFrame().getPlotPanel().removeTabAt(index);
 			updatePageChange();
-		}
-	}
-
-	// method to show page information dialog
-	public static void displayInformation() {
-		// get selected plot page
-		PlotPage page = (PlotPage) OpenPlotTool.getMainFrame().getPlotPanel()
-				.getSelectedComponent();
-		if (page != null) {
-			PageInformationDialog dialog = new PageInformationDialog(page);
-			dialog.setVisible(true);
 		}
 	}
 

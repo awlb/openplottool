@@ -112,9 +112,7 @@ public class OpenPlotTool {
 	private class PageMenuListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			if (event.getSource() == mainFrame.getPageInformationItem()) {
-				PageHandler.displayInformation();
-			} else if (event.getSource() == mainFrame.getPageSettingsItem()) {
+			if (event.getSource() == mainFrame.getPageSettingsItem()) {
 				PageHandler.editPage();
 			} else if (event.getSource() == mainFrame.getAxisSettingsItem()) {
 				AxisHandler.editAxis();
@@ -217,7 +215,6 @@ public class OpenPlotTool {
 		mainFrame.getPrefMenuItem().addActionListener(editMenuListener);
 		// add page menu action listeners
 		ActionListener pageMenuListener = new PageMenuListener();
-		mainFrame.getPageInformationItem().addActionListener(pageMenuListener);
 		mainFrame.getPageSettingsItem().addActionListener(pageMenuListener);
 		mainFrame.getAxisSettingsItem().addActionListener(pageMenuListener);
 		// add plot menu action listeners

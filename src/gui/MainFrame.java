@@ -18,9 +18,6 @@
 
 package gui;
 
-import info.clearthought.layout.TableLayout;
-import info.clearthought.layout.TableLayoutConstants;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -65,7 +62,7 @@ public class MainFrame extends JFrame {
 	// tool bar buttons
 	private JButton newToolBtn, openToolBtn, saveToolBtn, printToolBtn;
 	// page menu items
-	private JMenuItem pageInformationItem, pageSettingsItem, axisSettingsItem;
+	private JMenuItem pageSettingsItem, axisSettingsItem;
 	// edit menu items
 	private JMenuItem prefMenuItem;
 	// progress bar
@@ -119,8 +116,6 @@ public class MainFrame extends JFrame {
 		// create page menu
 		JMenu pageMenu = new JMenu("Page");
 		menuBar.add(pageMenu);
-		pageInformationItem = new JMenuItem("Page Information");
-		pageMenu.add(pageInformationItem);
 		pageSettingsItem = new JMenuItem("Page Settings");
 		pageMenu.add(pageSettingsItem);
 		pageMenu.add(new JSeparator());
@@ -168,22 +163,19 @@ public class MainFrame extends JFrame {
 		toolBar.add(printToolBtn);
 
 		// create work area panel
-		JPanel workAreaPanel = new JPanel();
+		JPanel workAreaPanel = new JPanel(new BorderLayout());
 		mainPanel.add(workAreaPanel, BorderLayout.CENTER);
-		// create layout
-		double size[][] = { { TableLayoutConstants.FILL },
-				{ TableLayoutConstants.FILL, 150 } };
-		workAreaPanel.setLayout(new TableLayout(size));
 
 		// create plot pane
 		plotPanel = new JTabbedPane();
+		plotPanel.setPreferredSize(new Dimension(600, 300));
 		plotPanel.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		workAreaPanel.add(plotPanel, "0, 0");
+		workAreaPanel.add(plotPanel, BorderLayout.CENTER);
 
 		// create console tab pane
 		consoleTabPane = new JTabbedPane();
-		consoleTabPane.setMinimumSize(new Dimension(15, 15));
-		workAreaPanel.add(consoleTabPane, "0, 1");
+		consoleTabPane.setPreferredSize(new Dimension(600, 150));
+		workAreaPanel.add(consoleTabPane, BorderLayout.PAGE_END);
 
 		// create data set list panel
 		JPanel dataSetListPanel = new JPanel(new BorderLayout());
@@ -226,8 +218,8 @@ public class MainFrame extends JFrame {
 		progressBar = new JProgressBar(minimum, maximum);
 		mainPanel.add(progressBar, BorderLayout.PAGE_END);
 
-		// set size
-		setSize(600, 600);
+		// pack main frame
+		pack();
 
 		// turn of the default window closing code
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -314,10 +306,6 @@ public class MainFrame extends JFrame {
 
 	public JButton getOpenToolBtn() {
 		return openToolBtn;
-	}
-
-	public JMenuItem getPageInformationItem() {
-		return pageInformationItem;
 	}
 
 	public JMenuItem getPageSettingsItem() {
