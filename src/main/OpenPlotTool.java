@@ -50,8 +50,6 @@ import data.DataManager;
 
 public class OpenPlotTool {
 
-	public static String programName = "OpenPlot Tool 0.3";
-
 	// about menu listener inner class
 	private class AboutMenuListener implements ActionListener {
 		@Override
@@ -84,8 +82,8 @@ public class OpenPlotTool {
 				PageFileHandler.savePageFile();
 			} else if (event.getSource() == mainFrame.getSaveAsMenuItem()) {
 				PageFileHandler.saveAsPageFile();
-			} else if (event.getSource() == mainFrame.getSaveAllMenuItem()) {
-				// unimplemented
+			} else if (event.getSource() == mainFrame.getRevertMenuItem()) {
+				PageFileHandler.revertPageFile();
 			} else if (event.getSource() == mainFrame.getCloseMenuItem()) {
 				PageHandler.closeSelectedPlot();
 			} else if (event.getSource() == mainFrame.getCloseAllMenuItem()) {
@@ -96,6 +94,18 @@ public class OpenPlotTool {
 				PageHandler.export();
 			} else if (event.getSource() == mainFrame.getQuitMenuItem()) {
 				closeProgram();
+			}
+		}
+	}
+
+	// list click listener inner class
+	private class ListClickListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent evt) {
+			JList list = (JList) evt.getSource();
+			if (evt.getClickCount() == 2) {
+				int index = list.locationToIndex(evt.getPoint());
+				DataManager.editData(index);
 			}
 		}
 	}
@@ -147,17 +157,6 @@ public class OpenPlotTool {
 		}
 	}
 
-	// list click listener inner class
-	private class ListClickListener extends MouseAdapter {
-		public void mouseClicked(MouseEvent evt) {
-			JList list = (JList) evt.getSource();
-			if (evt.getClickCount() == 2) {
-				int index = list.locationToIndex(evt.getPoint());
-				DataManager.editData(index);
-			}
-		}
-	}
-
 	// tool bar listener inner class
 	private class ToolBarListener implements ActionListener {
 		@Override
@@ -175,6 +174,8 @@ public class OpenPlotTool {
 	}
 
 	private static MainFrame mainFrame;
+
+	public static String programName = "OpenPlot Tool 0.3";
 
 	public static MainFrame getMainFrame() {
 		return mainFrame;
@@ -204,7 +205,7 @@ public class OpenPlotTool {
 		mainFrame.getOpenMenuItem().addActionListener(fileMenuListener);
 		mainFrame.getSaveMenuItem().addActionListener(fileMenuListener);
 		mainFrame.getSaveAsMenuItem().addActionListener(fileMenuListener);
-		mainFrame.getSaveAllMenuItem().addActionListener(fileMenuListener);
+		mainFrame.getRevertMenuItem().addActionListener(fileMenuListener);
 		mainFrame.getCloseMenuItem().addActionListener(fileMenuListener);
 		mainFrame.getCloseAllMenuItem().addActionListener(fileMenuListener);
 		mainFrame.getPrintMenuItem().addActionListener(fileMenuListener);

@@ -51,6 +51,18 @@ public class PieChartDataSet extends PlotDataSet {
 		}
 		// get font height
 		int fontHeight = gc.getFontMetrics().getHeight();
+
+		if (settings.isDrawKey()) {
+			// draw key background
+			gc.setColor(settings.getKeyBackgroundColor());
+			gc.fillRect(pieAxis.getxIndent() + 5, pieAxis.getyIndent() + 5, max
+					+ fontHeight + 10, dataItems.size() * fontHeight + 5);
+			// draw key border
+			gc.setColor(settings.getOutlineDrawColor());
+			gc.drawRect(pieAxis.getxIndent() + 5, pieAxis.getyIndent() + 5, max
+					+ fontHeight + 10, dataItems.size() * fontHeight + 5);
+		}
+
 		// loop through data items and draw pie chart sections
 		int startAngle = 0;
 		int count = 1;
@@ -63,19 +75,18 @@ public class PieChartDataSet extends PlotDataSet {
 			gc.fillArc(pieAxis.getxPiePos(), pieAxis.getyPiePos(), pieAxis
 					.getPieSize(), pieAxis.getPieSize(), startAngle + 90,
 					-drawAngle);
-			// draw key border
-			gc.setColor(settings.getOutlineDrawColor());
-			gc.drawRect(pieAxis.getxIndent() + 5, pieAxis.getyIndent() + 5, max
-					+ fontHeight + 10, dataItems.size() * fontHeight + 5);
-			// draw key content
-			gc.setColor(settings.getTextColor());
-			int xItemTextPos = pieAxis.getxIndent() + 8;
-			int yItemTextPos = pieAxis.getyIndent() + 8
-					+ gc.getFontMetrics().getHeight() * count;
-			gc.drawString(dataItem.getName(), xItemTextPos, yItemTextPos - 2);
-			gc.setColor(dataItem.getColor());
-			gc.fillRect(xItemTextPos + max + 5, yItemTextPos - fontHeight,
-					fontHeight, fontHeight);
+			if (settings.isDrawKey()) {
+				// draw key content
+				gc.setColor(settings.getTextColor());
+				int xItemTextPos = pieAxis.getxIndent() + 8;
+				int yItemTextPos = pieAxis.getyIndent() + 8
+						+ gc.getFontMetrics().getHeight() * count;
+				gc.drawString(dataItem.getName(), xItemTextPos,
+						yItemTextPos - 2);
+				gc.setColor(dataItem.getColor());
+				gc.fillRect(xItemTextPos + max + 5, yItemTextPos - fontHeight,
+						fontHeight, fontHeight);
+			}
 			// increase start angle
 			startAngle += -drawAngle;
 			// increase count

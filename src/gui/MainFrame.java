@@ -57,7 +57,7 @@ public class MainFrame extends JFrame {
 			dataSetListModel;
 	// file menu items
 	private JMenuItem newMenuItem, openMenuItem, saveMenuItem, saveAsMenuItem,
-			saveAllMenuItem, closeMenuItem, closeAllMenuItem, printMenuItem,
+			revertMenuItem, closeMenuItem, closeAllMenuItem, printMenuItem,
 			exportMenuItem, quitMenuItem;
 	// tool bar buttons
 	private JButton newToolBtn, openToolBtn, saveToolBtn, printToolBtn;
@@ -67,6 +67,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem prefMenuItem;
 	// progress bar
 	private JProgressBar progressBar;
+	private JToolBar toolBar;
 
 	public MainFrame() {
 		super(OpenPlotTool.programName);
@@ -90,8 +91,8 @@ public class MainFrame extends JFrame {
 		fileMenu.add(saveMenuItem);
 		saveAsMenuItem = new JMenuItem("Save As...");
 		fileMenu.add(saveAsMenuItem);
-		saveAllMenuItem = new JMenuItem("Save All");
-		fileMenu.add(saveAllMenuItem);
+		revertMenuItem = new JMenuItem("Revert");
+		fileMenu.add(revertMenuItem);
 		fileMenu.add(new JSeparator());
 		closeMenuItem = new JMenuItem("Close");
 		fileMenu.add(closeMenuItem);
@@ -144,7 +145,7 @@ public class MainFrame extends JFrame {
 		helpMenu.add(aboutMenuItem);
 
 		// create toolbar
-		JToolBar toolBar = new JToolBar("Tool Bar");
+		toolBar = new JToolBar("Tool Bar");
 		toolBar.setFloatable(false);
 		mainPanel.add(toolBar, BorderLayout.PAGE_START);
 
@@ -348,8 +349,8 @@ public class MainFrame extends JFrame {
 		return removeSelectedItem;
 	}
 
-	public JMenuItem getSaveAllMenuItem() {
-		return saveAllMenuItem;
+	public JMenuItem getRevertMenuItem() {
+		return revertMenuItem;
 	}
 
 	public JMenuItem getSaveAsMenuItem() {
@@ -363,4 +364,8 @@ public class MainFrame extends JFrame {
 	public JButton getSaveToolBtn() {
 		return saveToolBtn;
 	}
+
+	public JToolBar getToolBar() {
+		return toolBar;
+	}	
 }

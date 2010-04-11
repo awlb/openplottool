@@ -35,16 +35,11 @@ import plot.StrokeType;
 import xml.XMLFileHandler;
 
 public class StrokeTypeHandler {
-	private static List<StrokeType> strokeTypeList = new ArrayList<StrokeType>();
 	private static boolean changed = false;
+	private static List<StrokeType> strokeTypeList = new ArrayList<StrokeType>();
 
 	public static void addStrokeType(StrokeType strokeType) {
 		strokeTypeList.add(strokeType);
-		changed = true;
-	}
-
-	public static void removeStrokeType(StrokeType strokeType) {
-		strokeTypeList.remove(strokeType);
 		changed = true;
 	}
 
@@ -63,6 +58,10 @@ public class StrokeTypeHandler {
 		StrokeType[] strokeTypeArray = new StrokeType[strokeTypeList.size()];
 		strokeTypeArray = strokeTypeList.toArray(strokeTypeArray);
 		return strokeTypeArray;
+	}
+
+	public static boolean hasChanged() {
+		return changed;
 	}
 
 	public static void loadStrokeTypes() throws SAXException, IOException,
@@ -131,6 +130,11 @@ public class StrokeTypeHandler {
 		}
 	}
 
+	public static void removeStrokeType(StrokeType strokeType) {
+		strokeTypeList.remove(strokeType);
+		changed = true;
+	}
+
 	public static void saveStrokeTypes() throws IOException {
 		// create file reference
 		File file = new File("settings/Strokes.xml");
@@ -167,9 +171,5 @@ public class StrokeTypeHandler {
 		fileContentBuffer.append("</strokes>\n");
 		// write string buffer in plain format
 		XMLFileHandler.savePlainFile(fileContentBuffer, file);
-	}
-
-	public static boolean hasChanged() {
-		return changed;
 	}
 }

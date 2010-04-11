@@ -22,6 +22,8 @@ import handlers.StrokeTypeHandler;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,24 +35,32 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import main.OpenPlotTool;
 import plot.PageSettings;
 import plot.StrokeType;
 
 @SuppressWarnings("serial")
-public class PageSettingsDialog extends JDialog implements ActionListener {
+public class PageSettingsDialog extends JDialog implements ActionListener,
+		ListSelectionListener {
 	public static int APPLY_PRESSED = 1;
 	private JButton applyButton, cancelButton;
 	private ColorSelector backgroundSelector;
 	private JComboBox borderDrawCombo;
 	private ColorSelector borderSelector;
+	private CardLayout cardLayout;
 	private JCheckBox drawBorderCheck;
 	private int pressed = 0;
+	private JList sectionList;
 	private PageSettings settings;
+	private JPanel settingsPanel;
 	private ColorSelector titleColorSelector;
 	private JTextField titleField;
 
@@ -59,22 +69,35 @@ public class PageSettingsDialog extends JDialog implements ActionListener {
 		settings = inSettings;
 		// create main panel
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPanel);
 
-		// create settings tab pane
-		JTabbedPane settingsPane = new JTabbedPane();
-		mainPanel.add(settingsPane, BorderLayout.CENTER);
+		// create settings panel
+		cardLayout = new CardLayout();
+		settingsPanel = new JPanel(cardLayout);
+		mainPanel.add(settingsPanel, BorderLayout.CENTER);
+
+		// create section list
+		String[] sections = { "Draw", "Border" };
+		sectionList = new JList(sections);
+		sectionList.setPreferredSize(new Dimension(115, 50));
+		sectionList.addListSelectionListener(this);
+		sectionList.setSelectedIndex(0);
+		JScrollPane stopsTableScroll = new JScrollPane(sectionList,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		mainPanel.add(stopsTableScroll, BorderLayout.LINE_START);
 
 		// create draw settings panel
 		JPanel drawSettingPanel = new JPanel();
-		settingsPane.addTab("Draw Settings", drawSettingPanel);
-		double[][] drawSettingLayoutSize = { { 0.35, 0.65 }, { 25, 25, 25 } };
+		drawSettingPanel.setBorder(BorderFactory
+				.createTitledBorder("Draw Settings: "));
+		settingsPanel.add(drawSettingPanel, "Draw");
+		double[][] drawSettingLayoutSize = { { 0.4, 0.6 }, { 25, 25, 25 } };
 		drawSettingPanel.setLayout(new TableLayout(drawSettingLayoutSize));
 
 		// create title field
 		drawSettingPanel.add(new JLabel("Title: "), "0, 0");
-		titleField = new JTextField(10);
+		titleField = new JTextField(8);
 		titleField.setText("" + settings.getTitle());
 		drawSettingPanel.add(titleField, "1, 0");
 		// create title color field
@@ -82,14 +105,16 @@ public class PageSettingsDialog extends JDialog implements ActionListener {
 		titleColorSelector = new ColorSelector(settings.getTitleColor());
 		drawSettingPanel.add(titleColorSelector, "1, 1");
 		// create background color field
-		drawSettingPanel.add(new JLabel("Background Color: "), "0, 2");
+		drawSettingPanel.add(new JLabel("Background: "), "0, 2");
 		backgroundSelector = new ColorSelector(settings.getBackgroundColor());
 		drawSettingPanel.add(backgroundSelector, "1, 2");
 
 		// create border settings panel
 		JPanel borderSettingPanel = new JPanel();
-		settingsPane.addTab("Border Settings", borderSettingPanel);
-		double[][] borderSettingLayoutSize = { { 0.35, 0.65 }, { 25, 25, 25 } };
+		borderSettingPanel.setBorder(BorderFactory
+				.createTitledBorder("Border Settings: "));
+		settingsPanel.add(borderSettingPanel, "Border");
+		double[][] borderSettingLayoutSize = { { 0.4, 0.6 }, { 25, 25, 25 } };
 		borderSettingPanel.setLayout(new TableLayout(borderSettingLayoutSize));
 
 		// create draw border field
@@ -102,9 +127,10 @@ public class PageSettingsDialog extends JDialog implements ActionListener {
 		borderSelector = new ColorSelector(settings.getBorderColor());
 		borderSettingPanel.add(borderSelector, "1, 1");
 		// create border draw type field
-		borderSettingPanel.add(new JLabel("Border Draw Type: "), "0, 2");
+		borderSettingPanel.add(new JLabel("Border Type: "), "0, 2");
 		borderDrawCombo = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
-		borderDrawCombo.setSelectedItem(settings.getBorderDrawType());
+		borderDrawCombo.setSelectedItem(StrokeTypeHandler
+				.getStrokeType(settings.getBorderDrawType()));
 		borderSettingPanel.add(borderDrawCombo, "1, 2");
 
 		// create button panel
@@ -151,5 +177,11 @@ public class PageSettingsDialog extends JDialog implements ActionListener {
 
 	public int getPressed() {
 		return pressed;
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		String selection = (String) sectionList.getSelectedValue();
+		cardLayout.show(settingsPanel, selection);
 	}
 }

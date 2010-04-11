@@ -50,14 +50,27 @@ import plot.piechart.PieChartItem;
 @SuppressWarnings("serial")
 public class PieChartDataDialog extends JDialog implements ActionListener {
 
+	// list click listener inner class
+	private class ListClickListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent evt) {
+			JList list = (JList) evt.getSource();
+			if (evt.getClickCount() == 2) {
+				int index = list.locationToIndex(evt.getPoint());
+				editItem(index);
+			}
+		}
+	}
+
 	public static int ADD_PRESSED = 1;
+	private JButton addButton, cancelButton;
 	private JButton addItemButton, editItemButton, removeItemButton;
 	private JList dataItemList;
 	private DefaultListModel dataItemListModel;
 	private ArrayList<PieChartItem> dataItems = new ArrayList<PieChartItem>();
 	private JTextField nameField;
+
 	private int pressed = 0;
-	private JButton addButton, cancelButton;
 
 	public PieChartDataDialog(PieChartDataSet currentDataSet) {
 		super(OpenPlotTool.getMainFrame(), "Add Data Set", true);
@@ -223,17 +236,6 @@ public class PieChartDataDialog extends JDialog implements ActionListener {
 			// remove selected pit chart item
 			dataItems.remove(dataItemList.getSelectedValue());
 			dataItemListModel.remove(index);
-		}
-	}
-
-	// list click listener inner class
-	private class ListClickListener extends MouseAdapter {
-		public void mouseClicked(MouseEvent evt) {
-			JList list = (JList) evt.getSource();
-			if (evt.getClickCount() == 2) {
-				int index = list.locationToIndex(evt.getPoint());
-				editItem(index);
-			}
 		}
 	}
 }

@@ -41,20 +41,28 @@ public class PieChartXMLLoader {
 		if (axisNodes.getLength() > 0) {
 			// get axis settings nodes
 			NodeList axisInnerNodes = axisNodes.item(0).getChildNodes();
+			// get settings object
+			PieChartSettings settings = (PieChartSettings) newPage.getAxis().getPlotSettings();
 			for (int i = 0; i < axisInnerNodes.getLength(); i++) {
 				// loop through axis settings nodes
 				Node curNode = axisInnerNodes.item(i);
 				if (curNode.getNodeName().equals("bgcolor")) {
 					String colorStr = curNode.getTextContent();
-					newPage.getAxis().getPlotSettings().setBackgroundColor(
+					settings.setBackgroundColor(
 							Color.decode(colorStr));
 				} else if (curNode.getNodeName().equals("outlinedrawcolor")) {
 					String colorStr = curNode.getTextContent();
-					((PieChartSettings) newPage.getAxis().getPlotSettings())
-							.setOutlineDrawColor(Color.decode(colorStr));
+					settings.setOutlineDrawColor(Color.decode(colorStr));
 				} else if (curNode.getNodeName().equals("textcolor")) {
 					String colorStr = curNode.getTextContent();
-					newPage.getAxis().getPlotSettings().setTextColor(
+					settings.setTextColor(
+							Color.decode(colorStr));
+				} else if (curNode.getNodeName().equals("drawkey")) {
+					String booleanStr = curNode.getTextContent();
+					settings.setDrawKey(Boolean.parseBoolean(booleanStr));
+				} else if (curNode.getNodeName().equals("keybgcolor")) {
+					String colorStr = curNode.getTextContent();
+					settings.setKeyBackgroundColor(
 							Color.decode(colorStr));
 				}
 			}

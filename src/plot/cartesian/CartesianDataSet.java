@@ -18,7 +18,10 @@
 
 package plot.cartesian;
 
+import handlers.StrokeTypeHandler;
+
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import plot.Axis;
 import plot.PlotDataSet;
@@ -29,12 +32,15 @@ public class CartesianDataSet extends PlotDataSet {
 
 	@Override
 	public void draw(Graphics g, Axis axis) {
+		Graphics2D gc = (Graphics2D) g;
 		// get Cartesian axis
 		CartesianAxis caxis = (CartesianAxis) axis;
 		// get plot settings
 		CartesianSettings settings = (CartesianSettings) axis.getPlotSettings();
 		// set draw color
-		g.setColor(this.getDrawColor());
+		gc.setColor(this.getDrawColor());
+		// set draw stroke
+		gc.setStroke(StrokeTypeHandler.getStrokeType("Line").getStroke());
 		// last draw points -- used for drawing linked points
 		int lastXPoint = -1;
 		int lastYPoint = -1;
@@ -58,10 +64,10 @@ public class CartesianDataSet extends PlotDataSet {
 			int iDrawYPoint = (int) Math.round(drawYPoint);
 
 			if (linkPoints && lastXPoint > -1 && lastYPoint > -1) {
-				g.drawLine(lastXPoint, lastYPoint, iDrawXPoint, iDrawYPoint);
+				gc.drawLine(lastXPoint, lastYPoint, iDrawXPoint, iDrawYPoint);
 			}
 			// draw point
-			g.fillRect(iDrawXPoint - 2, iDrawYPoint - 2, 5, 5);
+			gc.fillRect(iDrawXPoint - 2, iDrawYPoint - 2, 5, 5);
 			// update last draw point
 			lastXPoint = iDrawXPoint;
 			lastYPoint = iDrawYPoint;

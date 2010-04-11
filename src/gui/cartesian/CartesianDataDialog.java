@@ -53,14 +53,14 @@ import plot.cartesian.CartesianDataSet;
 public class CartesianDataDialog extends JDialog implements ChangeListener,
 		ActionListener {
 	public static int ADD_PRESSED = 1;
+	private JButton addButton, cancelButton;
 	private ColorSelector colorSelector;
 	private DefaultTableModel dataModel;
 	private JTable dataTable;
+	private JCheckBox linkPointsCheck;
 	private JTextField nameField;
 	private int pressed = 0;
 	private JSpinner setSizeField;
-	private JButton addButton, cancelButton;
-	private JCheckBox linkPointsCheck;
 
 	public CartesianDataDialog(CartesianDataSet currentDataSet) {
 		super(OpenPlotTool.getMainFrame(), "Add Data Set", true);

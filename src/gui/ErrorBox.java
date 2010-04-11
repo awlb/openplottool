@@ -33,6 +33,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 
 import main.OpenPlotTool;
 
@@ -83,7 +84,7 @@ public class ErrorBox extends JDialog implements ActionListener {
 		buttonPanel.add(continueButton);
 
 		// dipose on exit
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		// pack dialog
 		setSize(500, 300);
 		// set dialog location

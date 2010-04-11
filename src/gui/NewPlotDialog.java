@@ -38,6 +38,22 @@ import main.OpenPlotTool;
 
 @SuppressWarnings("serial")
 public class NewPlotDialog extends JDialog implements ActionListener {
+	// list click listener inner class
+	private class ListClickListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent evt) {
+			JList list = (JList) evt.getSource();
+			if (evt.getClickCount() == 2) {
+				int index = list.locationToIndex(evt.getPoint());
+				if (index > -1) {
+					selected = (NewPlotEntry) plotList.getSelectedValue();
+					pressed = OK_PRESSED;
+					setVisible(false);
+				}
+			}
+		}
+	}
+
 	public static int OK_PRESSED = 1;
 	private JButton okBtn, cancelBtn;
 	private JList plotList;
@@ -48,6 +64,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 			new NewPlotEntry("piechart", "Pie Chart", new ImageIcon(
 					"icon/pie.png")) };
 	private int pressed = 0;
+
 	private NewPlotEntry selected = null;
 
 	public NewPlotDialog() {
@@ -103,20 +120,5 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 	public NewPlotEntry getSelected() {
 		// return selected plot type
 		return selected;
-	}
-
-	// list click listener inner class
-	private class ListClickListener extends MouseAdapter {
-		public void mouseClicked(MouseEvent evt) {
-			JList list = (JList) evt.getSource();
-			if (evt.getClickCount() == 2) {
-				int index = list.locationToIndex(evt.getPoint());
-				if (index > -1) {
-					selected = (NewPlotEntry) plotList.getSelectedValue();
-					pressed = OK_PRESSED;
-					setVisible(false);
-				}
-			}
-		}
 	}
 }

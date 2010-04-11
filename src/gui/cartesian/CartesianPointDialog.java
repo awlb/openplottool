@@ -41,8 +41,8 @@ import plot.cartesian.CartesianPoint;
 @SuppressWarnings("serial")
 public class CartesianPointDialog extends JDialog implements ActionListener {
 	public static int ADD_PRESSED = 1;
-	private ColorSelector colorSelector;
 	private JButton addButton, cancelButton;
+	private ColorSelector colorSelector;
 	private int pressed = 0;
 	private JTextField xField, yField;
 

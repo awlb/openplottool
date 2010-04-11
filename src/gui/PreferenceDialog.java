@@ -23,6 +23,7 @@ import info.clearthought.layout.TableLayout;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,12 +49,12 @@ import main.Preferences;
 public class PreferenceDialog extends JDialog implements ActionListener,
 		ListSelectionListener {
 	public static int APPLY_PRESSED = 1;
-	private JCheckBox compressFilesCheck, addExtensionCheck,
-			checkExtensionCheck;
 	private JComboBox aaTypeField, lookTypeField;
 	private JButton applyButton, cancelButton;
-	private int pressed = 0;
 	private CardLayout cardLayout;
+	private JCheckBox compressFilesCheck, addExtensionCheck,
+			checkExtensionCheck;
+	private int pressed = 0;
 	private JList sectionList;
 	private JPanel settingsPanel;
 
@@ -71,6 +72,7 @@ public class PreferenceDialog extends JDialog implements ActionListener,
 		// create section list
 		String[] sections = { "Draw", "Files", "User Interface" };
 		sectionList = new JList(sections);
+		sectionList.setPreferredSize(new Dimension(115, 50));
 		sectionList.addListSelectionListener(this);
 		sectionList.setSelectedIndex(0);
 		JScrollPane stopsTableScroll = new JScrollPane(sectionList,

@@ -23,8 +23,9 @@ import handlers.StrokeTypeHandler;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,9 +36,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import main.OpenPlotTool;
 import plot.StrokeType;
@@ -45,13 +50,17 @@ import plot.cartesian.CartesianAxis;
 import plot.cartesian.CartesianSettings;
 
 @SuppressWarnings("serial")
-public class CartesianSettingsDialog extends JDialog implements ActionListener {
+public class CartesianSettingsDialog extends JDialog implements ActionListener,
+		ListSelectionListener {
 	public static int OK_PRESSED = 1;
 	private JButton applyButton, cancelButton;
 	private JComboBox axisDrawSelector, gridDrawSelector, subDrawGridSelector;
 	private ColorSelector backgroundColorSelector, textColorSelector,
 			axisColorSelector, gridColorSelector, subColorGridSelector;
+	private CardLayout cardLayout;
 	private int pressed = 0;
+	private JList sectionList;
+	private JPanel settingsPanel;
 	private JTextField xMaxField, xMinField, yMaxField, yMinField,
 			xSplitSizeField, xNumSplitSizeField, ySplitSizeField,
 			yNumSplitSizeField;
@@ -60,23 +69,34 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 		super(OpenPlotTool.getMainFrame(), "Axis Settings", true);
 		// get current settings
 		CartesianSettings settings = (CartesianSettings) axis.getPlotSettings();
+
 		// create main panel
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPanel);
-		// create settings tab pane
-		JTabbedPane settingsPane = new JTabbedPane();
-		mainPanel.add(settingsPane, BorderLayout.CENTER);
 
-		// create grid settings panel
-		JPanel gridSettingsPanel = new JPanel(new GridLayout(1, 2));
-		settingsPane.addTab("Grid Settings", gridSettingsPanel);
+		// create settings panel
+		cardLayout = new CardLayout();
+		settingsPanel = new JPanel(cardLayout);
+		mainPanel.add(settingsPanel, BorderLayout.CENTER);
+
+		// create section list
+		String[] sections = { "Axis Range", "Axis Spacing", "Axis Color",
+				"Draw" };
+		sectionList = new JList(sections);
+		sectionList.setPreferredSize(new Dimension(115, 50));
+		sectionList.addListSelectionListener(this);
+		sectionList.setSelectedIndex(0);
+		JScrollPane stopsTableScroll = new JScrollPane(sectionList,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		mainPanel.add(stopsTableScroll, BorderLayout.LINE_START);
+
 		// create range panel
 		JPanel rangePanel = new JPanel();
 		rangePanel.setBorder(BorderFactory.createTitledBorder("Axis range:"));
-		gridSettingsPanel.add(rangePanel);
+		settingsPanel.add(rangePanel, "Axis Range");
 		// create layout
-		double[][] rangeSize = { { 0.35, 0.65 }, { 25, 25, 25, 25 } };
+		double[][] rangeSize = { { 0.4, 0.6 }, { 25, 25, 25, 25 } };
 		rangePanel.setLayout(new TableLayout(rangeSize));
 		// create xmax field
 		rangePanel.add(new JLabel("X Max: "), "0, 0");
@@ -98,12 +118,14 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 		yMinField = new JTextField(4);
 		yMinField.setText("" + settings.getyMin());
 		rangePanel.add(yMinField, "1, 3");
+
 		// create range panel
 		JPanel spacingPanel = new JPanel();
-		spacingPanel.setBorder(BorderFactory.createTitledBorder("Spacing:"));
-		gridSettingsPanel.add(spacingPanel);
+		spacingPanel.setBorder(BorderFactory
+				.createTitledBorder("Axis Spacing:"));
+		settingsPanel.add(spacingPanel, "Axis Spacing");
 		// create layout
-		double[][] spacingSize = { { 0.35, 0.65 }, { 25, 25, 25, 25 } };
+		double[][] spacingSize = { { 0.4, 0.6 }, { 25, 25, 25, 25 } };
 		spacingPanel.setLayout(new TableLayout(spacingSize));
 		// create x split size field
 		spacingPanel.add(new JLabel("X Grid: "), "0, 0");
@@ -126,16 +148,13 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 		yNumSplitSizeField.setText("" + settings.getNumYSplitSize());
 		spacingPanel.add(yNumSplitSizeField, "1, 3");
 
-		// create color settings panel
-		JPanel drawSettingsPanel = new JPanel(new GridLayout(1, 2));
-		settingsPane.addTab("Color Settings", drawSettingsPanel);
 		// create color panel
 		JPanel colorPanel = new JPanel();
 		colorPanel.setBorder(BorderFactory
 				.createTitledBorder("Color Settings:"));
-		drawSettingsPanel.add(colorPanel);
+		settingsPanel.add(colorPanel, "Axis Color");
 		// create layout
-		double[][] colorSize = { { 0.35, 0.65 }, { 25, 25, 25, 25, 25 } };
+		double[][] colorSize = { { 0.4, 0.6 }, { 25, 25, 25, 25, 25 } };
 		colorPanel.setLayout(new TableLayout(colorSize));
 		// create background color field
 		colorPanel.add(new JLabel("Background: "), "0, 0");
@@ -158,30 +177,34 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 		colorPanel.add(new JLabel("Sub Grid: "), "0, 4");
 		subColorGridSelector = new ColorSelector(settings.getSubGridColor());
 		colorPanel.add(subColorGridSelector, "1, 4");
+
 		// create draw method panel
 		JPanel drawMethodPanel = new JPanel();
 		drawMethodPanel.setBorder(BorderFactory
 				.createTitledBorder("Draw Settings:"));
-		drawSettingsPanel.add(drawMethodPanel);
+		settingsPanel.add(drawMethodPanel, "Draw");
 		// create layout
-		double[][] drawSize = { { 0.35, 0.65 }, { 25, 25, 25 } };
+		double[][] drawSize = { { 0.4, 0.6 }, { 25, 25, 25 } };
 		drawMethodPanel.setLayout(new TableLayout(drawSize));
 		// create axis color field
 		drawMethodPanel.add(new JLabel("Axis: "), "0, 0");
 		axisDrawSelector = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
 		drawMethodPanel.add(axisDrawSelector, "1, 0");
-		axisDrawSelector.setSelectedItem(settings.getAxisDrawType());
+		axisDrawSelector.setSelectedItem(StrokeTypeHandler
+				.getStrokeType(settings.getAxisDrawType()));
 		// create grid color field
 		drawMethodPanel.add(new JLabel("Grid: "), "0, 1");
 		gridDrawSelector = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
 		drawMethodPanel.add(gridDrawSelector, "1, 1");
-		gridDrawSelector.setSelectedItem(settings.getMainGridDrawType());
+		gridDrawSelector.setSelectedItem(StrokeTypeHandler
+				.getStrokeType(settings.getMainGridDrawType()));
 		// create sub grid color field
 		drawMethodPanel.add(new JLabel("Sub Grid: "), "0, 2");
 		subDrawGridSelector = new JComboBox(StrokeTypeHandler
 				.getStrokeTypeArray());
 		drawMethodPanel.add(subDrawGridSelector, "1, 2");
-		subDrawGridSelector.setSelectedItem(settings.getSubGridType());
+		subDrawGridSelector.setSelectedItem(StrokeTypeHandler
+				.getStrokeType(settings.getSubGridType()));
 
 		// create button panel
 		JPanel buttonPanel = new JPanel();
@@ -259,5 +282,11 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener {
 
 	public int getPressed() {
 		return pressed;
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		String selection = (String) sectionList.getSelectedValue();
+		cardLayout.show(settingsPanel, selection);
 	}
 }

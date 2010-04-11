@@ -193,6 +193,26 @@ public class PageHandler {
 		}
 	}
 
+	// method to replace plot page at a given index
+	public static void replacePage(PlotPage page, int pageIndex) {
+		// replace page in list
+		plotPages.set(pageIndex, page);
+		// work out tooltip for tab
+		String toolTip;
+		if (page.getPageFile() != null) {
+			toolTip = page.getPageFile().getAbsolutePath();
+		} else {
+			toolTip = page.getTabTitle();
+		}
+		// remove tab for old page
+		OpenPlotTool.getMainFrame().getPlotPanel().remove(pageIndex);
+		// insert tab for new page in old ones place
+		OpenPlotTool.getMainFrame().getPlotPanel().insertTab(
+				page.getTabTitle(), null, page, toolTip, pageIndex);
+		// set this new tab as the selected one
+		OpenPlotTool.getMainFrame().getPlotPanel().setSelectedIndex(pageIndex);
+	}
+
 	// method called when page changed
 	public static void updatePageChange() {
 		// clear current items from lists
