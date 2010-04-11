@@ -25,6 +25,21 @@ import plot.piechart.PieChartSettings;
 
 public class PieChartXMLBuilder {
 
+	public static StringBuffer buildXML(PlotPage page) {
+		// create string buffer for xml
+		StringBuffer xmlStringBuffer = new StringBuffer();
+		// write xml strings to file
+		xmlStringBuffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		xmlStringBuffer.append("<page>\n");
+		xmlStringBuffer.append("<type>piechartplot</type>\n");
+		xmlStringBuffer.append("<version>0.3</version>\n");
+		buildXMLSettings(page, xmlStringBuffer);
+		buildXMLAxisSettings(page, xmlStringBuffer);
+		buildXMLDataSets(page, xmlStringBuffer);
+		xmlStringBuffer.append("</page>\n");
+		return xmlStringBuffer;
+	}
+
 	private static void buildXMLAxisSettings(PlotPage page,
 			StringBuffer xmlStringBuffer) {
 		PieChartSettings settings = (PieChartSettings) page.getAxis()
@@ -37,6 +52,10 @@ public class PieChartXMLBuilder {
 		xmlStringBuffer.append("<outlinedrawcolor>"
 				+ settings.getOutlineDrawColor().getRGB()
 				+ "</outlinedrawcolor>");
+		xmlStringBuffer.append("<drawkey>" + settings.isDrawKey()
+				+ "</drawkey>\n");
+		xmlStringBuffer.append("<keybgcolor>"
+				+ settings.getKeyBackgroundColor().getRGB() + "</keybgcolor>");
 		xmlStringBuffer.append("</axis>\n");
 	}
 
@@ -88,20 +107,5 @@ public class PieChartXMLBuilder {
 				+ page.getSettings().getTitleColor().getRGB()
 				+ "</titlecolor>\n");
 		xmlStringBuffer.append("</settings>\n");
-	}
-
-	public static StringBuffer buildXML(PlotPage page) {
-		// create string buffer for xml
-		StringBuffer xmlStringBuffer = new StringBuffer();
-		// write xml strings to file
-		xmlStringBuffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		xmlStringBuffer.append("<page>\n");
-		xmlStringBuffer.append("<type>piechartplot</type>\n");
-		xmlStringBuffer.append("<version>0.2</version>\n");
-		buildXMLSettings(page, xmlStringBuffer);
-		buildXMLAxisSettings(page, xmlStringBuffer);
-		buildXMLDataSets(page, xmlStringBuffer);
-		xmlStringBuffer.append("</page>\n");
-		return xmlStringBuffer;
 	}
 }

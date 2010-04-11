@@ -48,12 +48,12 @@ import plot.cartesian.CartesianFunction;
 @SuppressWarnings("serial")
 public class CartesianFunctionDialog extends JDialog implements ActionListener {
 	public static int ADD_PRESSED = 1;
+	private JButton addButton, cancelButton;
 	private ColorSelector colorSelector;
 	private JSpinner drawSizeField;
 	private JComboBox drawTypeList, detailList;
 	private JTextField functionField;
 	private int pressed = 0;
-	private JButton addButton, cancelButton;
 
 	public CartesianFunctionDialog(CartesianFunction currentFunction) {
 		super(OpenPlotTool.getMainFrame(), "Add Function", true);
@@ -172,10 +172,6 @@ public class CartesianFunctionDialog extends JDialog implements ActionListener {
 		}
 	}
 
-	public int getPressed() {
-		return pressed;
-	}
-
 	public CartesianFunction getFunction() throws NullDataValueException,
 			MathParserException {
 		// build and return function
@@ -203,5 +199,9 @@ public class CartesianFunctionDialog extends JDialog implements ActionListener {
 			}
 			return editFunction;
 		}
+	}
+
+	public int getPressed() {
+		return pressed;
 	}
 }

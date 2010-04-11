@@ -27,10 +27,28 @@ import plot.PlotSettings;
  */
 
 public class PieChartSettings extends PlotSettings {
+	private boolean drawKey = true;
+	private Color keyBackgroundColor = Color.LIGHT_GRAY;
 	private Color outlineDrawColor = Color.BLACK;
+
+	public Color getKeyBackgroundColor() {
+		return keyBackgroundColor;
+	}
 
 	public Color getOutlineDrawColor() {
 		return outlineDrawColor;
+	}
+
+	public boolean isDrawKey() {
+		return drawKey;
+	}
+
+	public void setDrawKey(boolean drawKey) {
+		this.drawKey = drawKey;
+	}
+
+	public void setKeyBackgroundColor(Color keyBackgroundColor) {
+		this.keyBackgroundColor = keyBackgroundColor;
 	}
 
 	public void setOutlineDrawColor(Color outlineDrawColor) {

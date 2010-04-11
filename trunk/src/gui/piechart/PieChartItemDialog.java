@@ -42,10 +42,10 @@ import plot.piechart.PieChartItem;
 public class PieChartItemDialog extends JDialog implements ActionListener {
 
 	public static int ADD_PRESSED = 1;
-	private ColorSelector colorSelector;
-	private int pressed = 0;
 	private JButton addButton, cancelButton;
+	private ColorSelector colorSelector;
 	private JTextField nameField, valueField;
+	private int pressed = 0;
 
 	public PieChartItemDialog(PieChartItem pieItem) {
 		super(OpenPlotTool.getMainFrame(), "Add Data Item", true);

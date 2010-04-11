@@ -25,6 +25,23 @@ import plot.cartesian.CartesianPoint;
 import plot.cartesian.CartesianSettings;
 
 public class CartesianXMLBuilder {
+	public static StringBuffer buildXML(PlotPage page) {
+		// create string buffer for xml
+		StringBuffer xmlStringBuffer = new StringBuffer();
+		// write xml strings to file
+		xmlStringBuffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		xmlStringBuffer.append("<page>\n");
+		xmlStringBuffer.append("<type>cartesianxyplot</type>\n");
+		xmlStringBuffer.append("<version>0.3</version>\n");
+		buildXMLSettings(page, xmlStringBuffer);
+		buildXMLAxisSettings(page, xmlStringBuffer);
+		buildXMLDataSets(page, xmlStringBuffer);
+		buildXMLPoints(page, xmlStringBuffer);
+		buildXMLFunction(page, xmlStringBuffer);
+		xmlStringBuffer.append("</page>\n");
+		return xmlStringBuffer;
+	}
+
 	private static void buildXMLAxisSettings(PlotPage page,
 			StringBuffer xmlStringBuffer) {
 		// create string of axis settings in required XML format
@@ -152,22 +169,5 @@ public class CartesianXMLBuilder {
 				+ page.getSettings().getTitleColor().getRGB()
 				+ "</titlecolor>\n");
 		xmlStringBuffer.append("</settings>\n");
-	}
-
-	public static StringBuffer buildXML(PlotPage page) {
-		// create string buffer for xml
-		StringBuffer xmlStringBuffer = new StringBuffer();
-		// write xml strings to file
-		xmlStringBuffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		xmlStringBuffer.append("<page>\n");
-		xmlStringBuffer.append("<type>cartesianxyplot</type>\n");
-		xmlStringBuffer.append("<version>0.2</version>\n");
-		buildXMLSettings(page, xmlStringBuffer);
-		buildXMLAxisSettings(page, xmlStringBuffer);
-		buildXMLDataSets(page, xmlStringBuffer);
-		buildXMLPoints(page, xmlStringBuffer);
-		buildXMLFunction(page, xmlStringBuffer);
-		xmlStringBuffer.append("</page>\n");
-		return xmlStringBuffer;
 	}
 }

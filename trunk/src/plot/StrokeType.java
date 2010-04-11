@@ -35,12 +35,12 @@ public class StrokeType {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public BasicStroke getStroke() {
 		return stroke;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setStroke(BasicStroke stroke) {

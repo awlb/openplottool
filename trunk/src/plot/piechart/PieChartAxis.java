@@ -67,7 +67,7 @@ public class PieChartAxis extends Axis {
 		pieSize = height - (4 * yIndent);
 		yPiePos = (yIndent * 2);
 		xPiePos = xIndent + ((width - (2 * xIndent)) / 2) - pieSize / 2;
-		gc.drawOval(xPiePos - 1, yPiePos - 1, pieSize + 1, pieSize + 1);
+		gc.drawOval(xPiePos, yPiePos, pieSize, pieSize);
 
 		// draw title
 		String title = this.getParentPage().getSettings().getTitle();

@@ -40,8 +40,8 @@ import plot.PlotPage;
 import xml.XMLFileHandler;
 
 public class PreferenceHandler {
-	private static Preferences settings = new Preferences();
 	private static boolean changed = false;
+	private static Preferences settings = new Preferences();
 
 	public static void editPreferences() {
 		// show preference dialog
@@ -82,6 +82,10 @@ public class PreferenceHandler {
 	public static Preferences getSettings() {
 		// return settings
 		return settings;
+	}
+
+	public static boolean hasChanged() {
+		return changed;
 	}
 
 	public static void loadPreferences() throws SAXException, IOException,
@@ -147,9 +151,5 @@ public class PreferenceHandler {
 		fileContentBuffer.append("</preferences>\n");
 		// write string buffer in plain format
 		XMLFileHandler.savePlainFile(fileContentBuffer, file);
-	}
-
-	public static boolean hasChanged() {
-		return changed;
 	}
 }

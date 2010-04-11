@@ -37,6 +37,25 @@ import org.xml.sax.SAXException;
 
 public class XMLFileHandler {
 
+	public static double getFileVersion(Document xmlDocument) {
+		// get file version number from XML document version tags
+		NodeList versionNodes = xmlDocument.getElementsByTagName("version");
+		if (versionNodes.item(0) != null) {
+			double version = Double.parseDouble(versionNodes.item(0)
+					.getTextContent());
+			return version;
+		} else {
+			return -1;
+		}
+	}
+
+	public static String getPlotType(Document xmlDocument) {
+		// get the plot type the file represents
+		NodeList typeNodes = xmlDocument.getElementsByTagName("type");
+		String type = typeNodes.item(0).getTextContent();
+		return type;
+	}
+
 	public static Document openCompressedFile(File file) throws IOException,
 			SAXException, ParserConfigurationException {
 		// create buffered input stream
@@ -88,24 +107,5 @@ public class XMLFileHandler {
 		outputStream.write(fileContentBytes);
 		// close stream
 		outputStream.close();
-	}
-
-	public static double getFileVersion(Document xmlDocument) {
-		// get file version number from XML document version tags
-		NodeList versionNodes = xmlDocument.getElementsByTagName("version");
-		if (versionNodes.item(0) != null) {
-			double version = Double.parseDouble(versionNodes.item(0)
-					.getTextContent());
-			return version;
-		} else {
-			return -1;
-		}
-	}
-
-	public static String getPlotType(Document xmlDocument) {
-		// get the plot type the file represents
-		NodeList typeNodes = xmlDocument.getElementsByTagName("type");
-		String type = typeNodes.item(0).getTextContent();
-		return type;
 	}
 }
