@@ -275,12 +275,11 @@ public class PageFileHandler {
 				}
 				// check if saving will overwrite another file
 				if (saveFile.exists() && !(page.getPageFile().equals(saveFile))) {
-					int chosen = JOptionPane.showConfirmDialog(
-							OpenPlotTool.getMainFrame(),
+					int chosen = JOptionPane.showConfirmDialog(OpenPlotTool
+							.getMainFrame(),
 							"A file with the name you have given alreadt exists.\n"
 									+ "Do you wish to overwrite this file?",
-							"Overwrite File",
-							JOptionPane.YES_NO_OPTION);
+							"Overwrite File", JOptionPane.YES_NO_OPTION);
 					if (chosen == JOptionPane.NO_OPTION) {
 						return;
 					}

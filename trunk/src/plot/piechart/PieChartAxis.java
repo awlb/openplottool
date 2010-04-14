@@ -21,6 +21,7 @@ package plot.piechart;
 import handlers.PreferenceHandler;
 import handlers.StrokeTypeHandler;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -61,9 +62,10 @@ public class PieChartAxis extends Axis {
 			gc.drawRect(xIndent, yIndent, width - (2 * xIndent), height
 					- (2 * yIndent));
 		}
+
 		// draw pie outline
 		gc.setColor(settings.getOutlineDrawColor());
-		gc.setStroke(StrokeTypeHandler.getStrokeType("Line").getStroke());
+		gc.setStroke(new BasicStroke(2));
 		pieSize = height - (4 * yIndent);
 		yPiePos = (yIndent * 2);
 		xPiePos = xIndent + ((width - (2 * xIndent)) / 2) - pieSize / 2;
