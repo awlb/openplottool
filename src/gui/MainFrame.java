@@ -367,5 +367,5 @@ public class MainFrame extends JFrame {
 
 	public JToolBar getToolBar() {
 		return toolBar;
-	}	
+	}
 }

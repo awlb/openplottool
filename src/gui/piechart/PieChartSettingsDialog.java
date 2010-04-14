@@ -53,12 +53,12 @@ public class PieChartSettingsDialog extends JDialog implements ActionListener,
 	private ColorSelector backgroundColorSelector, textColorSelector,
 			outlineColorSelector;
 	private CardLayout cardLayout;
+	private JCheckBox drawKeyCheck;
+	private ColorSelector keyColorSelector;
 	private int pressed = 0;
 	private JList sectionList;
 	private PieChartSettings settings;
 	private JPanel settingsPanel;
-	private ColorSelector keyColorSelector;
-	private JCheckBox drawKeyCheck;
 
 	public PieChartSettingsDialog(PieChartAxis axis) {
 		super(OpenPlotTool.getMainFrame(), "Axis Settings", true);

@@ -28,7 +28,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
@@ -36,6 +35,8 @@ import main.OpenPlotTool;
 
 @SuppressWarnings("serial")
 public class ColorSelector extends JPanel implements ActionListener {
+	private static ColorSelectorDialog dialog = new ColorSelectorDialog(
+			OpenPlotTool.getMainFrame());
 	private Color color;
 	private JPanel colorPanel;
 	private JButton selectBtn;
@@ -79,8 +80,8 @@ public class ColorSelector extends JPanel implements ActionListener {
 
 	private void performSelectColor() {
 		// show color chooser dialog and get new color
-		Color newColor = JColorChooser.showDialog(OpenPlotTool.getMainFrame(),
-				"Choose Color", color);
+		dialog.showDialog(color);
+		Color newColor = dialog.getSelectedColor();
 		if (newColor != null) {
 			// update color
 			color = newColor;
