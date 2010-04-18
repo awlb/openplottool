@@ -19,12 +19,12 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -67,7 +67,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 
 		// create ok and cancel buttons
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
 		licenseBtn = new JButton("License");
 		licenseBtn.addActionListener(this);
