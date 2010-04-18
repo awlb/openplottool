@@ -19,6 +19,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +27,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -83,7 +83,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 		mainPanel.add(scroll, BorderLayout.CENTER);
 		// create ok and cancel buttons
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
 		okBtn = new JButton("Ok");
 		okBtn.addActionListener(this);

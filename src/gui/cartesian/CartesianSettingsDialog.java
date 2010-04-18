@@ -26,12 +26,12 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -208,7 +208,7 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener,
 
 		// create button panel
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
 		applyButton = new JButton("Apply");
 		applyButton.addActionListener(this);

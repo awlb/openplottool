@@ -22,6 +22,7 @@ import exceptions.NullDataValueException;
 import info.clearthought.layout.TableLayout;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -31,7 +32,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -125,7 +125,7 @@ public class PieChartDataDialog extends JDialog implements ActionListener {
 
 		// create button panel
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
 		addButton = new JButton("Add");
 		addButton.addActionListener(this);
