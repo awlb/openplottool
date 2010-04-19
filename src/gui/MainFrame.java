@@ -88,21 +88,28 @@ public class MainFrame extends JFrame {
 		fileMenu.add(openMenuItem);
 		fileMenu.add(new JSeparator());
 		saveMenuItem = new JMenuItem("Save");
+		saveMenuItem.setEnabled(false);
 		fileMenu.add(saveMenuItem);
 		saveAsMenuItem = new JMenuItem("Save As...");
+		saveAsMenuItem.setEnabled(false);
 		fileMenu.add(saveAsMenuItem);
 		revertMenuItem = new JMenuItem("Revert");
+		revertMenuItem.setEnabled(false);
 		fileMenu.add(revertMenuItem);
 		fileMenu.add(new JSeparator());
 		closeMenuItem = new JMenuItem("Close");
+		closeMenuItem.setEnabled(false);
 		fileMenu.add(closeMenuItem);
 		closeAllMenuItem = new JMenuItem("Close All");
+		closeAllMenuItem.setEnabled(false);
 		fileMenu.add(closeAllMenuItem);
 		fileMenu.add(new JSeparator());
 		printMenuItem = new JMenuItem("Print");
+		printMenuItem.setEnabled(false);
 		fileMenu.add(printMenuItem);
 		fileMenu.add(new JSeparator());
 		exportMenuItem = new JMenuItem("Export");
+		exportMenuItem.setEnabled(false);
 		fileMenu.add(exportMenuItem);
 		fileMenu.add(new JSeparator());
 		quitMenuItem = new JMenuItem("Quit");
@@ -118,24 +125,31 @@ public class MainFrame extends JFrame {
 		JMenu pageMenu = new JMenu("Page");
 		menuBar.add(pageMenu);
 		pageSettingsItem = new JMenuItem("Page Settings");
+		pageSettingsItem.setEnabled(false);
 		pageMenu.add(pageSettingsItem);
 		pageMenu.add(new JSeparator());
 		axisSettingsItem = new JMenuItem("Axis Settings");
+		axisSettingsItem.setEnabled(false);
 		pageMenu.add(axisSettingsItem);
 
 		// create plot menu
 		JMenu plotMenu = new JMenu("Plot");
 		menuBar.add(plotMenu);
 		addDataItem = new JMenuItem("Add Data Set");
+		addDataItem.setEnabled(false);
 		plotMenu.add(addDataItem);
 		addFunctionItem = new JMenuItem("Add Function");
+		addFunctionItem.setEnabled(false);
 		plotMenu.add(addFunctionItem);
 		addPointItem = new JMenuItem("Add Point");
+		addPointItem.setEnabled(false);
 		plotMenu.add(addPointItem);
 		plotMenu.addSeparator();
 		editSelectedItem = new JMenuItem("Edit Selected");
+		editSelectedItem.setEnabled(false);
 		plotMenu.add(editSelectedItem);
 		removeSelectedItem = new JMenuItem("Remove Selected");
+		removeSelectedItem.setEnabled(false);
 		plotMenu.add(removeSelectedItem);
 
 		// create help menu
@@ -157,10 +171,12 @@ public class MainFrame extends JFrame {
 		toolBar.add(openToolBtn);
 		saveToolBtn = new JButton("Save", new ImageIcon(
 				"icon/document-save.png"));
+		saveToolBtn .setEnabled(false);
 		toolBar.add(saveToolBtn);
 		toolBar.addSeparator();
 		printToolBtn = new JButton("Print", new ImageIcon(
 				"icon/document-print.png"));
+		printToolBtn.setEnabled(false);
 		toolBar.add(printToolBtn);
 
 		// create work area panel
