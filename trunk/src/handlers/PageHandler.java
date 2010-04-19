@@ -251,8 +251,44 @@ public class PageHandler {
 						OpenPlotTool.programName + " - "
 								+ page.getSettings().getTitle());
 			}
+			// update enabled menu items
+			OpenPlotTool.getMainFrame().getSaveMenuItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getSaveAsMenuItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getRevertMenuItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getCloseMenuItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getCloseAllMenuItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getPrintMenuItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getExportMenuItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getPageSettingsItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getAxisSettingsItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getAddDataItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getAddFunctionItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getAddPointItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getEditSelectedItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getRemoveSelectedItem().setEnabled(true);
+			// update enabled toolbar buttons
+			OpenPlotTool.getMainFrame().getSaveToolBtn().setEnabled(true);
+			OpenPlotTool.getMainFrame().getPrintToolBtn().setEnabled(true);
 		} else {
 			OpenPlotTool.getMainFrame().setTitle(OpenPlotTool.programName);
+			// update enabled menu items
+			OpenPlotTool.getMainFrame().getSaveMenuItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getSaveAsMenuItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getRevertMenuItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getCloseMenuItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getCloseAllMenuItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getPrintMenuItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getExportMenuItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getPageSettingsItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getAxisSettingsItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getAddDataItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getAddFunctionItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getAddPointItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getEditSelectedItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getRemoveSelectedItem().setEnabled(false);
+			// update enabled toolbar buttons
+			OpenPlotTool.getMainFrame().getSaveToolBtn().setEnabled(false);
+			OpenPlotTool.getMainFrame().getPrintToolBtn().setEnabled(false);
 		}
 	}
 }
