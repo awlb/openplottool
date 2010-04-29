@@ -65,6 +65,8 @@ public class MainFrame extends JFrame {
 	private JMenuItem pageSettingsItem, axisSettingsItem;
 	// edit menu items
 	private JMenuItem prefMenuItem;
+	// tools menu items
+	private JMenuItem strokeEditorMenuItem;
 	// progress bar
 	private JProgressBar progressBar;
 	private JToolBar toolBar;
@@ -152,6 +154,12 @@ public class MainFrame extends JFrame {
 		removeSelectedItem.setEnabled(false);
 		plotMenu.add(removeSelectedItem);
 
+		// create tools menu
+		JMenu toolsMenu = new JMenu("Tools");
+		menuBar.add(toolsMenu);
+		strokeEditorMenuItem = new JMenuItem("Stroke Editor");
+		toolsMenu.add(strokeEditorMenuItem);
+
 		// create help menu
 		JMenu helpMenu = new JMenu("Help");
 		menuBar.add(helpMenu);
@@ -171,7 +179,7 @@ public class MainFrame extends JFrame {
 		toolBar.add(openToolBtn);
 		saveToolBtn = new JButton("Save", new ImageIcon(
 				"icon/document-save.png"));
-		saveToolBtn .setEnabled(false);
+		saveToolBtn.setEnabled(false);
 		toolBar.add(saveToolBtn);
 		toolBar.addSeparator();
 		printToolBtn = new JButton("Print", new ImageIcon(
@@ -261,124 +269,128 @@ public class MainFrame extends JFrame {
 		return addDataItem;
 	}
 
-	public JMenuItem getAddFunctionItem() {
-		return addFunctionItem;
-	}
-
 	public JMenuItem getAddPointItem() {
 		return addPointItem;
 	}
 
-	public JMenuItem getAxisSettingsItem() {
-		return axisSettingsItem;
-	}
-
-	public JMenuItem getCloseAllMenuItem() {
-		return closeAllMenuItem;
-	}
-
-	public JMenuItem getCloseMenuItem() {
-		return closeMenuItem;
-	}
-
-	public JTabbedPane getConsoleTabPane() {
-		return consoleTabPane;
-	}
-
-	public JList getDataSetList() {
-		return dataSetList;
-	}
-
-	public DefaultListModel getDataSetListModel() {
-		return dataSetListModel;
+	public JMenuItem getAddFunctionItem() {
+		return addFunctionItem;
 	}
 
 	public JMenuItem getEditSelectedItem() {
 		return editSelectedItem;
 	}
 
-	public JMenuItem getExportMenuItem() {
-		return exportMenuItem;
+	public JMenuItem getRemoveSelectedItem() {
+		return removeSelectedItem;
 	}
 
-	public JList getFunctionList() {
-		return functionList;
-	}
-
-	public DefaultListModel getFunctionListModel() {
-		return functionListModel;
-	}
-
-	public JMenuItem getNewMenuItem() {
-		return newMenuItem;
-	}
-
-	public JButton getNewToolBtn() {
-		return newToolBtn;
-	}
-
-	public JMenuItem getOpenMenuItem() {
-		return openMenuItem;
-	}
-
-	public JButton getOpenToolBtn() {
-		return openToolBtn;
-	}
-
-	public JMenuItem getPageSettingsItem() {
-		return pageSettingsItem;
+	public JTabbedPane getConsoleTabPane() {
+		return consoleTabPane;
 	}
 
 	public JTabbedPane getPlotPanel() {
 		return plotPanel;
 	}
 
+	public JList getFunctionList() {
+		return functionList;
+	}
+
 	public JList getPointList() {
 		return pointList;
+	}
+
+	public JList getDataSetList() {
+		return dataSetList;
+	}
+
+	public DefaultListModel getFunctionListModel() {
+		return functionListModel;
 	}
 
 	public DefaultListModel getPointListModel() {
 		return pointListModel;
 	}
 
-	public JMenuItem getPrefMenuItem() {
-		return prefMenuItem;
+	public DefaultListModel getDataSetListModel() {
+		return dataSetListModel;
 	}
 
-	public JMenuItem getPrintMenuItem() {
-		return printMenuItem;
+	public JMenuItem getNewMenuItem() {
+		return newMenuItem;
 	}
 
-	public JButton getPrintToolBtn() {
-		return printToolBtn;
-	}
-
-	public JProgressBar getProgressBar() {
-		return progressBar;
-	}
-
-	public JMenuItem getQuitMenuItem() {
-		return quitMenuItem;
-	}
-
-	public JMenuItem getRemoveSelectedItem() {
-		return removeSelectedItem;
-	}
-
-	public JMenuItem getRevertMenuItem() {
-		return revertMenuItem;
-	}
-
-	public JMenuItem getSaveAsMenuItem() {
-		return saveAsMenuItem;
+	public JMenuItem getOpenMenuItem() {
+		return openMenuItem;
 	}
 
 	public JMenuItem getSaveMenuItem() {
 		return saveMenuItem;
 	}
 
+	public JMenuItem getSaveAsMenuItem() {
+		return saveAsMenuItem;
+	}
+
+	public JMenuItem getRevertMenuItem() {
+		return revertMenuItem;
+	}
+
+	public JMenuItem getCloseMenuItem() {
+		return closeMenuItem;
+	}
+
+	public JMenuItem getCloseAllMenuItem() {
+		return closeAllMenuItem;
+	}
+
+	public JMenuItem getPrintMenuItem() {
+		return printMenuItem;
+	}
+
+	public JMenuItem getExportMenuItem() {
+		return exportMenuItem;
+	}
+
+	public JMenuItem getQuitMenuItem() {
+		return quitMenuItem;
+	}
+
+	public JButton getNewToolBtn() {
+		return newToolBtn;
+	}
+
+	public JButton getOpenToolBtn() {
+		return openToolBtn;
+	}
+
 	public JButton getSaveToolBtn() {
 		return saveToolBtn;
+	}
+
+	public JButton getPrintToolBtn() {
+		return printToolBtn;
+	}
+
+	public JMenuItem getPageSettingsItem() {
+		return pageSettingsItem;
+	}
+
+	public JMenuItem getAxisSettingsItem() {
+		return axisSettingsItem;
+	}
+
+	public JMenuItem getPrefMenuItem() {
+		return prefMenuItem;
+	}
+
+	public JMenuItem getStrokeEditorMenuItem() {
+		return strokeEditorMenuItem;
+	}
+
+	public JProgressBar getProgressBar() {
+		return progressBar;
 	}
 
 	public JToolBar getToolBar() {
