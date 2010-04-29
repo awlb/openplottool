@@ -45,7 +45,6 @@ import javax.swing.event.ListSelectionListener;
 
 import main.OpenPlotTool;
 import plot.PageSettings;
-import plot.StrokeType;
 
 @SuppressWarnings("serial")
 public class PageSettingsDialog extends JDialog implements ActionListener,
@@ -127,10 +126,9 @@ public class PageSettingsDialog extends JDialog implements ActionListener,
 		borderSelector = new ColorSelector(settings.getBorderColor());
 		borderSettingPanel.add(borderSelector, "1, 1");
 		// create border draw type field
-		borderSettingPanel.add(new JLabel("Border Type: "), "0, 2");
-		borderDrawCombo = new JComboBox(StrokeTypeHandler.getStrokeTypeArray());
-		borderDrawCombo.setSelectedItem(StrokeTypeHandler
-				.getStrokeType(settings.getBorderDrawType()));
+		borderSettingPanel.add(new JLabel("Border Stroke: "), "0, 2");
+		borderDrawCombo = new JComboBox(StrokeTypeHandler.getStrokeTypeNames());
+		borderDrawCombo.setSelectedItem(settings.getBorderDrawType());
 		borderSettingPanel.add(borderDrawCombo, "1, 2");
 
 		// create button panel
@@ -170,8 +168,7 @@ public class PageSettingsDialog extends JDialog implements ActionListener,
 		settings.setBackgroundColor(backgroundSelector.getColor());
 		settings.setDrawBorder(drawBorderCheck.isSelected());
 		settings.setBorderColor(borderSelector.getColor());
-		settings.setBorderDrawType(((StrokeType) borderDrawCombo
-				.getSelectedItem()).getName());
+		settings.setBorderDrawType((String) borderDrawCombo.getSelectedItem());
 		return settings;
 	}
 

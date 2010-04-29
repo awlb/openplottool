@@ -265,7 +265,8 @@ public class PageHandler {
 			OpenPlotTool.getMainFrame().getAddFunctionItem().setEnabled(true);
 			OpenPlotTool.getMainFrame().getAddPointItem().setEnabled(true);
 			OpenPlotTool.getMainFrame().getEditSelectedItem().setEnabled(true);
-			OpenPlotTool.getMainFrame().getRemoveSelectedItem().setEnabled(true);
+			OpenPlotTool.getMainFrame().getRemoveSelectedItem()
+					.setEnabled(true);
 			// update enabled toolbar buttons
 			OpenPlotTool.getMainFrame().getSaveToolBtn().setEnabled(true);
 			OpenPlotTool.getMainFrame().getPrintToolBtn().setEnabled(true);
@@ -285,7 +286,8 @@ public class PageHandler {
 			OpenPlotTool.getMainFrame().getAddFunctionItem().setEnabled(false);
 			OpenPlotTool.getMainFrame().getAddPointItem().setEnabled(false);
 			OpenPlotTool.getMainFrame().getEditSelectedItem().setEnabled(false);
-			OpenPlotTool.getMainFrame().getRemoveSelectedItem().setEnabled(false);
+			OpenPlotTool.getMainFrame().getRemoveSelectedItem().setEnabled(
+					false);
 			// update enabled toolbar buttons
 			OpenPlotTool.getMainFrame().getSaveToolBtn().setEnabled(false);
 			OpenPlotTool.getMainFrame().getPrintToolBtn().setEnabled(false);

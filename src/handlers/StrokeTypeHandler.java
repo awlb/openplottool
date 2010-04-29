@@ -18,11 +18,13 @@
 
 package handlers;
 
+import gui.StrokeEditor;
+
 import java.awt.BasicStroke;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -36,27 +38,27 @@ import xml.XMLFileHandler;
 
 public class StrokeTypeHandler {
 	private static boolean changed = false;
-	private static List<StrokeType> strokeTypeList = new ArrayList<StrokeType>();
+	private static Map<String, StrokeType> strokeTypeList = new HashMap<String, StrokeType>();
 
 	public static void addStrokeType(StrokeType strokeType) {
-		strokeTypeList.add(strokeType);
+		strokeTypeList.put(strokeType.getName(), strokeType);
 		changed = true;
 	}
 
+	public static void showStrokeEditor() {
+		StrokeEditor editor = new StrokeEditor();
+		editor.setVisible(true);
+		editor.dispose();
+	}
+
 	public static StrokeType getStrokeType(String name) {
-		StrokeType strokeType = null;
-		for (StrokeType curStroke : strokeTypeList) {
-			if (curStroke.getName().equals(name)) {
-				strokeType = curStroke;
-				break;
-			}
-		}
+		StrokeType strokeType = strokeTypeList.get(name);
 		return strokeType;
 	}
 
-	public static StrokeType[] getStrokeTypeArray() {
-		StrokeType[] strokeTypeArray = new StrokeType[strokeTypeList.size()];
-		strokeTypeArray = strokeTypeList.toArray(strokeTypeArray);
+	public static String[] getStrokeTypeNames() {
+		String[] strokeTypeArray = new String[strokeTypeList.size()];
+		strokeTypeArray = strokeTypeList.keySet().toArray(strokeTypeArray);
 		return strokeTypeArray;
 	}
 
@@ -124,7 +126,7 @@ public class StrokeTypeHandler {
 					BasicStroke stroke = new BasicStroke(width, cap, join,
 							miterlimit, dash, dashPhase);
 					StrokeType strokeType = new StrokeType(name, stroke);
-					strokeTypeList.add(strokeType);
+					strokeTypeList.put(name, strokeType);
 				}
 			}
 		}
@@ -140,11 +142,15 @@ public class StrokeTypeHandler {
 		File file = new File("settings/Strokes.xml");
 		// create string buffer to hold file content
 		StringBuffer fileContentBuffer = new StringBuffer();
+		// get list of strokes
+		StrokeType[] strokeList = new StrokeType[strokeTypeList.size()];
+		strokeList = strokeTypeList.values().toArray(strokeList);
 		// add XML strings to buffer
 		fileContentBuffer
 				.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		fileContentBuffer.append("<strokes>\n");
-		for (StrokeType stroke : strokeTypeList) {
+		for (int i = 0; i < strokeList.length; i++) {
+			StrokeType stroke = strokeList[i];
 			fileContentBuffer.append("<stroke>\n");
 			fileContentBuffer.append("<name>" + stroke.getName() + "</name>\n");
 			fileContentBuffer.append("<width>"
@@ -157,9 +163,9 @@ public class StrokeTypeHandler {
 					+ stroke.getStroke().getMiterLimit() + "</miterlimit>\n");
 			fileContentBuffer.append("<dash>");
 			float[] dashArray = stroke.getStroke().getDashArray();
-			for (int i = 0; i < dashArray.length; i++) {
+			for (int j = 0; j < dashArray.length; j++) {
 				fileContentBuffer.append(dashArray[i]);
-				if (i != (dashArray.length - 1)) {
+				if (j != (dashArray.length - 1)) {
 					fileContentBuffer.append(",");
 				}
 			}
