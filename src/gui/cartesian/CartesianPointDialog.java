@@ -60,7 +60,7 @@ public class CartesianPointDialog extends JDialog implements ActionListener {
 				.createTitledBorder("Point Data: "));
 		mainPanel.add(pointDataPanel, BorderLayout.PAGE_START);
 		// create layout
-		double[][] pointSize = { { 0.25, 0.75 }, { 25, 25 } };
+		double[][] pointSize = { { 0.4, 0.6 }, { 25, 25 } };
 		pointDataPanel.setLayout(new TableLayout(pointSize));
 		// create x field
 		pointDataPanel.add(new JLabel("X: "), "0, 0");
@@ -102,9 +102,6 @@ public class CartesianPointDialog extends JDialog implements ActionListener {
 			yField.setText("" + currentPoint.getYValue());
 			colorSelector.setColor(currentPoint.getDrawColor());
 		}
-
-		// make dialog none Resizable
-		setResizable(false);
 		// pack dialog
 		pack();
 		// set dialog location

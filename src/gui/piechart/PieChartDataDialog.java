@@ -144,9 +144,6 @@ public class PieChartDataDialog extends JDialog implements ActionListener {
 			addButton.setText("Update");
 			this.setTitle("Edit Data Set");
 		}
-
-		// make dialog none Resizable
-		setResizable(false);
 		// pack dialog
 		setSize(300, 300);
 		// set dialog location

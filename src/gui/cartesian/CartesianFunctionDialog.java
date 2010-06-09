@@ -69,7 +69,7 @@ public class CartesianFunctionDialog extends JDialog implements ActionListener {
 				.createTitledBorder("Function Data:"));
 		mainPanel.add(functionDataPanel, BorderLayout.PAGE_START);
 		// create layout
-		double[][] functionDataLayoutSize = { { 0.25, 0.75 }, { 25 } };
+		double[][] functionDataLayoutSize = { { 0.3, 0.7 }, { 25 } };
 		functionDataPanel.setLayout(new TableLayout(functionDataLayoutSize));
 		// create function field
 		functionDataPanel.add(new JLabel("Function: "), "0, 0");
@@ -82,7 +82,7 @@ public class CartesianFunctionDialog extends JDialog implements ActionListener {
 				.createTitledBorder("Function Settings:"));
 		mainPanel.add(functionSettingsPanel, BorderLayout.CENTER);
 		// create layout
-		double[][] functionSettingsLayoutSize = { { 0.25, 0.75 },
+		double[][] functionSettingsLayoutSize = { { 0.4, 0.6 },
 				{ 25, 25, 25, 25 } };
 		functionSettingsPanel.setLayout(new TableLayout(
 				functionSettingsLayoutSize));
@@ -141,9 +141,6 @@ public class CartesianFunctionDialog extends JDialog implements ActionListener {
 			// set window title for update
 			this.setTitle("Update Function");
 		}
-
-		// make dialog none Resizable
-		setResizable(false);
 		// pack dialog
 		pack();
 		// set dialog location

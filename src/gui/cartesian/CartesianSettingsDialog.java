@@ -212,9 +212,6 @@ public class CartesianSettingsDialog extends JDialog implements ActionListener,
 		cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(this);
 		buttonPanel.add(cancelButton);
-
-		// make dialog none Resizable
-		setResizable(false);
 		// pack dialog
 		pack();
 		// set dialog location

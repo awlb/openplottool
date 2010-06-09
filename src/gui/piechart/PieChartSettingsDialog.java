@@ -136,8 +136,6 @@ public class PieChartSettingsDialog extends JDialog implements ActionListener,
 		cancelButton.addActionListener(this);
 		buttonPanel.add(cancelButton);
 
-		// make dialog none Resizable
-		setResizable(false);
 		// pack dialog
 		pack();
 		// set dialog location
