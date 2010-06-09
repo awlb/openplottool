@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,6 +45,10 @@ public class ColorSelectorDialog extends JDialog implements ActionListener {
 		buttonPanel.add(resetButton);
 		// pack dialog size
 		pack();
+		// set dialog location
+		Point winLocation = new Point(parent.getLocation().x + 20, parent
+				.getLocation().y + 20);
+		setLocation(winLocation);
 	}
 
 	@Override

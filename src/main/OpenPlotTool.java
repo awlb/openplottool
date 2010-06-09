@@ -173,16 +173,6 @@ public class OpenPlotTool {
 		}
 	}
 
-	// tools menu listener inner class
-	private class ToolsMenuListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == mainFrame.getStrokeEditorMenuItem()) {
-				StrokeTypeHandler.showStrokeEditor();
-			}
-		}
-	}
-
 	private static MainFrame mainFrame;
 
 	public static String programName = "OpenPlot Tool 0.3";
@@ -235,10 +225,6 @@ public class OpenPlotTool {
 		mainFrame.getAddPointItem().addActionListener(plotMenuListener);
 		mainFrame.getEditSelectedItem().addActionListener(plotMenuListener);
 		mainFrame.getRemoveSelectedItem().addActionListener(plotMenuListener);
-		// add tools menu listeners
-		ActionListener toolsMenuListener = new ToolsMenuListener();
-		mainFrame.getStrokeEditorMenuItem()
-				.addActionListener(toolsMenuListener);
 		// add help menu action listeners
 		ActionListener helpMenuListener = new AboutMenuListener();
 		mainFrame.getAboutMenuItem().addActionListener(helpMenuListener);

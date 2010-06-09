@@ -65,8 +65,6 @@ public class MainFrame extends JFrame {
 	private JMenuItem pageSettingsItem, axisSettingsItem;
 	// edit menu items
 	private JMenuItem prefMenuItem;
-	// tools menu items
-	private JMenuItem strokeEditorMenuItem;
 	// progress bar
 	private JProgressBar progressBar;
 	private JToolBar toolBar;
@@ -153,12 +151,6 @@ public class MainFrame extends JFrame {
 		removeSelectedItem = new JMenuItem("Remove Selected");
 		removeSelectedItem.setEnabled(false);
 		plotMenu.add(removeSelectedItem);
-
-		// create tools menu
-		JMenu toolsMenu = new JMenu("Tools");
-		menuBar.add(toolsMenu);
-		strokeEditorMenuItem = new JMenuItem("Stroke Editor");
-		toolsMenu.add(strokeEditorMenuItem);
 
 		// create help menu
 		JMenu helpMenu = new JMenu("Help");
@@ -383,10 +375,6 @@ public class MainFrame extends JFrame {
 
 	public JMenuItem getPrefMenuItem() {
 		return prefMenuItem;
-	}
-
-	public JMenuItem getStrokeEditorMenuItem() {
-		return strokeEditorMenuItem;
 	}
 
 	public JProgressBar getProgressBar() {

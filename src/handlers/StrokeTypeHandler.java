@@ -18,8 +18,6 @@
 
 package handlers;
 
-import gui.StrokeEditor;
-
 import java.awt.BasicStroke;
 import java.io.File;
 import java.io.IOException;
@@ -43,12 +41,6 @@ public class StrokeTypeHandler {
 	public static void addStrokeType(StrokeType strokeType) {
 		strokeTypeList.put(strokeType.getName(), strokeType);
 		changed = true;
-	}
-
-	public static void showStrokeEditor() {
-		StrokeEditor editor = new StrokeEditor();
-		editor.setVisible(true);
-		editor.dispose();
 	}
 
 	public static StrokeType getStrokeType(String name) {
