@@ -76,7 +76,7 @@ public class CartesianDataDialog extends JDialog implements ChangeListener,
 				.createTitledBorder("Set Settings: "));
 		mainPanel.add(settingsPanel, BorderLayout.PAGE_START);
 		// create layout
-		double[][] settingsSize = { { 0.34, 0.65 }, { 25, 25, 25, 25 } };
+		double[][] settingsSize = { { 0.4, 0.6 }, { 25, 25, 25, 25 } };
 		settingsPanel.setLayout(new TableLayout(settingsSize));
 		// create name field
 		nameField = new JTextField();
@@ -139,9 +139,6 @@ public class CartesianDataDialog extends JDialog implements ChangeListener,
 			// set window title for update
 			this.setTitle("Update Data Set");
 		}
-
-		// make dialog none Resizable
-		setResizable(false);
 		// pack dialog
 		setSize(300, 300);
 		// set dialog location

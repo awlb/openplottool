@@ -93,9 +93,6 @@ public class PieChartItemDialog extends JDialog implements ActionListener {
 			addButton.setText("Update");
 			this.setTitle("Edit Data Item");
 		}
-
-		// make dialog none Resizable
-		setResizable(false);
 		// pack dialog
 		pack();
 		// set dialog location
