@@ -84,7 +84,8 @@ public class PreferenceDialog extends JDialog implements ActionListener,
 		JPanel drawSettingPanel = new JPanel();
 		drawSettingPanel.setBorder(BorderFactory
 				.createTitledBorder("Draw Settings: "));
-		settingsPanel.add(drawSettingPanel, "Draw");		// TODO Auto-generated method stub
+		settingsPanel.add(drawSettingPanel, "Draw"); // TODO Auto-generated
+		// method stub
 
 		double[][] drawSettingLayoutSize = { { 0.4, 0.6 }, { 25 } };
 		drawSettingPanel.setLayout(new TableLayout(drawSettingLayoutSize));
