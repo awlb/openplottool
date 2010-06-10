@@ -127,23 +127,18 @@ public class DataManager {
 	}
 
 	public static void editData() {
-		// get selected console tab index
-		int tabIndex = OpenPlotTool.getMainFrame().getConsoleTabPane()
-				.getSelectedIndex();
-		int selectedIndex = -1;
-		// get selected item in console lists -- depends on selected console tab
-		if (tabIndex == 0) {
-			selectedIndex = OpenPlotTool.getMainFrame().getDataSetList()
-					.getSelectedIndex();
-		} else if (tabIndex == 1) {
-			selectedIndex = OpenPlotTool.getMainFrame().getFunctionList()
-					.getSelectedIndex();
-		} else if (tabIndex == 2) {
-			selectedIndex = OpenPlotTool.getMainFrame().getPointList()
-					.getSelectedIndex();
-		}
-		// edit this selected point
-		editData(selectedIndex);
+		/*
+		 * // get selected console tab index int tabIndex =
+		 * OpenPlotTool.getMainFrame().getConsoleTabPane() .getSelectedIndex();
+		 * int selectedIndex = -1; // get selected item in console lists --
+		 * depends on selected console tab if (tabIndex == 0) { selectedIndex =
+		 * OpenPlotTool.getMainFrame().getDataSetList() .getSelectedIndex(); }
+		 * else if (tabIndex == 1) { selectedIndex =
+		 * OpenPlotTool.getMainFrame().getFunctionList() .getSelectedIndex(); }
+		 * else if (tabIndex == 2) { selectedIndex =
+		 * OpenPlotTool.getMainFrame().getPointList() .getSelectedIndex(); } //
+		 * edit this selected point editData(selectedIndex);
+		 */
 	}
 
 	public static void editData(int selectedIndex) {

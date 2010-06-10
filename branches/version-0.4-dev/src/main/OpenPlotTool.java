@@ -29,14 +29,11 @@ import handlers.StrokeTypeHandler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.swing.JList;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -94,18 +91,6 @@ public class OpenPlotTool {
 				PageHandler.export();
 			} else if (event.getSource() == mainFrame.getQuitMenuItem()) {
 				closeProgram();
-			}
-		}
-	}
-
-	// list click listener inner class
-	private class ListClickListener extends MouseAdapter {
-		@Override
-		public void mouseClicked(MouseEvent evt) {
-			JList list = (JList) evt.getSource();
-			if (evt.getClickCount() == 2) {
-				int index = list.locationToIndex(evt.getPoint());
-				DataManager.editData(index);
 			}
 		}
 	}
@@ -175,7 +160,7 @@ public class OpenPlotTool {
 
 	private static MainFrame mainFrame;
 
-	public static String programName = "OpenPlot Tool 0.3";
+	public static String programName = "OpenPlot Tool 0.4";
 
 	public static MainFrame getMainFrame() {
 		return mainFrame;
@@ -230,10 +215,6 @@ public class OpenPlotTool {
 		mainFrame.getAboutMenuItem().addActionListener(helpMenuListener);
 		// add listener to plot tabbed panel
 		mainFrame.getPlotPanel().addChangeListener(new TabListener());
-		// add click listeners to lists
-		mainFrame.getDataSetList().addMouseListener(new ListClickListener());
-		mainFrame.getFunctionList().addMouseListener(new ListClickListener());
-		mainFrame.getPointList().addMouseListener(new ListClickListener());
 		// add tool bar listeners
 		mainFrame.getNewToolBtn().addActionListener(new ToolBarListener());
 		mainFrame.getOpenToolBtn().addActionListener(new ToolBarListener());

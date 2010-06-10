@@ -34,10 +34,13 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
+import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import main.OpenPlotTool;
 
@@ -50,11 +53,6 @@ public class MainFrame extends JFrame {
 			editSelectedItem, removeSelectedItem;
 	// tab panels
 	private JTabbedPane consoleTabPane, plotPanel;
-	// function, points and data set lists models
-	private JList functionList, pointList, dataSetList;
-	// function, points and data set lists models
-	private DefaultListModel functionListModel, pointListModel,
-			dataSetListModel;
 	// file menu items
 	private JMenuItem newMenuItem, openMenuItem, saveMenuItem, saveAsMenuItem,
 			revertMenuItem, closeMenuItem, closeAllMenuItem, printMenuItem,
@@ -67,7 +65,10 @@ public class MainFrame extends JFrame {
 	private JMenuItem prefMenuItem;
 	// progress bar
 	private JProgressBar progressBar;
+	// tool bar
 	private JToolBar toolBar;
+	// data tree
+	JTree dataTree;
 
 	public MainFrame() {
 		super(OpenPlotTool.programName);
@@ -115,7 +116,7 @@ public class MainFrame extends JFrame {
 		quitMenuItem = new JMenuItem("Quit");
 		fileMenu.add(quitMenuItem);
 
-		// create edit menu
+		// create edit menu /*
 		JMenu editMenu = new JMenu("Edit");
 		menuBar.add(editMenu);
 		prefMenuItem = new JMenuItem("Preferences");
@@ -179,55 +180,27 @@ public class MainFrame extends JFrame {
 		printToolBtn.setEnabled(false);
 		toolBar.add(printToolBtn);
 
-		// create work area panel
-		JPanel workAreaPanel = new JPanel(new BorderLayout());
-		mainPanel.add(workAreaPanel, BorderLayout.CENTER);
-
 		// create plot pane
 		plotPanel = new JTabbedPane();
 		plotPanel.setPreferredSize(new Dimension(600, 300));
 		plotPanel.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		workAreaPanel.add(plotPanel, BorderLayout.CENTER);
 
-		// create console tab pane
-		consoleTabPane = new JTabbedPane();
-		consoleTabPane.setPreferredSize(new Dimension(600, 150));
-		workAreaPanel.add(consoleTabPane, BorderLayout.PAGE_END);
+		// create data tree
+	    DefaultMutableTreeNode root =
+	        new DefaultMutableTreeNode("Plot Data");
+	    DefaultMutableTreeNode data = new DefaultMutableTreeNode("Data Sets");
+	    root.add(data);
+	    DefaultMutableTreeNode points = new DefaultMutableTreeNode("Points");
+	    root.add(points);
+	    DefaultMutableTreeNode functions = new DefaultMutableTreeNode("Functions");
+	    root.add(functions);
+		JTree dataTree = new JTree(root);
+		JScrollPane dataTreeScroll = new JScrollPane(dataTree);
 
-		// create data set list panel
-		JPanel dataSetListPanel = new JPanel(new BorderLayout());
-		consoleTabPane.addTab("Data Sets", null, dataSetListPanel,
-				"Plotted data sets");
-		dataSetListModel = new DefaultListModel();
-		dataSetList = new JList(dataSetListModel);
-		dataSetList.setCellRenderer(new DataListRender());
-		JScrollPane dataSetListScroll = new JScrollPane(dataSetList,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		dataSetListPanel.add(dataSetListScroll, BorderLayout.CENTER);
-
-		// create function list panel
-		JPanel functionListPanel = new JPanel(new BorderLayout());
-		consoleTabPane.addTab("Functions", null, functionListPanel,
-				"Plotted functions");
-		functionListModel = new DefaultListModel();
-		functionList = new JList(functionListModel);
-		functionList.setCellRenderer(new DataListRender());
-		JScrollPane functionListScroll = new JScrollPane(functionList,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		functionListPanel.add(functionListScroll, BorderLayout.CENTER);
-
-		// create points list panel
-		JPanel pointListPanel = new JPanel(new BorderLayout());
-		consoleTabPane.addTab("Points", null, pointListPanel, "Plotted points");
-		pointListModel = new DefaultListModel();
-		pointList = new JList(pointListModel);
-		pointList.setCellRenderer(new DataListRender());
-		JScrollPane pointListScroll = new JScrollPane(pointList,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		pointListPanel.add(pointListScroll, BorderLayout.CENTER);
+		// create work area
+		JSplitPane workSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+				dataTreeScroll, plotPanel);
+		mainPanel.add(workSplitPane, BorderLayout.CENTER);
 
 		// create progress bar
 		int minimum = 0;
@@ -283,30 +256,6 @@ public class MainFrame extends JFrame {
 
 	public JTabbedPane getPlotPanel() {
 		return plotPanel;
-	}
-
-	public JList getFunctionList() {
-		return functionList;
-	}
-
-	public JList getPointList() {
-		return pointList;
-	}
-
-	public JList getDataSetList() {
-		return dataSetList;
-	}
-
-	public DefaultListModel getFunctionListModel() {
-		return functionListModel;
-	}
-
-	public DefaultListModel getPointListModel() {
-		return pointListModel;
-	}
-
-	public DefaultListModel getDataSetListModel() {
-		return dataSetListModel;
 	}
 
 	public JMenuItem getNewMenuItem() {

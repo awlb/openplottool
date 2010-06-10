@@ -215,32 +215,34 @@ public class PageHandler {
 
 	// method called when page changed
 	public static void updatePageChange() {
-		// clear current items from lists
-		OpenPlotTool.getMainFrame().getFunctionListModel().clear();
-		OpenPlotTool.getMainFrame().getPointListModel().clear();
-		OpenPlotTool.getMainFrame().getDataSetListModel().clear();
+		/*
+		 * // clear current items from lists
+		 * OpenPlotTool.getMainFrame().getFunctionListModel().clear();
+		 * OpenPlotTool.getMainFrame().getPointListModel().clear();
+		 * OpenPlotTool.getMainFrame().getDataSetListModel().clear();
+		 */
+
 		// get new selected page
 		PlotPage page = (PlotPage) OpenPlotTool.getMainFrame().getPlotPanel()
 				.getSelectedComponent();
+
 		if (page != null) {
-			// add functions to function list
-			Object[] functions = page.getPlotFunctions().toArray();
-			for (int i = 0; i < functions.length; i++) {
-				OpenPlotTool.getMainFrame().getFunctionListModel().addElement(
-						functions[i]);
-			}
-			// add points to list
-			Object[] points = page.getPlotPoints().toArray();
-			for (int i = 0; i < points.length; i++) {
-				OpenPlotTool.getMainFrame().getPointListModel().addElement(
-						points[i]);
-			}
-			// add data sets to list
-			Object[] data = page.getPlotData().toArray();
-			for (int i = 0; i < data.length; i++) {
-				OpenPlotTool.getMainFrame().getDataSetListModel().addElement(
-						data[i]);
-			}
+			/*
+			 * // add functions to function list Object[] functions =
+			 * page.getPlotFunctions().toArray(); for (int i = 0; i <
+			 * functions.length; i++) {
+			 * OpenPlotTool.getMainFrame().getFunctionListModel().addElement(
+			 * functions[i]); } // add points to list Object[] points =
+			 * page.getPlotPoints().toArray(); for (int i = 0; i <
+			 * points.length; i++) {
+			 * OpenPlotTool.getMainFrame().getPointListModel().addElement(
+			 * points[i]); } // add data sets to list Object[] data =
+			 * page.getPlotData().toArray(); for (int i = 0; i < data.length;
+			 * i++) {
+			 * OpenPlotTool.getMainFrame().getDataSetListModel().addElement(
+			 * data[i]); }
+			 */
+
 			// update window title
 			if (page.getPageFile() != null) {
 				OpenPlotTool.getMainFrame().setTitle(
