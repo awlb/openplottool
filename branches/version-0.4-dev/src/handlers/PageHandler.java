@@ -172,6 +172,18 @@ public class PageHandler {
 		}
 		dialog.dispose();
 	}
+	
+	// check if a page file is not already open
+	public static boolean pageFileCheck(File file) {
+		boolean alreadyOpen = false;
+		for (int i = 0; i < plotPages.size(); i++) {
+			if (plotPages.get(i).getPageFile().equals(file)) {
+				alreadyOpen = true;
+				break;
+			}
+		}
+		return alreadyOpen;
+	}
 
 	// method to print current plot page
 	public static void printSelectedPlot() {
