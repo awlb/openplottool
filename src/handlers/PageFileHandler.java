@@ -57,10 +57,24 @@ public class PageFileHandler {
 		// get selected file
 		File selectedFile = filechooser.getSelectedFile();
 		if (selectedFile != null) {
-			PlotPage loadedPage = performOpen(selectedFile);
-			// if page is null there was an error while loading
-			if (loadedPage != null) {
-				PageHandler.addPlotPage(loadedPage);
+			// check if file not already open
+			boolean openFile = true;
+			if (PageHandler.pageFileCheck(selectedFile)) {
+				int chosen = JOptionPane.showConfirmDialog(OpenPlotTool
+						.getMainFrame(),
+						"The file you are trying to open is already open.\n"
+								+ "Do you wish to open it again?",
+						"File already open", JOptionPane.YES_NO_OPTION);
+				if (chosen == JOptionPane.NO_OPTION) {
+					openFile = false;
+				}
+			}
+			if (openFile) {
+				PlotPage loadedPage = performOpen(selectedFile);
+				// if page is null there was an error while loading
+				if (loadedPage != null) {
+					PageHandler.addPlotPage(loadedPage);
+				}
 			}
 		}
 	}
