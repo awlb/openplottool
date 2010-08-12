@@ -31,7 +31,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
@@ -65,8 +64,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem pageSettingsItem, axisSettingsItem;
 	// edit menu items
 	private JMenuItem prefMenuItem;
-	// progress bar
-	private JProgressBar progressBar;
+	// main toolbar
 	private JToolBar toolBar;
 
 	public MainFrame() {
@@ -229,12 +227,6 @@ public class MainFrame extends JFrame {
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		pointListPanel.add(pointListScroll, BorderLayout.CENTER);
 
-		// create progress bar
-		int minimum = 0;
-		int maximum = 100;
-		progressBar = new JProgressBar(minimum, maximum);
-		mainPanel.add(progressBar, BorderLayout.PAGE_END);
-
 		// pack main frame
 		pack();
 
@@ -375,10 +367,6 @@ public class MainFrame extends JFrame {
 
 	public JMenuItem getPrefMenuItem() {
 		return prefMenuItem;
-	}
-
-	public JProgressBar getProgressBar() {
-		return progressBar;
 	}
 
 	public JToolBar getToolBar() {
