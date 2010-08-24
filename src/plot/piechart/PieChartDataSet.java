@@ -18,6 +18,7 @@
 
 package plot.piechart;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -92,6 +93,12 @@ public class PieChartDataSet extends PlotDataSet {
 			// increase count
 			count++;
 		}
+
+		// draw pie outline
+		gc.setColor(settings.getOutlineDrawColor());
+		gc.setStroke(new BasicStroke(2));
+		gc.drawOval(pieAxis.getxPiePos(), pieAxis.getyPiePos(), pieAxis
+				.getPieSize(), pieAxis.getPieSize());
 	}
 
 	public ArrayList<PieChartItem> getDataItems() {

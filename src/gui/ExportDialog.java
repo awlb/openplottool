@@ -87,8 +87,11 @@ public class ExportDialog extends JDialog implements ActionListener {
 		String[] formatNames = ImageIO.getReaderFormatNames();
 		Set<String> set = new HashSet<String>();
 		for (int i = 0; i < formatNames.length; i++) {
-			String name = formatNames[i].toLowerCase();
-			set.add(name);
+			// only add formats with extension of length three
+			if(formatNames[i].length()==3) {
+				String name = formatNames[i].toLowerCase();
+				set.add(name);
+			}
 		}
 		formatNames = set.toArray(new String[0]);
 		formatBox = new JComboBox(formatNames);
