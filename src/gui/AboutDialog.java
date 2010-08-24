@@ -65,7 +65,7 @@ public class AboutDialog extends JDialog implements ActionListener {
 				SwingConstants.CENTER);
 		informationPanel.add(copyLabel, BorderLayout.PAGE_END);
 
-		// create ok and cancel buttons
+		// create license and cancel buttons
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
