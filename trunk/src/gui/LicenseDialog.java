@@ -19,11 +19,15 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,8 +37,9 @@ import javax.swing.WindowConstants;
 import main.OpenPlotTool;
 
 @SuppressWarnings("serial")
-public class LicenseDialog extends JDialog {
+public class LicenseDialog extends JDialog implements ActionListener {
 	private JTextArea licenseText;
+	private JButton closeBtn;
 
 	public LicenseDialog() {
 		super(OpenPlotTool.getMainFrame(), "License", true);
@@ -56,6 +61,14 @@ public class LicenseDialog extends JDialog {
 				OpenPlotTool.getMainFrame().getLocation().x + 20, OpenPlotTool
 						.getMainFrame().getLocation().y + 20);
 		setLocation(winLocation);
+		// create close button
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
+		mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
+		closeBtn = new JButton("Close");
+		closeBtn.addActionListener(this);
+		buttonPanel.add(closeBtn);
+		
 		showLicense();
 		// pack dialog
 		pack();
@@ -77,5 +90,12 @@ public class LicenseDialog extends JDialog {
 		}
 		licenseText.setText(text);
 		licenseText.setCaretPosition(0);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == closeBtn) {
+			setVisible(false);
+		}
 	}
 }
