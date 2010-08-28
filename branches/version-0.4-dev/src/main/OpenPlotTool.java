@@ -18,6 +18,8 @@
 
 package main;
 
+import gui.MainFrame;
+
 import javax.swing.SwingUtilities;
 
 public class OpenPlotTool {
@@ -29,7 +31,8 @@ public class OpenPlotTool {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				// create gui and add action listeners on the EDT
-
+				MainFrame mainFrame = new MainFrame();
+				mainFrame.setVisible(true);
 			}
 		});
 	}
