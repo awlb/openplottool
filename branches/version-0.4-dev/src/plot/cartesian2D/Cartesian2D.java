@@ -16,39 +16,27 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package main;
+package plot.cartesian2D;
 
-import gui.MainFrame;
+import java.awt.Graphics;
 
-import javax.swing.SwingUtilities;
+import plot.Plot;
 
-public class OpenPlotTool {
+public class Cartesian2D extends Plot {
+	// serial UID
+	private static final long serialVersionUID = 4025965656042258986L;
 
-	// openplot tool instance
-	private static OpenPlotTool instance = null;
-
-	public static void main(String[] args) {
-		instance = new OpenPlotTool();
+	public Cartesian2D() {
+		super();
+		// set data types for Cartesian
+		String[] dataTypes = { "Cartesian Function", "Cartesian Point",
+				"Cartesian Data Set" };
+		this.setDataTypes(dataTypes);
 	}
 
-	public static OpenPlotTool getInstance() {
-		return instance;
-	}
-
-	// main frame
-	MainFrame mainFrame = null;
-
-	protected OpenPlotTool() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				// create gui and add action listeners on the EDT
-				mainFrame = new MainFrame();
-				mainFrame.setVisible(true);
-			}
-		});
-	}
-
-	public MainFrame getMainFrame() {
-		return mainFrame;
+	@Override
+	public void drawAxis(Graphics g) {
+		g.setColor(this.getPlotSettings().getBackgroundColor());
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 }

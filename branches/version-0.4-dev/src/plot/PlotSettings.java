@@ -16,39 +16,27 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package main;
+package plot;
 
-import gui.MainFrame;
+import java.awt.Color;
 
-import javax.swing.SwingUtilities;
+public class PlotSettings {
+	private Color backgroundColor = Color.WHITE;
+	private Color textColor = Color.BLACK;
 
-public class OpenPlotTool {
-
-	// openplot tool instance
-	private static OpenPlotTool instance = null;
-
-	public static void main(String[] args) {
-		instance = new OpenPlotTool();
+	public Color getBackgroundColor() {
+		return backgroundColor;
 	}
 
-	public static OpenPlotTool getInstance() {
-		return instance;
+	public Color getTextColor() {
+		return textColor;
 	}
 
-	// main frame
-	MainFrame mainFrame = null;
-
-	protected OpenPlotTool() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				// create gui and add action listeners on the EDT
-				mainFrame = new MainFrame();
-				mainFrame.setVisible(true);
-			}
-		});
+	public void setBackgroundColor(Color backgroundColor) {
+		this.backgroundColor = backgroundColor;
 	}
 
-	public MainFrame getMainFrame() {
-		return mainFrame;
+	public void setTextColor(Color textColor) {
+		this.textColor = textColor;
 	}
 }

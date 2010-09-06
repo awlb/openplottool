@@ -16,39 +16,33 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package main;
+package handlers;
 
-import gui.MainFrame;
+public class EditHandler {
 
-import javax.swing.SwingUtilities;
+	private static EditHandler instance = null;
 
-public class OpenPlotTool {
-
-	// openplot tool instance
-	private static OpenPlotTool instance = null;
-
-	public static void main(String[] args) {
-		instance = new OpenPlotTool();
-	}
-
-	public static OpenPlotTool getInstance() {
+	public static EditHandler getInstance() {
+		if (instance == null) {
+			instance = new EditHandler();
+		}
 		return instance;
 	}
 
-	// main frame
-	MainFrame mainFrame = null;
+	protected EditHandler() {
 
-	protected OpenPlotTool() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				// create gui and add action listeners on the EDT
-				mainFrame = new MainFrame();
-				mainFrame.setVisible(true);
-			}
-		});
 	}
 
-	public MainFrame getMainFrame() {
-		return mainFrame;
+	public void preferencesEdit() {
+		System.out.println("Edit Preferences");
+
+	}
+
+	public void redoEdit() {
+		System.out.println("Edit Redo");
+	}
+
+	public void undoEdit() {
+		System.out.println("Edit Undo");
 	}
 }

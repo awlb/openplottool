@@ -16,39 +16,28 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package main;
+package handlers;
 
-import gui.MainFrame;
+import gui.AboutDialog;
 
-import javax.swing.SwingUtilities;
+public class HelpHandler {
 
-public class OpenPlotTool {
+	private static HelpHandler instance = null;
 
-	// openplot tool instance
-	private static OpenPlotTool instance = null;
-
-	public static void main(String[] args) {
-		instance = new OpenPlotTool();
-	}
-
-	public static OpenPlotTool getInstance() {
+	public static HelpHandler getInstance() {
+		if (instance == null) {
+			instance = new HelpHandler();
+		}
 		return instance;
 	}
 
-	// main frame
-	MainFrame mainFrame = null;
+	protected HelpHandler() {
 
-	protected OpenPlotTool() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				// create gui and add action listeners on the EDT
-				mainFrame = new MainFrame();
-				mainFrame.setVisible(true);
-			}
-		});
 	}
 
-	public MainFrame getMainFrame() {
-		return mainFrame;
+	public void showAbout() {
+		// display about dialog
+		AboutDialog aboutDialog = new AboutDialog();
+		aboutDialog.setVisible(true);
 	}
 }

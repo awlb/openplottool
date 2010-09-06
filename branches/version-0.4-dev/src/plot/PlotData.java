@@ -16,39 +16,17 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package main;
+package plot;
 
-import gui.MainFrame;
+import java.awt.Graphics;
+import java.io.Serializable;
 
-import javax.swing.SwingUtilities;
+public abstract class PlotData implements Serializable {
+	private static final long serialVersionUID = 5102951867313854626L;
 
-public class OpenPlotTool {
+	public PlotData() {
 
-	// openplot tool instance
-	private static OpenPlotTool instance = null;
-
-	public static void main(String[] args) {
-		instance = new OpenPlotTool();
 	}
 
-	public static OpenPlotTool getInstance() {
-		return instance;
-	}
-
-	// main frame
-	MainFrame mainFrame = null;
-
-	protected OpenPlotTool() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				// create gui and add action listeners on the EDT
-				mainFrame = new MainFrame();
-				mainFrame.setVisible(true);
-			}
-		});
-	}
-
-	public MainFrame getMainFrame() {
-		return mainFrame;
-	}
+	public abstract void draw(Graphics g);
 }
