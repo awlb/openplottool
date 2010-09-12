@@ -28,17 +28,17 @@ import javax.swing.JPanel;
 public abstract class Plot extends JPanel implements Serializable {
 	// serial version UID
 	private static final long serialVersionUID = 43493445736684770L;
+	// list of data types this plot supports
+	private String[] dataTypes = {};
 	// plot data
 	private ArrayList<PlotData> plotDataList = new ArrayList<PlotData>();
 	// plot file
 	private File plotFile = null;
-	// plot settings
-	private PlotSettings plotSettings = null;
-	// list of data types this plot supports
-	private String[] dataTypes = {};
+	// plot type name
+	String plotType = "default";
 
 	public Plot() {
-		setPlotSettings(new PlotSettings());
+
 	}
 
 	public void addData(PlotData plotDataItem) {
@@ -57,6 +57,10 @@ public abstract class Plot extends JPanel implements Serializable {
 		}
 	}
 
+	public String[] getDataTypes() {
+		return dataTypes;
+	}
+
 	public ArrayList<PlotData> getPlotDataList() {
 		return plotDataList;
 	}
@@ -65,8 +69,8 @@ public abstract class Plot extends JPanel implements Serializable {
 		return plotFile;
 	}
 
-	public PlotSettings getPlotSettings() {
-		return plotSettings;
+	public String getPlotType() {
+		return plotType;
 	}
 
 	@Override
@@ -83,19 +87,15 @@ public abstract class Plot extends JPanel implements Serializable {
 		}
 	}
 
-	public void setPlotFile(File plotFile) {
-		this.plotFile = plotFile;
-	}
-
-	public void setPlotSettings(PlotSettings plotSettings) {
-		this.plotSettings = plotSettings;
-	}
-
 	public void setDataTypes(String[] dataTypes) {
 		this.dataTypes = dataTypes;
 	}
 
-	public String[] getDataTypes() {
-		return dataTypes;
+	public void setPlotFile(File plotFile) {
+		this.plotFile = plotFile;
+	}
+
+	public void setPlotType(String plotType) {
+		this.plotType = plotType;
 	}
 }

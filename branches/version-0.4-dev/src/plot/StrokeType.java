@@ -18,34 +18,37 @@
 
 package plot;
 
-import java.awt.Graphics;
-import java.io.Serializable;
+import java.awt.BasicStroke;
 
-public abstract class PlotData implements Serializable {
-	private static final long serialVersionUID = 5102951867313854626L;
-	private String dataType = "default";
-	private Plot parentPlot = null;
+public class StrokeType {
+	// name of the stroke
+	String name;
+	// Basic stroke object for this stroke
+	BasicStroke stroke;
 
-	public PlotData(Plot parentPlot) {
-		this.parentPlot = parentPlot;
+	public StrokeType(String name, BasicStroke stroke) {
+		this.name = name;
+		this.stroke = stroke;
 	}
 
-	public abstract void draw(Graphics g);
-
-	public String getDataType() {
-		return dataType;
+	public String getName() {
+		return name;
 	}
 
-	public void setDataType(String dataType) {
-		this.dataType = dataType;
+	public BasicStroke getStroke() {
+		return stroke;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setStroke(BasicStroke stroke) {
+		this.stroke = stroke;
 	}
 
 	@Override
 	public String toString() {
-		return "PlotData [dataType=" + dataType + "]";
-	}
-
-	public Plot getParentPlot() {
-		return parentPlot;
+		return name;
 	}
 }

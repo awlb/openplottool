@@ -22,6 +22,7 @@ import handlers.EditHandler;
 import handlers.ExitHandler;
 import handlers.FileHandler;
 import handlers.HelpHandler;
+import handlers.PlotHandler;
 
 import java.awt.BorderLayout;
 
@@ -43,16 +44,16 @@ import org.jdesktop.swingx.action.BoundAction;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JXFrame {
+	// loading bar
+	private JProgressBar loadingBar;
 	// menu bar
 	private JMenuBar menuBar;
 	// status bar
 	private JXStatusBar statusBar;
-	// program tool bar
-	private JToolBar toolBar;
-	// loading bar
-	private JProgressBar loadingBar;
 	// tab area
 	private JTabbedPane tabPane;
+	// program tool bar
+	private JToolBar toolBar;
 
 	public MainFrame() {
 		super("OpenPlotTool 0.4");
@@ -210,6 +211,45 @@ public class MainFrame extends JXFrame {
 		actionManager.registerCallback("preferences-action", EditHandler
 				.getInstance(), "preferencesEdit");
 
+		// create plot action
+		BoundAction plotAction = ActionFactory.createBoundAction("plot-action",
+				"Plot", null);
+		ActionFactory.decorateAction(plotAction, null, null, null, null, null);
+		actionManager.addAction(plotAction);
+
+		// create add data action
+		BoundAction addDataAction = ActionFactory.createBoundAction(
+				"add-data-action", "Add Data", null);
+		ActionFactory.decorateAction(addDataAction, "Create new data item",
+				"Create new data item", new ImageIcon("icon/add.png"), null,
+				null);
+		// add and register add data action
+		actionManager.addAction(addDataAction);
+		actionManager.registerCallback("add-data-action", PlotHandler
+				.getInstance(), "addData");
+
+		// create remove data action
+		BoundAction removeDataAction = ActionFactory.createBoundAction(
+				"remove-data-action", "Remove Data", null);
+		ActionFactory.decorateAction(removeDataAction, "Remove selected data",
+				"Remove selected data", new ImageIcon("icon/remove.png"), null,
+				null);
+		// add and register remove data action
+		actionManager.addAction(removeDataAction);
+		actionManager.registerCallback("remove-data-action", PlotHandler
+				.getInstance(), "removeData");
+
+		// create plot settings action
+		BoundAction plotSettingsAction = ActionFactory.createBoundAction(
+				"plot-settings-action", "Plot Settings", null);
+		ActionFactory.decorateAction(plotSettingsAction, "Edit Plot Settings",
+				"Edit Plot Settings",
+				new ImageIcon("icon/edit-preferences.png"), null, null);
+		// add and register plot settings action
+		actionManager.addAction(plotSettingsAction);
+		actionManager.registerCallback("plot-settings-action", PlotHandler
+				.getInstance(), "showAbout");
+
 		// create help action
 		BoundAction helpAction = ActionFactory.createBoundAction("help-action",
 				"Help", null);
@@ -219,9 +259,9 @@ public class MainFrame extends JXFrame {
 		// create about action
 		BoundAction aboutAction = ActionFactory.createBoundAction(
 				"about-action", "About", null);
-		ActionFactory
-				.decorateAction(aboutAction, "View About", "Edit Preferences",
-						new ImageIcon("icon/about.png"), null, null);
+		ActionFactory.decorateAction(aboutAction, "View About",
+				"View About Dialog", new ImageIcon("icon/about.png"), null,
+				null);
 		// add and register preferences action
 		actionManager.addAction(aboutAction);
 		actionManager.registerCallback("about-action", HelpHandler
@@ -246,6 +286,11 @@ public class MainFrame extends JXFrame {
 				null, "preferences-action" };
 		JMenu editMenu = factory.createMenu(editMenuItems);
 		menuBar.add(editMenu);
+		// create plot menu
+		String[] plotMenuItems = { "plot-action", "add-data-action",
+				"remove-data-action", null, "plot-settings-action" };
+		JMenu plotMenu = factory.createMenu(plotMenuItems);
+		menuBar.add(plotMenu);
 		// create help menu
 		String[] helpMenuItems = { "help-action", "about-action" };
 		JMenu helpMenu = factory.createMenu(helpMenuItems);
@@ -275,7 +320,7 @@ public class MainFrame extends JXFrame {
 		mainPanel.add(tabPane, BorderLayout.CENTER);
 
 		// pack main frame
-		pack();
+		setSize(500, 400);
 
 		// turn of the default window closing code
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

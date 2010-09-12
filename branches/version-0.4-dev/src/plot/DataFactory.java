@@ -18,25 +18,24 @@
 
 package plot;
 
-import java.awt.Color;
+import net.smplmathparser.MathParserException;
+import plot.cartesian2D.Cartesian2D;
+import plot.cartesian2D.Cartesian2DDataSet;
+import plot.cartesian2D.Cartesian2DFunction;
 
-public class PlotSettings {
-	private Color backgroundColor = Color.WHITE;
-	private Color textColor = Color.BLACK;
-
-	public Color getBackgroundColor() {
-		return backgroundColor;
-	}
-
-	public Color getTextColor() {
-		return textColor;
-	}
-
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
-	}
-
-	public void setTextColor(Color textColor) {
-		this.textColor = textColor;
+public class DataFactory {
+	public static PlotData getData(Plot plot, String dataType)
+			throws MathParserException {
+		if (plot instanceof Cartesian2D) {
+			if ("Data Set".equals(dataType)) {
+				return new Cartesian2DDataSet(plot);
+			} else if ("Function".equals(dataType)) {
+				return new Cartesian2DFunction(plot, "y=x");
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 }

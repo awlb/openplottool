@@ -44,7 +44,7 @@ public class AboutDialog extends JDialog {
 		// set close action
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-		// set dialog lcoation
+		// set dialog location
 		Point parentPoint = OpenPlotTool.getInstance().getMainFrame()
 				.getLocation();
 		Point winLocation = new Point(parentPoint.x + 20, parentPoint.y + 20);

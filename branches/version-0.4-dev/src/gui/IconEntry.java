@@ -16,36 +16,25 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package plot;
+package gui;
 
-import java.awt.Graphics;
-import java.io.Serializable;
+import javax.swing.Icon;
 
-public abstract class PlotData implements Serializable {
-	private static final long serialVersionUID = 5102951867313854626L;
-	private String dataType = "default";
-	private Plot parentPlot = null;
+public class IconEntry {
+	private Icon icon;
+	private String name;
 
-	public PlotData(Plot parentPlot) {
-		this.parentPlot = parentPlot;
+	public IconEntry(Icon icon, String name) {
+		super();
+		this.icon = icon;
+		this.name = name;
 	}
 
-	public abstract void draw(Graphics g);
-
-	public String getDataType() {
-		return dataType;
+	public Icon getIcon() {
+		return icon;
 	}
 
-	public void setDataType(String dataType) {
-		this.dataType = dataType;
-	}
-
-	@Override
-	public String toString() {
-		return "PlotData [dataType=" + dataType + "]";
-	}
-
-	public Plot getParentPlot() {
-		return parentPlot;
+	public String getName() {
+		return name;
 	}
 }
