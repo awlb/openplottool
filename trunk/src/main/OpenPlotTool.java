@@ -19,14 +19,8 @@
 package main;
 
 import gui.MainFrame;
-import handlers.StrokeTypeHandler;
-
-import java.io.IOException;
 
 import javax.swing.SwingUtilities;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 public class OpenPlotTool {
 
@@ -52,16 +46,6 @@ public class OpenPlotTool {
 				mainFrame.setVisible(true);
 			}
 		});
-		// load strokes from XML
-		try {
-			StrokeTypeHandler.loadStrokeTypes();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public MainFrame getMainFrame() {

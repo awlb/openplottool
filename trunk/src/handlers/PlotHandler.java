@@ -18,18 +18,6 @@
 
 package handlers;
 
-import gui.AddDataDialog;
-
-import javax.swing.JOptionPane;
-
-import main.OpenPlotTool;
-import net.smplmathparser.MathParserException;
-import page.Page;
-import page.PageManager;
-import plot.DataFactory;
-import plot.Plot;
-import plot.PlotData;
-
 public class PlotHandler {
 
 	private static PlotHandler instance = null;
@@ -46,35 +34,7 @@ public class PlotHandler {
 	}
 
 	public void addData() {
-		// get selected page
-		Page selectedPage = PageManager.getSelected();
-		if (selectedPage != null) {
-			// get selected plot
-			Plot selectedPlot = selectedPage.getPlot();
-			// display add data dialog
-			AddDataDialog addDataDialog = new AddDataDialog(selectedPlot);
-			addDataDialog.setVisible(true);
-			if (addDataDialog.getPressed() == AddDataDialog.OK_PRESSED) {
-				// create new data of selected type
-				String dataType = addDataDialog.getSelected();
-				PlotData newData;
-				try {
-					newData = DataFactory.getData(selectedPlot, dataType);
-					if (newData != null) {
-						selectedPage.addData(newData);
-					} else {
-						// display error dialog if plot type is not recognised
-						JOptionPane.showMessageDialog(OpenPlotTool
-								.getInstance().getMainFrame(),
-								"Failed to create data of type: " + dataType,
-								"Error", JOptionPane.ERROR_MESSAGE);
-					}
-				} catch (MathParserException e) {
-					e.printStackTrace();
-				}
-			}
-			addDataDialog.dispose();
-		}
+
 	}
 
 	public void editPlotSettings() {
@@ -82,7 +42,6 @@ public class PlotHandler {
 	}
 
 	public void removeData() {
-		Page selectedPage = PageManager.getSelected();
-		selectedPage.removeData();
+
 	}
 }

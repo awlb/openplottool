@@ -18,8 +18,6 @@
 
 package handlers;
 
-import gui.AboutDialog;
-
 public class HelpHandler {
 
 	private static HelpHandler instance = null;
@@ -36,8 +34,6 @@ public class HelpHandler {
 	}
 
 	public void showAbout() {
-		// display about dialog
-		AboutDialog aboutDialog = new AboutDialog();
-		aboutDialog.setVisible(true);
+
 	}
 }
