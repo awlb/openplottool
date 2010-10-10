@@ -16,28 +16,25 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handlers;
+package gui;
 
-import gui.AboutDialog;
+import javax.swing.Icon;
 
-public class HelpHandler {
+public class IconEntry {
+	private Icon icon;
+	private String name;
 
-	private static HelpHandler instance = null;
-
-	public static HelpHandler getInstance() {
-		if (instance == null) {
-			instance = new HelpHandler();
-		}
-		return instance;
+	public IconEntry(Icon icon, String name) {
+		super();
+		this.icon = icon;
+		this.name = name;
 	}
 
-	protected HelpHandler() {
-
+	public Icon getIcon() {
+		return icon;
 	}
 
-	public void showAbout() {
-		// display about dialog
-		AboutDialog aboutDialog = new AboutDialog();
-		aboutDialog.setVisible(true);
+	public String getName() {
+		return name;
 	}
 }

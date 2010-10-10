@@ -16,28 +16,34 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handlers;
+package gui;
 
-import gui.AboutDialog;
+import javax.swing.Icon;
 
-public class HelpHandler {
+/*
+ * Class used to represent plot types in the new plot dialog list
+ */
 
-	private static HelpHandler instance = null;
+public class NewPlotEntry {
+	private Icon icon = null;
+	private String name = null;
+	private String plotTypeName = null;
 
-	public static HelpHandler getInstance() {
-		if (instance == null) {
-			instance = new HelpHandler();
-		}
-		return instance;
+	public NewPlotEntry(String entryPlotID, String name, Icon icon) {
+		this.plotTypeName = entryPlotID;
+		this.name = name;
+		this.icon = icon;
 	}
 
-	protected HelpHandler() {
-
+	public Icon getIcon() {
+		return icon;
 	}
 
-	public void showAbout() {
-		// display about dialog
-		AboutDialog aboutDialog = new AboutDialog();
-		aboutDialog.setVisible(true);
+	public String getName() {
+		return name;
+	}
+
+	public String getPlotTypeName() {
+		return plotTypeName;
 	}
 }

@@ -16,28 +16,39 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handlers;
+package plot;
 
-import gui.AboutDialog;
+import java.awt.BasicStroke;
 
-public class HelpHandler {
+public class StrokeType {
+	// name of the stroke
+	String name;
+	// Basic stroke object for this stroke
+	BasicStroke stroke;
 
-	private static HelpHandler instance = null;
-
-	public static HelpHandler getInstance() {
-		if (instance == null) {
-			instance = new HelpHandler();
-		}
-		return instance;
+	public StrokeType(String name, BasicStroke stroke) {
+		this.name = name;
+		this.stroke = stroke;
 	}
 
-	protected HelpHandler() {
-
+	public String getName() {
+		return name;
 	}
 
-	public void showAbout() {
-		// display about dialog
-		AboutDialog aboutDialog = new AboutDialog();
-		aboutDialog.setVisible(true);
+	public BasicStroke getStroke() {
+		return stroke;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setStroke(BasicStroke stroke) {
+		this.stroke = stroke;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }

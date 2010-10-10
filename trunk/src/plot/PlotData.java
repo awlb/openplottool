@@ -16,28 +16,36 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handlers;
+package plot;
 
-import gui.AboutDialog;
+import java.awt.Graphics;
+import java.io.Serializable;
 
-public class HelpHandler {
+public abstract class PlotData implements Serializable {
+	private static final long serialVersionUID = 5102951867313854626L;
+	private String dataType = "default";
+	private Plot parentPlot = null;
 
-	private static HelpHandler instance = null;
-
-	public static HelpHandler getInstance() {
-		if (instance == null) {
-			instance = new HelpHandler();
-		}
-		return instance;
+	public PlotData(Plot parentPlot) {
+		this.parentPlot = parentPlot;
 	}
 
-	protected HelpHandler() {
+	public abstract void draw(Graphics g);
 
+	public String getDataType() {
+		return dataType;
 	}
 
-	public void showAbout() {
-		// display about dialog
-		AboutDialog aboutDialog = new AboutDialog();
-		aboutDialog.setVisible(true);
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
+	}
+
+	@Override
+	public String toString() {
+		return "PlotData [dataType=" + dataType + "]";
+	}
+
+	public Plot getParentPlot() {
+		return parentPlot;
 	}
 }

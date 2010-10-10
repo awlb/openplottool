@@ -16,28 +16,26 @@
     along with OpenPlot Tool.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handlers;
+package plot;
 
-import gui.AboutDialog;
+import net.smplmathparser.MathParserException;
+import plot.cartesian2D.Cartesian2D;
+import plot.cartesian2D.Cartesian2DDataSet;
+import plot.cartesian2D.Cartesian2DFunction;
 
-public class HelpHandler {
-
-	private static HelpHandler instance = null;
-
-	public static HelpHandler getInstance() {
-		if (instance == null) {
-			instance = new HelpHandler();
+public class DataFactory {
+	public static PlotData getData(Plot plot, String dataType)
+			throws MathParserException {
+		if (plot instanceof Cartesian2D) {
+			if ("Data Set".equals(dataType)) {
+				return new Cartesian2DDataSet(plot);
+			} else if ("Function".equals(dataType)) {
+				return new Cartesian2DFunction(plot, "y=x");
+			} else {
+				return null;
+			}
+		} else {
+			return null;
 		}
-		return instance;
-	}
-
-	protected HelpHandler() {
-
-	}
-
-	public void showAbout() {
-		// display about dialog
-		AboutDialog aboutDialog = new AboutDialog();
-		aboutDialog.setVisible(true);
 	}
 }
