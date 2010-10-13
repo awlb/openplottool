@@ -118,7 +118,7 @@ public class MainFrame extends JXFrame {
 		// add and register new plot action action
 		actionManager.addAction(revertAction);
 		actionManager.registerCallback("revert-action", FileHandler
-				.getInstance(), "savePlotAs");
+				.getInstance(), "revertPlot");
 
 		// create close plot action
 		BoundAction closeAction = ActionFactory.createBoundAction(

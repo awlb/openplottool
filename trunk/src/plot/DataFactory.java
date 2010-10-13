@@ -22,6 +22,7 @@ import net.smplmathparser.MathParserException;
 import plot.cartesian2D.Cartesian2D;
 import plot.cartesian2D.Cartesian2DDataSet;
 import plot.cartesian2D.Cartesian2DFunction;
+import plot.cartesian2D.Cartesian2DPoint;
 
 public class DataFactory {
 	public static PlotData getData(Plot plot, String dataType)
@@ -31,8 +32,10 @@ public class DataFactory {
 				return new Cartesian2DDataSet(plot);
 			} else if ("Function".equals(dataType)) {
 				return new Cartesian2DFunction(plot, "y=x");
+			} else if ("Point".equals(dataType)) {
+				return new Cartesian2DPoint(plot);
 			} else {
-				return null;
+				return null;				
 			}
 		} else {
 			return null;
