@@ -46,7 +46,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 			if (evt.getClickCount() == 2) {
 				int index = list.locationToIndex(evt.getPoint());
 				if (index > -1) {
-					selected = (NewPlotEntry) plotList.getSelectedValue();
+					selected = ((IconEntry) plotList.getSelectedValue()).getName();
 					pressed = OK_PRESSED;
 					setVisible(false);
 				}
@@ -59,7 +59,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 	private JList plotList;
 	private int pressed = 0;
 
-	private NewPlotEntry selected = null;
+	private String selected = null;
 
 	public NewPlotDialog() {
 		super(OpenPlotTool.getInstance().getMainFrame(), "New Plot", true);
@@ -70,7 +70,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 		plotList = new JList(PlotFactory.plotList);
 		plotList.setSelectedIndex(0);
 		plotList.setVisibleRowCount(4);
-		plotList.setCellRenderer(new NewPlotListRender());
+		plotList.setCellRenderer(new IconEntryRender());
 		plotList.addMouseListener(new ListClickListener());
 		JScrollPane scroll = new JScrollPane(plotList);
 		scroll.setBorder(BorderFactory.createTitledBorder("Select Type: "));
@@ -105,7 +105,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == okBtn) {
 			if (plotList.getSelectedValue() != null) {
-				selected = (NewPlotEntry) plotList.getSelectedValue();
+				selected = ((IconEntry) plotList.getSelectedValue()).getName();
 				pressed = OK_PRESSED;
 			}
 		}
@@ -116,7 +116,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 		return pressed;
 	}
 
-	public NewPlotEntry getSelected() {
+	public String getSelected() {
 		// return selected plot type
 		return selected;
 	}

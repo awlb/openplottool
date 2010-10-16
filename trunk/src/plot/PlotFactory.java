@@ -18,19 +18,19 @@
 
 package plot;
 
-import gui.NewPlotEntry;
+import gui.IconEntry;
 
 import javax.swing.ImageIcon;
 
 import plot.cartesian2D.Cartesian2D;
 
 public class PlotFactory {
-	public static final NewPlotEntry plotList[] = {
+	public static final IconEntry plotList[] = {
 			// plot types to appear in list
-			new NewPlotEntry("cartesian2D", "Cartesian 2D", new ImageIcon(
-					"icon/xy.png")),
-			new NewPlotEntry("piechart", "Pie Chart", new ImageIcon(
-					"icon/pie.png")) };
+			new IconEntry(new ImageIcon(
+					"icon/plot/Cartesian 2D.png"), "Cartesian 2D"),
+			new IconEntry(new ImageIcon(
+					"icon/plot/Pie Chart.png"), "Pie Chart") };
 
 	// string plot types
 	public static final String[] plotTypes = { "cartesian2D", "piechart" };

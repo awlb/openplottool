@@ -85,7 +85,7 @@ public class FileHandler {
 		NewPlotDialog newPlotDialog = new NewPlotDialog();
 		newPlotDialog.setVisible(true);
 		if (newPlotDialog.getPressed() == NewPlotDialog.OK_PRESSED) {
-			String plotTypeName = newPlotDialog.getSelected().getPlotTypeName();
+			String plotTypeName = newPlotDialog.getSelected();
 			// create new plot and page
 			Plot plot = PlotFactory.getPlot(plotTypeName);
 			if (plot != null) {
