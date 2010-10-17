@@ -27,19 +27,14 @@ import plot.cartesian2D.Cartesian2D;
 public class PlotFactory {
 	public static final IconEntry plotList[] = {
 			// plot types to appear in list
-			new IconEntry(new ImageIcon(
-					"icon/plot/Cartesian 2D.png"), "Cartesian 2D"),
-			new IconEntry(new ImageIcon(
-					"icon/plot/Pie Chart.png"), "Pie Chart") };
-
-	// string plot types
-	public static final String[] plotTypes = { "cartesian2D", "piechart" };
+			new IconEntry(new ImageIcon("icon/plot/Cartesian 2D.png"),
+					"Cartesian 2D"),
+			new IconEntry(new ImageIcon("icon/plot/Pie Chart.png"), "Pie Chart") };
 
 	public static Plot getPlot(String type) {
 		// create and return plot object of required type
-		if ("cartesian2D".equals(type)) {
+		if ("Cartesian 2D".equals(type)) {
 			Cartesian2D cartesian2D = new Cartesian2D();
-			cartesian2D.setPlotType("cartesian2D");
 			return cartesian2D;
 		} else {
 			return null;

@@ -40,6 +40,8 @@ public class Cartesian2D extends Plot {
 
 	public Cartesian2D() {
 		super();
+		// set plot type
+		this.setPlotType("Cartesian 2D");
 		// create and set plot settings instance
 		plotSettings = new Cartesian2DSettings();
 		// set data types for Cartesian
@@ -154,8 +156,11 @@ public class Cartesian2D extends Plot {
 		int yPadding = height
 				- (yLowerSectionPad + yUpperSectionPad + (yWholeSectionNum * ySectionSize));
 
-		// draw background
-		gc.setColor(plotSettings.getBackgroundColor());
+		// draw page background
+		gc.setColor(plotSettings.getBgColor());
+		gc.fillRect(0, 0, this.getWidth(), this.getHeight());
+		// draw grid background
+		gc.setColor(plotSettings.getGridBGColor());
 		gc.fillRect(xIndent, yIndent, width - xPadding, height - yPadding);
 
 		// set settings for sub grid

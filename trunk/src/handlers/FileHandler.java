@@ -18,9 +18,12 @@
 
 package handlers;
 
+import gui.ExportDialog;
 import gui.MainFrame;
 import gui.NewPlotDialog;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,6 +32,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -77,7 +81,42 @@ public class FileHandler {
 	}
 
 	public void exportPlot() {
-		System.out.println("Export plot");
+		if (PageManager.getSelected() != null) {
+			// get selected plot
+			Plot selectedPlot = PageManager.getSelected().getPlot();
+			// display export dialog
+			ExportDialog exportDialog = new ExportDialog();
+			exportDialog.setVisible(true);
+			if (exportDialog.getPressed() == ExportDialog.EXPORT_PRESSED) {
+				// get file and format
+				File file = exportDialog.getFile();
+				String format = exportDialog.getFormat();
+				if (file != null) {
+					// create image of page
+					int width = selectedPlot.getWidth();
+					int height = selectedPlot.getHeight();
+					BufferedImage image = new BufferedImage(width, height,
+							BufferedImage.TYPE_INT_RGB);
+					Graphics2D g2 = image.createGraphics();
+					selectedPlot.paint(g2);
+					g2.dispose();
+					// write image to file
+					try {
+						ImageIO.write(image, format, file);
+					} catch (IOException e) {
+						JOptionPane.showMessageDialog(OpenPlotTool
+								.getInstance().getMainFrame(),
+								"Error while exporting to file.\n"
+										+ e.getMessage(), "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(OpenPlotTool.getInstance()
+							.getMainFrame(), "Invalid export file location.",
+							"Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
 	}
 
 	public void newPlot() {

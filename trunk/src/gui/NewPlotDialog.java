@@ -26,7 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
@@ -34,6 +34,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import main.OpenPlotTool;
+
+import org.jdesktop.swingx.JXHeader;
+
 import plot.PlotFactory;
 
 @SuppressWarnings("serial")
@@ -46,7 +49,8 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 			if (evt.getClickCount() == 2) {
 				int index = list.locationToIndex(evt.getPoint());
 				if (index > -1) {
-					selected = ((IconEntry) plotList.getSelectedValue()).getName();
+					selected = ((IconEntry) plotList.getSelectedValue())
+							.getName();
 					pressed = OK_PRESSED;
 					setVisible(false);
 				}
@@ -66,6 +70,13 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 		// create main panel
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		setContentPane(mainPanel);
+		// create new header
+		JXHeader aboutHeader = new JXHeader();
+		mainPanel.add(aboutHeader, BorderLayout.PAGE_START);
+		aboutHeader.setTitle("Create New Plot");
+		aboutHeader.setDescription("Select type from list below");
+		aboutHeader.setIcon(new ImageIcon("icon/new-large.png"));
+		aboutHeader.setIconPosition(JXHeader.IconPosition.LEFT);
 		// create type selection list
 		plotList = new JList(PlotFactory.plotList);
 		plotList.setSelectedIndex(0);
@@ -73,7 +84,6 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 		plotList.setCellRenderer(new IconEntryRender());
 		plotList.addMouseListener(new ListClickListener());
 		JScrollPane scroll = new JScrollPane(plotList);
-		scroll.setBorder(BorderFactory.createTitledBorder("Select Type: "));
 		mainPanel.add(scroll, BorderLayout.CENTER);
 		// create ok and cancel buttons
 		JPanel buttonPanel = new JPanel();
@@ -98,7 +108,7 @@ public class NewPlotDialog extends JDialog implements ActionListener {
 		setLocation(winLocation);
 
 		// set dialog size
-		setSize(300, 300);
+		setSize(320, 300);
 	}
 
 	@Override

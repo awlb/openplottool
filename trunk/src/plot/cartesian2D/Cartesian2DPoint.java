@@ -36,13 +36,13 @@ public class Cartesian2DPoint extends PlotData {
 						.getPlotSettings().getySplitSize())
 				* plot.getySectionSize();
 		int iDrawYPoint = (int) Math.round(drawYPoint);
-		
+
 		// draw point
 		g.fillRect(iDrawXPoint - 2, iDrawYPoint - 2, 5, 5);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "("+x+","+y+")";
+		return "(" + x + "," + y + ")";
 	}
 }

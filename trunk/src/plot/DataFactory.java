@@ -35,7 +35,7 @@ public class DataFactory {
 			} else if ("Point".equals(dataType)) {
 				return new Cartesian2DPoint(plot);
 			} else {
-				return null;				
+				return null;
 			}
 		} else {
 			return null;

@@ -55,7 +55,8 @@ public class AddDataDialog extends JDialog implements ActionListener {
 			if (evt.getClickCount() == 2) {
 				int index = list.locationToIndex(evt.getPoint());
 				if (index > -1) {
-					selected = ((IconEntry) dataTypeList.getSelectedValue()).getName();
+					selected = ((IconEntry) dataTypeList.getSelectedValue())
+							.getName();
 					pressed = OK_PRESSED;
 					setVisible(false);
 				}

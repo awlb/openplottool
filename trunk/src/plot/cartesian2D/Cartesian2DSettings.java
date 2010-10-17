@@ -29,20 +29,21 @@ public class Cartesian2DSettings implements Serializable {
 	private static final long serialVersionUID = 6997652915341484605L;
 	private Color axisColor = Color.BLACK;
 	private String axisDrawType = "Line";
-	private Color backgroundColor = Color.WHITE;
+	private Color gridBGColor = Color.WHITE;
+	private Color bgColor = Color.lightGray;
 	private Color mainGridColor = Color.BLUE;
 	private String mainGridDrawType = "Line";
-	private double numXSplitSize = 2.0;
-	private double numYSplitSize = 2.0;
+	private double numXSplitSize = 2.5;
+	private double numYSplitSize = 2.5;
 	private Color subGridColor = Color.LIGHT_GRAY;
-	private String subGridType = "Line";
+	private String subGridType = "Dot";
 	private Color textColor = Color.BLACK;
-	private double xMax = 5.0;
-	private double xMin = -5.0;
-	private double xSplitSize = 1.0;
-	private double yMax = 5.0;
-	private double yMin = -5.0;
-	private double ySplitSize = 1.0;
+	private double xMax = 5.25;
+	private double xMin = -5.25;
+	private double xSplitSize = 0.5;
+	private double yMax = 5.25;
+	private double yMin = -5.25;
+	private double ySplitSize = 0.5;
 
 	public Color getAxisColor() {
 		return axisColor;
@@ -58,14 +59,6 @@ public class Cartesian2DSettings implements Serializable {
 
 	public void setAxisDrawType(String axisDrawType) {
 		this.axisDrawType = axisDrawType;
-	}
-
-	public Color getBackgroundColor() {
-		return backgroundColor;
-	}
-
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
 	}
 
 	public Color getMainGridColor() {
@@ -174,5 +167,21 @@ public class Cartesian2DSettings implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public void setGridBGColor(Color gridBGColor) {
+		this.gridBGColor = gridBGColor;
+	}
+
+	public Color getGridBGColor() {
+		return gridBGColor;
+	}
+
+	public void setBgColor(Color bgColor) {
+		this.bgColor = bgColor;
+	}
+
+	public Color getBgColor() {
+		return bgColor;
 	}
 }

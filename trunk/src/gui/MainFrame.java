@@ -32,7 +32,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTabbedPane;
-import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
 
 import org.jdesktop.swingx.JXFrame;
@@ -52,11 +51,9 @@ public class MainFrame extends JXFrame {
 	private JXStatusBar statusBar;
 	// tab area
 	private JTabbedPane tabPane;
-	// program tool bar
-	private JToolBar toolBar;
 
 	public MainFrame() {
-		super("OpenPlotTool 0.4");
+		super("OpenPlotTool 0.4 Dev");
 		// create action manager
 		ActionManager actionManager = ActionManager.getInstance();
 
@@ -70,8 +67,7 @@ public class MainFrame extends JXFrame {
 		BoundAction newAction = ActionFactory.createBoundAction("new-action",
 				"New", null);
 		ActionFactory.decorateAction(newAction, "Create New Plot",
-				"Create New Plot", new ImageIcon("icon/document-new.png"),
-				null, null);
+				"Create New Plot", new ImageIcon("icon/new.png"), null, null);
 		// add and register new plot action action
 		actionManager.addAction(newAction);
 		actionManager.registerCallback("new-action", FileHandler.getInstance(),
@@ -81,8 +77,7 @@ public class MainFrame extends JXFrame {
 		BoundAction openAction = ActionFactory.createBoundAction("open-action",
 				"Open", null);
 		ActionFactory.decorateAction(openAction, "Open Plot File",
-				"Open Plot File", new ImageIcon("icon/document-open.png"),
-				null, null);
+				"Open Plot File", new ImageIcon("icon/open.png"), null, null);
 		// add and register new plot action action
 		actionManager.addAction(openAction);
 		actionManager.registerCallback("open-action",
@@ -92,7 +87,7 @@ public class MainFrame extends JXFrame {
 		BoundAction saveAction = ActionFactory.createBoundAction("save-action",
 				"Save", null);
 		ActionFactory.decorateAction(saveAction, "Save Plot", "Save Plot",
-				new ImageIcon("icon/document-save.png"), null, null);
+				new ImageIcon("icon/save.png"), null, null);
 		// add and register new plot action action
 		actionManager.addAction(saveAction);
 		actionManager.registerCallback("save-action",
@@ -102,8 +97,8 @@ public class MainFrame extends JXFrame {
 		BoundAction saveAsAction = ActionFactory.createBoundAction(
 				"save-as-action", "Save As...", null);
 		ActionFactory.decorateAction(saveAsAction, "Save Plot As...",
-				"Save Plot As...", new ImageIcon("icon/document-save-as.png"),
-				null, null);
+				"Save Plot As...", new ImageIcon("icon/save-as.png"), null,
+				null);
 		// add and register new plot action action
 		actionManager.addAction(saveAsAction);
 		actionManager.registerCallback("save-as-action", FileHandler
@@ -113,8 +108,8 @@ public class MainFrame extends JXFrame {
 		BoundAction revertAction = ActionFactory.createBoundAction(
 				"revert-action", "Revert", null);
 		ActionFactory.decorateAction(revertAction, "Revert to saved state",
-				"Revert to saved state", new ImageIcon(
-						"icon/document-revert.png"), null, null);
+				"Revert to saved state", new ImageIcon("icon/revert.png"),
+				null, null);
 		// add and register new plot action action
 		actionManager.addAction(revertAction);
 		actionManager.registerCallback("revert-action", FileHandler
@@ -124,7 +119,7 @@ public class MainFrame extends JXFrame {
 		BoundAction closeAction = ActionFactory.createBoundAction(
 				"close-action", "Close", null);
 		ActionFactory.decorateAction(closeAction, "Close Plot", "Close Plot",
-				new ImageIcon("icon/document-close.png"), null, null);
+				new ImageIcon("icon/close.png"), null, null);
 		// add and register close plot action
 		actionManager.addAction(closeAction);
 		actionManager.registerCallback("close-action", FileHandler
@@ -134,8 +129,8 @@ public class MainFrame extends JXFrame {
 		BoundAction closeAllAction = ActionFactory.createBoundAction(
 				"close-all-action", "Close All", null);
 		ActionFactory.decorateAction(closeAllAction, "Close All Plots",
-				"Close All Plots",
-				new ImageIcon("icon/document-close-all.png"), null, null);
+				"Close All Plots", new ImageIcon("icon/close-all.png"), null,
+				null);
 		// add and register close all plot action
 		actionManager.addAction(closeAllAction);
 		actionManager.registerCallback("close-all-action", FileHandler
@@ -145,18 +140,27 @@ public class MainFrame extends JXFrame {
 		BoundAction printAction = ActionFactory.createBoundAction(
 				"print-action", "Print", null);
 		ActionFactory.decorateAction(printAction, "Print Plot", "Print Plot",
-				new ImageIcon("icon/document-print.png"), null, null);
+				new ImageIcon("icon/print.png"), null, null);
 		// add and register print plot action
 		actionManager.addAction(printAction);
 		actionManager.registerCallback("print-action", FileHandler
 				.getInstance(), "printPlot");
 
+		// create import plot action
+		BoundAction importAction = ActionFactory.createBoundAction(
+				"import-action", "Import", null);
+		ActionFactory.decorateAction(importAction, "Import Data",
+				"Import Data", new ImageIcon("icon/import.png"), null, null);
+		// add and register export plot action
+		actionManager.addAction(importAction);
+		actionManager.registerCallback("import-action", FileHandler
+				.getInstance(), "importData");
+
 		// create export plot action
 		BoundAction exportAction = ActionFactory.createBoundAction(
 				"export-action", "Export", null);
 		ActionFactory.decorateAction(exportAction, "Export Plot",
-				"Export Plot", new ImageIcon("icon/document-export.png"), null,
-				null);
+				"Export Plot", new ImageIcon("icon/export.png"), null, null);
 		// add and register export plot action
 		actionManager.addAction(exportAction);
 		actionManager.registerCallback("export-action", FileHandler
@@ -182,8 +186,7 @@ public class MainFrame extends JXFrame {
 		BoundAction undoAction = ActionFactory.createBoundAction("undo-action",
 				"Undo", null);
 		ActionFactory.decorateAction(undoAction, "Undo Plot Edits",
-				"Undo Plot Edits", new ImageIcon("icon/edit-undo.png"), null,
-				null);
+				"Undo Plot Edits", new ImageIcon("icon/undo.png"), null, null);
 		// add and register undo action
 		actionManager.addAction(undoAction);
 		actionManager.registerCallback("undo-action",
@@ -193,8 +196,7 @@ public class MainFrame extends JXFrame {
 		BoundAction redoAction = ActionFactory.createBoundAction("redo-action",
 				"Redo", null);
 		ActionFactory.decorateAction(redoAction, "Redo Plot Edits",
-				"Redo Plot Edits", new ImageIcon("icon/edit-redo.png"), null,
-				null);
+				"Redo Plot Edits", new ImageIcon("icon/redo.png"), null, null);
 		// add and register redo action
 		actionManager.addAction(redoAction);
 		actionManager.registerCallback("redo-action",
@@ -204,7 +206,7 @@ public class MainFrame extends JXFrame {
 		BoundAction preferencesAction = ActionFactory.createBoundAction(
 				"preferences-action", "Preferences", null);
 		ActionFactory.decorateAction(preferencesAction, "Edit Preferences",
-				"Edit Preferences", new ImageIcon("icon/edit-preferences.png"),
+				"Edit Preferences", new ImageIcon("icon/preferences.png"),
 				null, null);
 		// add and register preferences action
 		actionManager.addAction(preferencesAction);
@@ -228,6 +230,17 @@ public class MainFrame extends JXFrame {
 		actionManager.registerCallback("add-data-action", PlotHandler
 				.getInstance(), "addData");
 
+		// create add data action
+		BoundAction editDataAction = ActionFactory.createBoundAction(
+				"edit-data-action", "Edit Data", null);
+		ActionFactory.decorateAction(editDataAction, "Edit selected item",
+				"Edit selected item", new ImageIcon("icon/edit.png"), null,
+				null);
+		// add and register add data action
+		actionManager.addAction(editDataAction);
+		actionManager.registerCallback("edit-data-action", PlotHandler
+				.getInstance(), "editData");
+
 		// create remove data action
 		BoundAction removeDataAction = ActionFactory.createBoundAction(
 				"remove-data-action", "Remove Data", null);
@@ -243,8 +256,8 @@ public class MainFrame extends JXFrame {
 		BoundAction plotSettingsAction = ActionFactory.createBoundAction(
 				"plot-settings-action", "Plot Settings", null);
 		ActionFactory.decorateAction(plotSettingsAction, "Edit Plot Settings",
-				"Edit Plot Settings",
-				new ImageIcon("icon/edit-preferences.png"), null, null);
+				"Edit Plot Settings", new ImageIcon("icon/plot-settings.png"),
+				null, null);
 		// add and register plot settings action
 		actionManager.addAction(plotSettingsAction);
 		actionManager.registerCallback("plot-settings-action", PlotHandler
@@ -278,7 +291,7 @@ public class MainFrame extends JXFrame {
 		String[] fileMenuItems = { "file-action", "new-action", "open-action",
 				null, "save-action", "save-as-action", "revert-action", null,
 				"close-action", "close-all-action", null, "print-action", null,
-				"export-action", null, "exit-action" };
+				"import-action", "export-action", null, "exit-action" };
 		JMenu fileMenu = factory.createMenu(fileMenuItems);
 		menuBar.add(fileMenu);
 		// create edit menu
@@ -288,20 +301,14 @@ public class MainFrame extends JXFrame {
 		menuBar.add(editMenu);
 		// create plot menu
 		String[] plotMenuItems = { "plot-action", "add-data-action",
-				"remove-data-action", null, "plot-settings-action" };
+				"edit-data-action", "remove-data-action", null,
+				"plot-settings-action" };
 		JMenu plotMenu = factory.createMenu(plotMenuItems);
 		menuBar.add(plotMenu);
 		// create help menu
 		String[] helpMenuItems = { "help-action", "about-action" };
 		JMenu helpMenu = factory.createMenu(helpMenuItems);
 		menuBar.add(helpMenu);
-
-		// create tool bar
-		String[] toolBarItems = { "new-action", "open-action", "save-action",
-				null, "print-action" };
-		toolBar = factory.createToolBar(toolBarItems);
-		toolBar.setFloatable(false);
-		this.setToolBar(toolBar);
 
 		// create status bar
 		statusBar = new JXStatusBar();
