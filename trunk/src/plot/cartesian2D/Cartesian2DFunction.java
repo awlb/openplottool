@@ -12,15 +12,15 @@ import plot.Plot;
 import plot.PlotData;
 
 public class Cartesian2DFunction extends PlotData {
-	private static final long serialVersionUID = 3333435371909369250L;
-	private EvaluationTree functionTree = null;
-	private double jumpSize = 100;
-	private MathParser parser = new MathParser();
 	public static final int LINE_DRAW = 0;
 	public static final int POINT_DRAW = 1;
+	private static final long serialVersionUID = 3333435371909369250L;
 	private int drawMethod = LINE_DRAW;
 	private int drawSize = 1;
 	private String functionString = null;
+	private EvaluationTree functionTree = null;
+	private double jumpSize = 100;
+	private MathParser parser = new MathParser();
 
 	public Cartesian2DFunction(Plot parentPlot, String functionString)
 			throws MathParserException {

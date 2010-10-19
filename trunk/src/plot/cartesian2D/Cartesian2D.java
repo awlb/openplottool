@@ -29,6 +29,7 @@ import plot.Plot;
 public class Cartesian2D extends Plot {
 	// serial UID
 	private static final long serialVersionUID = 4025965656042258986L;
+	private Cartesian2DSettings plotSettings;
 	// axis values
 	private int xIndent, yIndent;
 	private int xLowerSectionPad;
@@ -36,7 +37,6 @@ public class Cartesian2D extends Plot {
 	private int xSectionSize;
 	private int ySectionSize;
 	private int yUpperSectionPad;
-	private Cartesian2DSettings plotSettings;
 
 	public Cartesian2D() {
 		super();
@@ -310,12 +310,16 @@ public class Cartesian2D extends Plot {
 		gc.drawString(title, xPos, ypos);
 	}
 
-	public int getxIndent() {
-		return xIndent;
+	public Cartesian2DSettings getPlotSettings() {
+		return plotSettings;
 	}
 
-	public int getyIndent() {
-		return yIndent;
+	public double getxBelow() {
+		return xBelow;
+	}
+
+	public int getxIndent() {
+		return xIndent;
 	}
 
 	public int getxLowerSectionPad() {
@@ -326,20 +330,20 @@ public class Cartesian2D extends Plot {
 		return xOver;
 	}
 
-	public double getxBelow() {
-		return xBelow;
-	}
-
-	public double getyOver() {
-		return yOver;
+	public int getxSectionSize() {
+		return xSectionSize;
 	}
 
 	public double getyBelow() {
 		return yBelow;
 	}
 
-	public int getxSectionSize() {
-		return xSectionSize;
+	public int getyIndent() {
+		return yIndent;
+	}
+
+	public double getyOver() {
+		return yOver;
 	}
 
 	public int getySectionSize() {
@@ -348,9 +352,5 @@ public class Cartesian2D extends Plot {
 
 	public int getyUpperSectionPad() {
 		return yUpperSectionPad;
-	}
-
-	public Cartesian2DSettings getPlotSettings() {
-		return plotSettings;
 	}
 }

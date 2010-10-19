@@ -43,11 +43,11 @@ import net.miginfocom.swing.MigLayout;
 @SuppressWarnings("serial")
 public class ExportDialog extends JDialog implements ActionListener {
 
+	public static int EXPORT_PRESSED = 1;
 	private JButton cancelBtn, exportBtn, selectLocationBtn;
 	private JTextField locationField, nameField;
-	private JComboBox typeCombo;
-	public static int EXPORT_PRESSED = 1;
 	private int pressed = 0;
+	private JComboBox typeCombo;
 
 	public ExportDialog() {
 		super(OpenPlotTool.getInstance().getMainFrame(), "Export", true);

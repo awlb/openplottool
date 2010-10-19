@@ -158,6 +158,7 @@ public class FileHandler {
 				ObjectInputStream objectInputStream = new ObjectInputStream(
 						fileInputStream);
 				Plot loadedPlot = (Plot) objectInputStream.readObject();
+				loadedPlot.setPlotFile(selectedFile);
 				Page loadedPage = new Page(loadedPlot);
 				// add to page list
 				PageManager.addPage(loadedPage);
@@ -192,7 +193,43 @@ public class FileHandler {
 	}
 
 	public void revertPlot() {
-		System.out.println("Revert Plot");
+		if (PageManager.getSelected() != null) {
+			// get selected page
+			Page selectedPage = PageManager.getSelected();
+			if (selectedPage.getPlot().getPlotFile() != null) {
+				FileInputStream fileInputStream;
+				try {
+					// load plot object from file
+					fileInputStream = new FileInputStream(selectedPage
+							.getPlot().getPlotFile());
+					ObjectInputStream objectInputStream = new ObjectInputStream(
+							fileInputStream);
+					Plot loadedPlot = (Plot) objectInputStream.readObject();
+					// set plot for page
+					selectedPage.setPlot(loadedPlot);
+					// repaint page
+					selectedPage.repaint();
+				} catch (FileNotFoundException e) {
+					// display error dialog if plot could not be reverted
+					JOptionPane.showMessageDialog(OpenPlotTool.getInstance()
+							.getMainFrame(), "Failed to revert plot:\n"
+							+ e.getMessage(), "File Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (IOException e) {
+					// display error dialog if plot could not be reverted
+					JOptionPane.showMessageDialog(OpenPlotTool.getInstance()
+							.getMainFrame(), "F ailed to revert plot:\n"
+							+ e.getMessage(), "IO Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (ClassNotFoundException e) {
+					// display error dialog if plot could not be reverted
+					JOptionPane.showMessageDialog(OpenPlotTool.getInstance()
+							.getMainFrame(), "Failed to revert plot:\n"
+							+ e.getMessage(), "Class Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
 	}
 
 	public void savePlot() {

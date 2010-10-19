@@ -40,13 +40,6 @@ import plot.Plot;
 
 @SuppressWarnings("serial")
 public class AddDataDialog extends JDialog implements ActionListener {
-	public static int OK_PRESSED = 1;
-	private JList dataTypeList;
-	private DefaultListModel dataTypelistModel;
-	private JButton okBtn, cancelBtn;
-	private int pressed = 0;
-	String selected = null;
-
 	// list click listener inner class
 	private class ListClickListener extends MouseAdapter {
 		@Override
@@ -63,6 +56,14 @@ public class AddDataDialog extends JDialog implements ActionListener {
 			}
 		}
 	}
+
+	public static int OK_PRESSED = 1;
+	private JList dataTypeList;
+	private DefaultListModel dataTypelistModel;
+	private JButton okBtn, cancelBtn;
+	private int pressed = 0;
+
+	String selected = null;
 
 	public AddDataDialog(Plot plot) {
 		super(OpenPlotTool.getInstance().getMainFrame(), "Add Data", true);

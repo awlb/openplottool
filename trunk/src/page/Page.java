@@ -36,11 +36,12 @@ import plot.PlotData;
 public class Page extends JPanel {
 	// data tree
 	private JTree dataTree;
+	private DefaultTreeModel dataTreeModel;
+	private HashMap<String, DefaultMutableTreeNode> nodeMap = null;
 	// plot panel
 	private Plot plot;
+	private JPanel plotPanel;
 	private JSplitPane splitPane;
-	private HashMap<String, DefaultMutableTreeNode> nodeMap = null;
-	private DefaultTreeModel dataTreeModel;
 
 	public Page(Plot plot) {
 		super(new BorderLayout());
@@ -68,8 +69,13 @@ public class Page extends JPanel {
 		leftPanel.add(dataTree, BorderLayout.CENTER);
 		JScrollPane scroll = new JScrollPane(leftPanel);
 
+		// create plot holder panel
+		plotPanel = new JPanel(new BorderLayout());
+		plotPanel.add(plot, BorderLayout.CENTER);
+
 		// create split pane
-		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scroll, plot);
+		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scroll,
+				plotPanel);
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setDividerLocation(180);
 		this.add(splitPane, BorderLayout.CENTER);
@@ -87,6 +93,10 @@ public class Page extends JPanel {
 		// repaint tree and plot
 		dataTree.repaint();
 		plot.repaint();
+	}
+
+	public Plot getPlot() {
+		return plot;
 	}
 
 	public void removeData() {
@@ -107,7 +117,9 @@ public class Page extends JPanel {
 		}
 	}
 
-	public Plot getPlot() {
-		return plot;
+	public void setPlot(Plot inPlot) {
+		plotPanel.removeAll();
+		this.plot = inPlot;
+		plotPanel.add(plot, BorderLayout.CENTER);
 	}
 }

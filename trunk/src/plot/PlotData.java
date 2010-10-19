@@ -36,6 +36,10 @@ public abstract class PlotData implements Serializable {
 		return dataType;
 	}
 
+	public Plot getParentPlot() {
+		return parentPlot;
+	}
+
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
 	}
@@ -43,9 +47,5 @@ public abstract class PlotData implements Serializable {
 	@Override
 	public String toString() {
 		return "PlotData [dataType=" + dataType + "]";
-	}
-
-	public Plot getParentPlot() {
-		return parentPlot;
 	}
 }
